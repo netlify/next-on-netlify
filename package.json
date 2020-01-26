@@ -1,0 +1,19 @@
+{
+  "name": "next-on-netlify",
+  "version": "1.0.0",
+  "description": "Wrapper for hosting NextJS applications with Server-Side Rendering on Netlify",
+  "bin": "./index.js",
+  "keywords": [
+    "next",
+    "nextjs",
+    "netlify",
+    "server-side rendering",
+    "ssr",
+    "serverless",
+    "netlify functions",
+    "wrapper",
+    "bridge"
+  ],
+  "author": "Finn Woelm",
+  "license": "MIT"
+}

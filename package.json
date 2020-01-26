@@ -14,6 +14,11 @@
     "wrapper",
     "bridge"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FinnWoelm/next-on-netlify"
+  },
+  "homepage": "https://github.com/FinnWoelm/next-on-netlify",
   "author": "Finn Woelm",
   "license": "MIT",
   "devDependencies": {

@@ -2,7 +2,7 @@
   "name": "next-on-netlify",
   "version": "1.0.0",
   "description": "Wrapper for hosting NextJS applications with Server-Side Rendering on Netlify",
-  "bin": "./index.js",
+  "bin": "./next-on-netlify.js",
   "keywords": [
     "next",
     "nextjs",
@@ -15,5 +15,12 @@
     "bridge"
   ],
   "author": "Finn Woelm",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "fs-extra": "^8.1.0",
+    "path-to-regexp": "^3.2.0"
+  },
+  "dependencies": {
+    "next-aws-lambda": "^2.3.4"
+  }
 }

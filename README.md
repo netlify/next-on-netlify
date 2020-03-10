@@ -120,8 +120,6 @@ Or you can define custom redirects in the `netlify.toml` file.
 
 next-on-netlify has only been tested on NextJS version 9 and above.
 
-next-on-netlify does not yet support [catch-all routes](https://nextjs.org/blog/next-9-2#catch-all-dynamic-routes) (yet).
-
 ## Credits
 
 📣 Shoutout to [@mottox2](https://github.com/mottox2) (a pioneer of hosting NextJS on Netlify) and [@danielcondemarin](https://github.com/danielcondemarin) (author of serverless-next.js for AWS). The two were big inspirations for this package.

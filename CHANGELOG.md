@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0 (2020-04-19)
+
+- Add support for catch-all routes (#1, #2)
+- README: Fix instructions for local preview
+
 ## 1.0.1 (2020-01-27)
 
 - Add README

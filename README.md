@@ -123,3 +123,7 @@ next-on-netlify has only been tested on NextJS version 9 and above.
 ## Credits
 
 📣 Shoutout to [@mottox2](https://github.com/mottox2) (a pioneer of hosting NextJS on Netlify) and [@danielcondemarin](https://github.com/danielcondemarin) (author of serverless-next.js for AWS). The two were big inspirations for this package.
+
+🙌 Big "thank you" to the following people for their contributions:
+- [@spencewood](https://github.com/spencewood)
+- [@alxhghs](https://github.com/alxhghs)

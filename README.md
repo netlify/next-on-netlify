@@ -103,7 +103,7 @@ Now you're all set.
 From now on, whenever you want to preview your application locally, just run:
 1. `next build` to build your NextJS app
 1. then `next-on-netlify` to prepare it for compatibility with Netlify
-1. and then `netlify-cli dev` to preview your app as if it was hosted on Netlify
+1. and then `netlify dev` to preview your app as if it was hosted on Netlify
 
 #### Add Custom Redirects
 

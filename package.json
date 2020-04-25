@@ -22,6 +22,9 @@
   "author": "Finn Woelm",
   "license": "MIT",
   "devDependencies": {},
+  "files": [
+    "/lib"
+  ],
   "dependencies": {
     "fs-extra": "^8.1.0",
     "next-aws-lambda": "^2.3.4",

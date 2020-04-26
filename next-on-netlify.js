@@ -5,10 +5,13 @@ const { copySync, emptyDirSync,
         writeFileSync, writeJsonSync } = require('fs-extra')
 const { join }                         = require('path')
 const collectNextjsPages               = require('./lib/collectNextjsPages')
+const getNextDistDir                   = require('./lib/getNextDistDir')
 
 // Configuration: Input Paths
+// Path to the NextJS config file
+const NEXT_CONFIG_PATH      = join(".", "next.config.js")
 // Path to the folder that NextJS builds to
-const NEXT_BUILD_PATH       = join(".", ".next")
+const NEXT_DIST_DIR         = getNextDistDir({ nextConfigPath: NEXT_CONFIG_PATH })
 // Path to Netlify functions folder
 const FUNCTIONS_PATH        = join(".", "functions")
 // Path to public folder
@@ -30,13 +33,17 @@ const ROUTER_FUNCTION_NAME  = "nextRouter"
 // - regex (/posts/([^\/]+)/)
 // - isHTML (whether it is a static file)
 // - isDynamic (whether it contains dynamic URL segments)
+const pages = collectNextjsPages({ nextDistDir: NEXT_DIST_DIR })
+
 // We ignore app.js and document.js, since NextJS has already included them in
 // all of the pages.
-const pages = collectNextjsPages().filter(({ file }) => (
+const filteredPages = pages.filter(({ file }) => (
   file !== "pages/_app.js" && file !== "pages/_document.js"
 ))
-const ssrPages  = pages.filter(({ isHTML }) => !isHTML)
-const htmlPages = pages.filter(({ isHTML }) =>  isHTML)
+
+// Identify SSR and HTML pages
+const ssrPages  = filteredPages.filter(({ isHTML }) => !isHTML)
+const htmlPages = filteredPages.filter(({ isHTML }) =>  isHTML)
 
 
 // 2. SSR Setup
@@ -56,7 +63,7 @@ copySync(
 // From there, they can be served by our nextRouter Netlify function.
 ssrPages.forEach(({ file }) => {
   copySync(
-    join(NEXT_BUILD_PATH, "serverless",         file),
+    join(NEXT_DIST_DIR,   "serverless",         file),
     join(FUNCTIONS_PATH,  ROUTER_FUNCTION_NAME, file)
   )
 })
@@ -93,8 +100,8 @@ emptyDirSync(
 // These are static, so they do not need to be handled by our nextRouter.
 htmlPages.forEach(({ file }) => (
   copySync(
-    join(NEXT_BUILD_PATH, "serverless", file),
-    join(PUBLIC_PATH,     "_next",      file)
+    join(NEXT_DIST_DIR, "serverless", file),
+    join(PUBLIC_PATH,   "_next",      file)
   )
 ))
 
@@ -103,8 +110,8 @@ htmlPages.forEach(({ file }) => (
 // Copy the NextJS' static assets from /.next/static to /public/_next/static.
 // These need to be available for NextJS to work.
 copySync(
-  join(NEXT_BUILD_PATH, "static"),
-  join(PUBLIC_PATH,     "_next",  "static")
+  join(NEXT_DIST_DIR, "static"),
+  join(PUBLIC_PATH,   "_next",  "static")
 )
 
 

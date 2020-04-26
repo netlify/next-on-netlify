@@ -30,9 +30,7 @@ It's super simple. Just create a `next.config.js` file and write the following:
 
 module.exports = {
   // Target must be serverless
-  target: 'serverless',
-  // distDir already has .next as default
-  distDir: '.next',
+  target: 'serverless'
 };
 ```
 

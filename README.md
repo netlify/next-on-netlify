@@ -1,5 +1,9 @@
 # README
 
+![npm](https://img.shields.io/npm/v/next-on-netlify)
+![NPM](https://img.shields.io/npm/l/next-on-netlify)
+![npm](https://img.shields.io/npm/dt/next-on-netlify)
+
 next-on-netlify is a utility for hosting NextJS applications with Server-Side Rendering on Netlify. It wraps your NextJS application in a tiny compatibility layer, so that pages can be server-side rendered with Netlify functions.
 
 

@@ -1,3 +1,6 @@
+# Ignore Netlify Site ID
+fixtures/default/.netlify/
+
 # Ignore build output
 fixtures/default/functions/
 fixtures/default/public/

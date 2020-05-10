@@ -75,19 +75,31 @@ I recommend you still use `next dev` to build and preview your application local
 
 But if you want to emulate the Netlify deployment on your computer, you can also run `next-on-netlify` locally and then use `netlify-cli` to preview the result.
 
-To do that, first install `serve` and `netlify-cli`:
+To do that, first install `http-server` and `netlify-cli`:
 ```
-npm install --save-dev serve
+npm install --save-dev http-server
 npm install -g netlify-cli
 ```
 
 Then add the following `[dev]` block to your `netlify.toml`:
 
 ```toml
+# netlify.toml
+
+# [build]
+#   ...
+
 [dev]
-  command   = "serve public -p 3000"
+  # We use HTTP server without directory listings (-d false),
+  # without caching (-c-1), and without log output (--silent).
+  # More info: https://www.npmjs.com/package/http-server
+  command   = "http-server --port 3999 -d false -c-1 --silent"
   functions = "functions"
   publish   = "public"
+  # We manually set the framework to static, otherwise Netlify automatically
+  # detects NextJS and redirects do not work.
+  # Read more: https://github.com/netlify/cli/blob/master/docs/netlify-dev.md#project-detection
+  framework = "#static"
 ```
 
 And add the following lines to your `.gitignore`:

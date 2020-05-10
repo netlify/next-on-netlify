@@ -1,0 +1,9 @@
+{
+  "name": "next-on-netlify-test",
+  "scripts": {
+    "build": "../../../node_modules/.bin/next build",
+    "postbuild": "node ../../../next-on-netlify",
+    "preview": "../../../node_modules/.bin/netlify dev",
+    "build-and-preview": "npm run build && npm run preview"
+  }
+}

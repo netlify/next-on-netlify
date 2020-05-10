@@ -1,0 +1,8 @@
+# Ignore build output
+fixtures/default/functions/
+fixtures/default/public/
+fixtures/default/.next/
+
+# Ignore Cypress videos and screenshots
+videos/
+screenshots/

@@ -133,9 +133,9 @@ describe('Routing',() => {
     // Check that routes are present
     expect(redirects).toContain("/static  /_next/pages/static.html  200")
     expect(redirects).toContain("/static/:id  /_next/pages/static/[id].html  200")
-    expect(redirects).toContain("/  /.netlify/functions/nextRouter?_path=/  200")
-    expect(redirects).toContain("/index  /.netlify/functions/nextRouter?_path=/index  200")
-    expect(redirects).toContain("/shows/:id  /.netlify/functions/nextRouter?_path=/shows/:id  200")
-    expect(redirects).toContain("/shows/*  /.netlify/functions/nextRouter?_path=/shows/*  200")
+    expect(redirects).toContain("/  /.netlify/functions/nextRouter  200")
+    expect(redirects).toContain("/index  /.netlify/functions/nextRouter  200")
+    expect(redirects).toContain("/shows/:id  /.netlify/functions/nextRouter  200")
+    expect(redirects).toContain("/shows/*  /.netlify/functions/nextRouter  200")
   })
 })

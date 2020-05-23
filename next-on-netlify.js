@@ -124,7 +124,7 @@ const htmlRedirects = htmlPages.map(({ route, file }) => (
   `${route}  /_next/${file}  200`
 ))
 const ssrRedirects = ssrPages.map(({ route }) => (
-  `${route}  /.netlify/functions/${ROUTER_FUNCTION_NAME}?_path=${route}  200`
+  `${route}  /.netlify/functions/${ROUTER_FUNCTION_NAME}  200`
 ))
 const nextjsRedirects = [...htmlRedirects, ...ssrRedirects].join("\n")
 

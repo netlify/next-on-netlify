@@ -2,7 +2,7 @@ import fetch from 'isomorphic-unfetch'
 import Error from 'next/error'
 import Link from 'next/link'
 
-const CatchAll = ({ errorCode, show, params }) => {
+const CatchAll = ({ errorCode, show, params, queryStringParams }) => {
 
   // If show item was not found, render 404 page
   if (errorCode) {
@@ -22,11 +22,26 @@ const CatchAll = ({ errorCode, show, params }) => {
             [{index}]: {param}<br/>
           </span>
         ))}
-        <br/>
+      </p>
+
+      <p>
         Refresh the page to see server-side rendering in action.
         <br/>
         You can also try changing the URL to something random,
         such as /shows/{show.id}/whatever/path/you/want
+      </p>
+
+      <p>
+        You can also use query string parameters, for example:
+        /shows/{show.id}/whatever/path/you/want?search=dog
+        <br/>
+        If you do, they will show up below:
+        <br/>
+        {Object.keys(queryStringParams).map(key => (
+          <span key={key}>
+            [{key}]: {queryStringParams[key]}<br/>
+          </span>
+        ))}
       </p>
 
       <hr/>
@@ -46,8 +61,8 @@ const CatchAll = ({ errorCode, show, params }) => {
 }
 
 CatchAll.getInitialProps = async ({ res: req, query }) => {
-  // Get the params to render
-  const { params } = query
+  // Get the params and query parameters to render
+  const { params, ...queryStringParams } = query
 
   // Get the ID to render
   const id = params[0]
@@ -59,7 +74,7 @@ CatchAll.getInitialProps = async ({ res: req, query }) => {
   // Set error code if show item could not be found
   const errorCode = res.status > 200 ? res.status : false
 
-  return { errorCode, show: data, params }
+  return { errorCode, show: data, params, queryStringParams }
 }
 
 export default CatchAll

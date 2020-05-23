@@ -83,27 +83,37 @@ describe('dynamic SSR page', () => {
 })
 
 describe('dynamic catch-all SSR page', () => {
-  it('displays all URL parameters', () => {
-    cy.visit('/shows/94/this-is-all/being/captured/yay')
+  it('displays all URL parameters, including query string parameters', () => {
+    cy.visit('/shows/94/this-is-all/being/captured/yay?search=dog&custom-param=cat')
 
+    // path parameters
     cy.get('p').should('contain', '[0]: 94')
     cy.get('p').should('contain', '[1]: this-is-all')
     cy.get('p').should('contain', '[2]: being')
     cy.get('p').should('contain', '[3]: captured')
     cy.get('p').should('contain', '[4]: yay')
+
+    // query string parameters
+    cy.get('p').should('contain', '[search]: dog')
+    cy.get('p').should('contain', '[custom-param]: cat')
 
     cy.get('h1').should('contain', 'Show #94')
     cy.get('p').should('contain',  'Defiance')
   })
 
-  it('displays all URL parameters when SSR-ing', () => {
-    cy.visit('/shows/94/this-is-all/being/captured/yay')
+  it('displays all URL parameters when SSR-ing, including query string parameters', () => {
+    cy.visit('/shows/94/this-is-all/being/captured/yay?search=dog&custom-param=cat')
 
+    // path parameters
     cy.get('p').should('contain', '[0]: 94')
     cy.get('p').should('contain', '[1]: this-is-all')
     cy.get('p').should('contain', '[2]: being')
     cy.get('p').should('contain', '[3]: captured')
     cy.get('p').should('contain', '[4]: yay')
+
+    // query string parameters
+    cy.get('p').should('contain', '[search]: dog')
+    cy.get('p').should('contain', '[custom-param]: cat')
 
     cy.get('h1').should('contain', 'Show #94')
     cy.get('p').should('contain',  'Defiance')

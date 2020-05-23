@@ -1,10 +1,9 @@
 # Ignore Netlify Site ID
-fixtures/default/.netlify/
+fixtures/.netlify/*
+!fixtures/.netlify/.keep
 
-# Ignore build output
-fixtures/default/functions/
-fixtures/default/public/
-fixtures/default/.next/
+# Ignore builds of NextJS that are created for testing purposes
+builds/
 
 # Ignore Cypress videos and screenshots
 videos/

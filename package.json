@@ -26,12 +26,8 @@
   ],
   "scripts": {
     "test": "jest",
-    "cypress:local:setup": "cd cypress/fixtures/default && npm run build-and-preview",
-    "cypress:local:test": "cypress run --config-file false --config baseUrl=http://localhost:8888",
-    "cypress:local": "start-server-and-test cypress:local:setup 8888 cypress:local:test",
-    "cypress:netlify:setup": "cd cypress/fixtures/default && npm run build-and-deploy",
-    "cypress:netlify:test": "cypress run --config-file false --config baseUrl=https://test-next-on-netlify.netlify.app",
-    "cypress:netlify": "npm run cypress:netlify:setup && npm run cypress:netlify:test"
+    "cypress:local": "env CYPRESS_DEPLOY=local cypress run --config-file false",
+    "cypress:netlify": "env CYPRESS_DEPLOY=netlify cypress run --config-file false"
   },
   "devDependencies": {
     "cypress": "^4.5.0",
@@ -41,7 +37,7 @@
     "next": "^9.3.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "start-server-and-test": "^1.11.0"
+    "wait-on": "^5.0.0"
   },
   "dependencies": {
     "fs-extra": "^8.1.0",

@@ -4,8 +4,6 @@
     "build": "../../../node_modules/.bin/next build",
     "postbuild": "node ../../../next-on-netlify",
     "preview": "../../../node_modules/.bin/netlify dev",
-    "build-and-preview": "npm run build && npm run preview",
-    "deploy": "../../../node_modules/.bin/netlify deploy --prod",
-    "build-and-deploy": "npm run build && npm run deploy"
+    "deploy": "../../../node_modules/.bin/netlify deploy --json > deployment.json"
   }
 }

@@ -1,21 +1,49 @@
-/// <reference types="cypress" />
-// ***********************************************************
-// This example plugins/index.js can be used to load plugins
-//
-// You can change the location of this file or turn off loading
-// the plugins file with the 'pluginsFile' configuration option.
-//
-// You can read more here:
-// https://on.cypress.io/plugins-guide
-// ***********************************************************
-
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
+// You can read more here:
+// https://on.cypress.io/plugins-guide
+
+const { join }        = require('path')
+
+const clearProject    = require('./clearProject')
+const copyFixture     = require('./copyFixture')
+const buildProject    = require('./buildProject')
+const deployProject   = require('./deployProject')
+const getBaseUrl      = require('./getBaseUrl')
+const clearDeployment = require('./clearDeployment')
+
+const tasks = [
+  clearProject,
+  copyFixture,
+  buildProject,
+  deployProject,
+  getBaseUrl,
+  clearDeployment
+]
 
 /**
  * @type {Cypress.PluginConfig}
  */
 module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
+  // We will use this to track deployment state
+  config.activeDeployment = null
+
+  // Add path to builds folder
+  config.buildsFolder = join(__dirname, "..", "builds")
+
+  // Set up tasks
+  const tasksObject = {}
+  tasks.forEach(task => {
+    // Make config availabe in tasks
+    tasksObject[task.name] = (...args) => task(...args, config)
+  })
+  on('task', tasksObject)
+
+  // Other tasks that don't warrant a separate function
+  on('task', {
+    // Check if deployment is currently active
+    isDeployed: () => {
+      return config.activeDeployment !== null
+    },
+  })
 }

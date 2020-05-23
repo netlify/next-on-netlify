@@ -1,3 +1,57 @@
+const project = "default"
+
+before(() => {
+  // When changing the base URL within a spec file, Cypress runs the spec twice
+  // To avoid rebuilding and redeployment on the second run, we check if the
+  // project has already been deployed.
+  cy.task('isDeployed').then(isDeployed => {
+    // Cancel setup, if already deployed
+    if(isDeployed)
+      return
+
+    // Clear project folder
+    cy.task('clearProject', { project })
+
+    // Copy NextJS files
+    cy.task('copyFixture', {
+      project, from: 'pages', to: 'pages'
+    })
+    cy.task('copyFixture', {
+      project, from: 'next.config.js', to: 'next.config.js'
+    })
+
+    // Copy package.json file
+    cy.task('copyFixture', {
+      project, from: 'package.json', to: 'package.json'
+    })
+
+    // Copy Netlify settings
+    cy.task('copyFixture', {
+      project, from: 'netlify.toml', to: 'netlify.toml'
+    })
+    cy.task('copyFixture', {
+      project, from: '.netlify', to: '.netlify'
+    })
+
+    // Build
+    cy.task('buildProject', { project })
+
+    // Deploy
+    cy.task('deployProject', { project })
+  })
+
+  // Set base URL
+  cy.task('getBaseUrl', { project }).then((url) => {
+    Cypress.config('baseUrl', url)
+  })
+})
+
+after(() => {
+  // While the before hook runs twice (it's re-run when the base URL changes),
+  // the after hook only runs once.
+  cy.task('clearDeployment')
+})
+
 describe('SSR page', () => {
   it('loads TV shows', () => {
     cy.visit('/')

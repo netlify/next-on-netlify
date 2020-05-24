@@ -120,6 +120,56 @@ describe('dynamic catch-all SSR page', () => {
   })
 })
 
+describe('API endpoint', () => {
+  it('returns hello world, with all response headers', () => {
+    cy.request('/api/static').then(response => {
+      expect(response.headers['content-type']).to.include('application/json')
+      expect(response.headers['my-custom-header']).to.include('header123')
+
+      expect(response.body).to.have.property('message', 'hello world :)')
+    })
+  })
+})
+
+describe('dynamic API endpoint', () => {
+  it('returns TV show', () => {
+    cy.request('/api/shows/305').then(response => {
+      expect(response.headers['content-type']).to.include('application/json')
+
+      expect(response.body).to.have.property('show')
+      expect(response.body.show).to.have.property('id', 305)
+      expect(response.body.show).to.have.property('name', 'Black Mirror')
+    })
+  })
+})
+
+describe('catch-all API endpoint', () => {
+  it('returns all URL paremeters, including query string parameters', () => {
+    cy.request('/api/shows/590/this/path/is/captured?metric=dog&p2=cat')
+      .then(response => {
+        expect(response.headers['content-type']).to.include('application/json')
+
+        // Params
+        expect(response.body).to.have.property('params')
+        expect(response.body.params).to.deep.eq([
+          '590', 'this', 'path', 'is', 'captured'
+        ])
+
+        // Query string parameters
+        expect(response.body).to.have.property('queryStringParams')
+        expect(response.body.queryStringParams).to.deep.eq({
+          metric: 'dog',
+          p2: 'cat'
+        })
+
+        // Show
+        expect(response.body).to.have.property('show')
+        expect(response.body.show).to.have.property('id', 590)
+        expect(response.body.show).to.have.property('name', 'Pokémon')
+    })
+  })
+})
+
 describe('static page', () => {
   it('renders', () => {
     cy.visit('/static')

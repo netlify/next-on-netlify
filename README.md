@@ -1,8 +1,9 @@
 # README
 
-![npm](https://img.shields.io/npm/v/next-on-netlify)
-![NPM](https://img.shields.io/npm/l/next-on-netlify)
-![npm](https://img.shields.io/npm/dt/next-on-netlify)
+[![NPM version](https://img.shields.io/npm/v/next-on-netlify)](https://www.npmjs.com/package/next-on-netlify)
+[![MIT license](https://img.shields.io/npm/l/next-on-netlify)](https://github.com/FinnWoelm/next-on-netlify/blob/master/LICENSE)
+[![NPM downloads](https://img.shields.io/npm/dt/next-on-netlify)](https://www.npmjs.com/package/next-on-netlify)
+[![Tested with Cypress.io](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)](https://www.cypress.io/)
 
 next-on-netlify is a utility for hosting NextJS applications with Server-Side Rendering on Netlify. It wraps your NextJS application in a tiny compatibility layer, so that pages can be server-side rendered with Netlify functions.
 

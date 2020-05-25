@@ -25,7 +25,7 @@
     "/lib"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "jest --config tests/jest.config.js",
     "cypress:local": "env CYPRESS_DEPLOY=local cypress run --config-file false",
     "cypress:netlify": "env CYPRESS_DEPLOY=netlify cypress run --config-file false"
   },

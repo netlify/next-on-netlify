@@ -32,13 +32,13 @@
     "cypress:netlify:testonly": "env CYPRESS_SKIP_DEPLOY=true npm run cypress:netlify"
   },
   "devDependencies": {
-    "cypress": "^4.7.0",
-    "jest": "^26.0.1",
-    "netlify-cli": "^2.52.0",
+    "cypress": "^4.9.0",
+    "jest": "^26.1.0",
+    "netlify-cli": "^2.54.0",
     "next": "^9.4.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "wait-on": "^5.0.0"
+    "wait-on": "^5.0.1"
   },
   "dependencies": {
     "@sls-next/lambda-at-edge": "1.2.0-alpha.3",

@@ -71,15 +71,15 @@ describe('SSR Pages', () => {
     // check entries
     expect(routes).toContainEqual({
       file: "pages/index.js",
-      regex: "^\\/(?:\\/)?$"
+      regex: "^\\/[\\/#\\?]?$"
     })
     expect(routes).toContainEqual({
       file: "pages/shows/[id].js",
-      regex: "^\\/shows\\/([^\\/]+?)(?:\\/)?$"
+      regex: "^\\/shows(?:\\/([^\\/#\\?]+?))[\\/#\\?]?$"
     })
     expect(routes).toContainEqual({
       file: "pages/shows/[...params].js",
-      regex: "^\\/shows(?:\\/((?:[^\\/]+?)(?:\\/(?:[^\\/]+?))*))?(?:\\/)?$"
+      regex: "^\\/shows(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?[\\/#\\?]?$"
     })
   })
 
@@ -119,15 +119,15 @@ describe('API Pages', () => {
     // check entries
     expect(routes).toContainEqual({
       file: "pages/api/static.js",
-      regex: "^\\/api\\/static(?:\\/)?$"
+      regex: "^\\/api\\/static[\\/#\\?]?$"
     })
     expect(routes).toContainEqual({
       file: "pages/api/shows/[id].js",
-      regex: "^\\/api\\/shows\\/([^\\/]+?)(?:\\/)?$"
+      regex: "^\\/api\\/shows(?:\\/([^\\/#\\?]+?))[\\/#\\?]?$"
     })
     expect(routes).toContainEqual({
       file: "pages/api/shows/[...params].js",
-      regex: "^\\/api\\/shows(?:\\/((?:[^\\/]+?)(?:\\/(?:[^\\/]+?))*))?(?:\\/)?$"
+      regex: "^\\/api\\/shows(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?[\\/#\\?]?$"
     })
   })
 

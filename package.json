@@ -40,8 +40,8 @@
     "wait-on": "^5.0.0"
   },
   "dependencies": {
+    "@sls-next/lambda-at-edge": "1.2.0-alpha.3",
     "fs-extra": "^9.0.0",
-    "next-aws-lambda": "^2.4.1",
-    "path-to-regexp": "^3.2.0"
+    "next-aws-lambda": "^2.4.1"
   }
 }

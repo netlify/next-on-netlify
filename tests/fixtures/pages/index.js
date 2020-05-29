@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-unfetch'
 import Link from 'next/link'
 
 const Index = ({ shows }) => (

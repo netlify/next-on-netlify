@@ -1,5 +1,3 @@
-import fetch from 'isomorphic-unfetch'
-
 export default async (req, res) => {
   // Respond with JSON
   res.setHeader('Content-Type', 'application/json')

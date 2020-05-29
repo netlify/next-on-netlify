@@ -1,5 +1,3 @@
-import fetch from 'isomorphic-unfetch'
-
 export default async (req, res) => {
   // Get the params and query string parameters
   const { query } = req

@@ -1,5 +1,3 @@
-import fetch from 'isomorphic-unfetch'
-
 export default async (req, res) => {
   // Get the ID of the show
   const { query } = req

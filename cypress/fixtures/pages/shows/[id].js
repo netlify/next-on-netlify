@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-unfetch'
 import Error from 'next/error'
 import Link from 'next/link'
 

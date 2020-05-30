@@ -186,6 +186,19 @@ describe('Static Pages', () => {
   })
 })
 
+describe('404 Page', () => {
+  test('copies 404.html to output directory', () => {
+    const OUTPUT_PATH = join(PROJECT_PATH, "out")
+
+    expect(existsSync(join(OUTPUT_PATH, "404.html"))).toBe(true)
+  })
+
+  // This is required for 404.html to work on netlify-dev
+  test('copies 404.html to directory root', () => {
+    expect(existsSync(join(PROJECT_PATH, "404.html"))).toBe(true)
+  })
+})
+
 describe('Public assets', () => {
   test('copies public files to output directory', () => {
     const OUTPUT_PATH = join(PROJECT_PATH, "out")

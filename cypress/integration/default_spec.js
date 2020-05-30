@@ -199,3 +199,17 @@ describe('dynamic static page', () => {
     cy.get('p').should('contain', 'it has a dynamic URL parameter: /static/:id.')
   })
 })
+
+describe('404 page', () => {
+  it('renders', () => {
+    cy.request({
+      url: '/this-page-does-not-exist',
+      failOnStatusCode: false
+    }).then(response => {
+      expect(response.status).to.eq(404)
+      cy.state('document').write(response.body)
+    })
+
+    cy.get('h2').should('contain', 'This page could not be found.')
+  })
+})

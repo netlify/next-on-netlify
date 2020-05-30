@@ -182,5 +182,14 @@ writeFileSync(
 )
 
 
+// 6. Copy 404.html to directory root
+// This is a temporary workaround. Currenly, Netlify (deployed) expects the
+// 404.html file in the publish folder, while netlify-cli dev expects it at
+// the directory root. In order to cover both cases, we copy the 404.html to
+// both locations until this is fixed.
+if(existsSync(join(OUTPUT_PATH, "404.html")))
+  copySync(join(OUTPUT_PATH, "404.html"), join(".", "404.html"))
+
+
 // Done!
 console.log("\x1b[1m✅ Success! All done!\x1b[22m")

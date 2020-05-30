@@ -41,6 +41,12 @@ beforeAll(
       join(PROJECT_PATH, "package.json")
     )
 
+    // Copy image.png to public folder
+    copySync(
+      join(FIXTURE_PATH, "image.png"),
+      join(PROJECT_PATH, "public", "image.png")
+    )
+
     // Invoke `npm run build`: Build Next and run next-on-netlify
     const { stdout } = await npmRunBuild({ directory: PROJECT_PATH })
     BUILD_OUTPUT = stdout
@@ -154,15 +160,15 @@ describe('API Pages', () => {
 })
 
 describe('Static Pages', () => {
-  test('copies static pages to public/_next/ directory', () => {
-    const pages = join(PROJECT_PATH, "public", "_next", "pages")
+  test('copies static pages to output directory', () => {
+    const OUTPUT_PATH = join(PROJECT_PATH, "out")
 
-    expect(existsSync(join(pages, "static.html"))).toBe(true)
-    expect(existsSync(join(pages, "static/[id].html"))).toBe(true)
+    expect(existsSync(join(OUTPUT_PATH, "static.html"))).toBe(true)
+    expect(existsSync(join(OUTPUT_PATH, "static/[id].html"))).toBe(true)
   })
 
-  test('copies static assets to public/_next/ directory', () => {
-    const dirs = readdirSync(join(PROJECT_PATH, "public", "_next", "static"))
+  test('copies static assets to out/_next/ directory', () => {
+    const dirs = readdirSync(join(PROJECT_PATH, "out", "_next", "static"))
 
     expect(dirs.length).toBe(3)
     expect(dirs).toContain("chunks")
@@ -170,17 +176,25 @@ describe('Static Pages', () => {
   })
 })
 
+describe('Public assets', () => {
+  test('copies public files to output directory', () => {
+    const OUTPUT_PATH = join(PROJECT_PATH, "out")
+
+    expect(existsSync(join(OUTPUT_PATH, "image.png"))).toBe(true)
+  })
+})
+
 describe('Routing',() => {
   test('creates Netlify redirects', async () => {
     // Read _redirects file
-    const contents = readFileSync(join(PROJECT_PATH, "public", "_redirects"))
+    const contents = readFileSync(join(PROJECT_PATH, "out", "_redirects"))
 
     // Convert contents into an array, each line being one element
     const redirects = contents.toString().split("\n")
 
     // Check that routes are present
-    expect(redirects).toContain("/static  /_next/pages/static.html  200")
-    expect(redirects).toContain("/static/:id  /_next/pages/static/[id].html  200")
+    expect(redirects).toContain("/static  /static.html  200")
+    expect(redirects).toContain("/static/:id  /static/[id].html  200")
     expect(redirects).toContain("/  /.netlify/functions/nextRouter  200")
     expect(redirects).toContain("/index  /.netlify/functions/nextRouter  200")
     expect(redirects).toContain("/shows/:id  /.netlify/functions/nextRouter  200")

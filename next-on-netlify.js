@@ -3,7 +3,7 @@
 const { copySync, emptyDirSync,
         existsSync, readFileSync,
         writeFileSync, writeJsonSync } = require('fs-extra')
-const { join }                         = require('path')
+const { join, relative }               = require('path')
 const collectNextjsPages               = require('./lib/collectNextjsPages')
 const getNextDistDir                   = require('./lib/getNextDistDir')
 
@@ -13,11 +13,15 @@ const NEXT_CONFIG_PATH      = join(".", "next.config.js")
 // Path to the folder that NextJS builds to
 const NEXT_DIST_DIR         = getNextDistDir({ nextConfigPath: NEXT_CONFIG_PATH })
 // Path to Netlify functions folder
-const FUNCTIONS_PATH        = join(".", "functions")
+const FUNCTIONS_PATH        = join(".", "functions/")
+// Path to output folder (same as `next export`)
+// This is where next-on-netlify will place all static files.
+// The publish key in netlify.toml should point to this folder.
+const OUTPUT_PATH           = join(".", "out/")
 // Path to public folder
-const PUBLIC_PATH           = join(".", "public")
+const PUBLIC_PATH           = join(".", "public/")
 // Path to user-defined redirects
-const USER_REDIRECTS_PATH   = join(".", "_redirects")
+const USER_REDIRECTS_PATH   = join(PUBLIC_PATH, "_redirects")
 // Path to the router template
 const ROUTER_TEMPLATE_PATH  = join(__dirname, "lib", "routerTemplate.js")
 
@@ -91,38 +95,54 @@ writeFileSync(
 
 // 3. HTML Setup
 
-// 3.1 HTML Setup: Clean existing _next folder
-emptyDirSync(
-  join(PUBLIC_PATH, "_next")
-)
+// 3.1 HTML Setup: Clean existing output folder
+emptyDirSync(OUTPUT_PATH)
 
-// 3.2 HTML Setup: Copy HTML pages to public/_next/pages
+// 3.2 HTML Setup: Copy files from public folder to output path
+if(existsSync(PUBLIC_PATH))
+  copySync(PUBLIC_PATH, OUTPUT_PATH)
+
+// 3.3 HTML Setup: Copy HTML pages to the output folder
 // These are static, so they do not need to be handled by our nextRouter.
-htmlPages.forEach(({ file }) => (
+htmlPages.forEach(({ file }) => {
+  // The path to the file, relative to the pages directory
+  const relativePath = relative("pages", file)
+
   copySync(
-    join(NEXT_DIST_DIR, "serverless", file),
-    join(PUBLIC_PATH,   "_next",      file)
+    join(NEXT_DIST_DIR, "serverless", "pages",relativePath),
+    join(OUTPUT_PATH,   relativePath),
+    {
+      overwrite: false,
+      errorOnExist: true
+    }
   )
-))
+})
 
 
 // 4. Prepare NextJS static assets
-// Copy the NextJS' static assets from /.next/static to /public/_next/static.
+// Copy the NextJS' static assets from /.next/static to /out/_next/static.
 // These need to be available for NextJS to work.
 copySync(
   join(NEXT_DIST_DIR, "static"),
-  join(PUBLIC_PATH,   "_next",  "static")
+  join(OUTPUT_PATH,   "_next",  "static"),
+  {
+    overwrite: false,
+    errorOnExist: true
+  }
 )
 
 
 // 5. Generate the _redirects file
 // These redirects route all requests to the appropriate location: Either the
 // nextRouter Netlify function or one of our static HTML pages. They are merged
-// with the _redirects file at the root level, so you can still define your
-// custom redirects.
-const htmlRedirects = htmlPages.map(({ route, file }) => (
-  `${route}  /_next/${file}  200`
-))
+// with the _redirects file from the public/ folder, so you can still define
+// your custom redirects.
+const htmlRedirects = htmlPages.map(({ route, file }) => {
+  // The path to the file, relative to the pages directory
+  const relativePath = relative("pages", file)
+
+  return `${route}  /${relativePath}  200`
+})
 const ssrRedirects = ssrPages.map(({ route }) => (
   `${route}  /.netlify/functions/${ROUTER_FUNCTION_NAME}  200`
 ))
@@ -135,7 +155,7 @@ if(existsSync(USER_REDIRECTS_PATH)) {
 }
 
 writeFileSync(
-  join(PUBLIC_PATH, "_redirects"),
+  join(OUTPUT_PATH, "_redirects"),
   userRedirects         + "\n\n"  +
   "# Next-on-Netlify Redirects"  + "\n"    +
   nextjsRedirects

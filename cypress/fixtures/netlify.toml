@@ -1,7 +1,7 @@
 [build]
   command     = "npm run build"
   functions   = "functions"
-  publish     = "public"
+  publish     = "out"
 
 [dev]
   # We manually set the framework to static, otherwise Netlify automatically
@@ -9,4 +9,4 @@
   # Read more: https://github.com/netlify/cli/blob/master/docs/netlify-dev.md#project-detection
   framework   = "#static"
   functions   = "functions"
-  publish     = "public"
+  publish     = "out"

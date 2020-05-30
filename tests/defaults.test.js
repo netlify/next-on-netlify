@@ -57,9 +57,19 @@ beforeAll(
 
 describe('Next', () => {
   test('builds successfully', () => {
+    // NextJS output
     expect(BUILD_OUTPUT).toMatch("Creating an optimized production build...")
     expect(BUILD_OUTPUT).toMatch("Automatically optimizing pages...")
     expect(BUILD_OUTPUT).toMatch("First Load JS shared by all")
+
+    // Next on Netlify output
+    expect(BUILD_OUTPUT).toMatch("Next on Netlify")
+    expect(BUILD_OUTPUT).toMatch("Preparing Netlify Function for SSR pages: functions/nextRouter")
+    expect(BUILD_OUTPUT).toMatch("Copying public/ folder to out/")
+    expect(BUILD_OUTPUT).toMatch("Writing pre-rendered HTML pages to out/")
+    expect(BUILD_OUTPUT).toMatch("Copying static NextJS assets to out/")
+    expect(BUILD_OUTPUT).toMatch("Setting up redirects")
+    expect(BUILD_OUTPUT).toMatch("Success! All done!")
   })
 })
 

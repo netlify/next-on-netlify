@@ -62,8 +62,8 @@ We're almost done! We just have to tell Netlify how to build our NextJS app, whe
 ```toml
 [build]
   command   = "npm run build"
-  functions = "functions"
-  publish   = "out"
+  functions = "out_functions"
+  publish   = "out_publish"
 ```
 
 We're done. Let's deploy 🚀🚀🚀
@@ -91,8 +91,8 @@ Then, add the following `[dev]` block to your `netlify.toml`:
 #   ...
 
 [dev]
-  functions = "functions"
-  publish   = "out"
+  functions = "out_functions"
+  publish   = "out_publish"
   # We manually set the framework to static, otherwise Netlify automatically
   # detects NextJS and redirects do not work.
   # Read more: https://github.com/netlify/cli/blob/master/docs/netlify-dev.md#project-detection
@@ -116,18 +116,20 @@ From now on, whenever you want to preview your application locally, just run:
 1. `npm run build`: This will run `next build` to build your NextJS app and `next-on-netlify` to prepare your NextJS app for compatibility with Netlify
 1. `netlify dev`: This will emulate Netlify on your computer and let you preview your app on `http://localhost:8888`.
 
-#### Add Custom Redirects
+#### Custom Netlify Redirects
 
-You can define custom redirects in a `_redirects` file in the `public/` folder. When you run `next-on-netlify`, your redirects will be merged with the redirects defined by `next-on-netlify`. Note that your redirects take priority.
+You can define custom redirects in the `netlify.toml` file.
+Routes defined by `next-on-netlify` take precedence over routes
+defined in `netlify.toml`.
 
-Or you can define custom redirects in the `netlify.toml` file.
+In the past, it was possible to define custom redirects in a `_redirects` file. This is not possible anymore. Let me know if you have a need for this feature and we can add it back.
 
 [Read more about Netlify redirects here](https://docs.netlify.com/routing/redirects/).  
 
+#### Custom Netlify Functions
 
-## Limitations
-
-next-on-netlify has only been tested on NextJS version 9 and above.
+`next-on-netlify` creates one Netlify Function for each of your
+SSR pages and API endpoints. It is currently not possible to create custom Netlify Functions. Let me know if you have a need for this feature and we can add it.
 
 ## Credits
 

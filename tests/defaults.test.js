@@ -64,121 +64,45 @@ describe('Next', () => {
 
     // Next on Netlify output
     expect(BUILD_OUTPUT).toMatch("Next on Netlify")
-    expect(BUILD_OUTPUT).toMatch("Preparing Netlify Function for SSR pages: functions/nextRouter")
-    expect(BUILD_OUTPUT).toMatch("Copying public/ folder to out/")
-    expect(BUILD_OUTPUT).toMatch("Writing pre-rendered HTML pages to out/")
-    expect(BUILD_OUTPUT).toMatch("Copying static NextJS assets to out/")
+    expect(BUILD_OUTPUT).toMatch("Copying public/ folder to out_publish/")
+    expect(BUILD_OUTPUT).toMatch("Copying static NextJS assets to out_publish/")
+    expect(BUILD_OUTPUT).toMatch("Setting up SSR pages as Netlify Functions in out_functions/")
+    expect(BUILD_OUTPUT).toMatch("Writing pre-rendered HTML pages to out_publish/")
     expect(BUILD_OUTPUT).toMatch("Setting up redirects")
     expect(BUILD_OUTPUT).toMatch("Success! All done!")
   })
 })
 
 describe('SSR Pages', () => {
-  const router = join(PROJECT_PATH, "functions", "nextRouter")
+  const functionsDir = join(PROJECT_PATH, "out_functions")
 
-  test('creates nextRouter.js Netlify Function', () => {
-    expect(existsSync(join(router, "nextRouter.js"))).toBe(true)
-  })
-
-  test('lists all routes in routes.json', () => {
-    // read routes
-    const { routes } = readJsonSync(join(router, "routes.json"))
-
-    // check entries
-    expect(routes).toContainEqual({
-      file: "pages/index.js",
-      regex: "^\\/[\\/#\\?]?$"
-    })
-    expect(routes).toContainEqual({
-      file: "pages/shows/[id].js",
-      regex: "^\\/shows(?:\\/([^\\/#\\?]+?))[\\/#\\?]?$"
-    })
-    expect(routes).toContainEqual({
-      file: "pages/shows/[...params].js",
-      regex: "^\\/shows(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?[\\/#\\?]?$"
-    })
-  })
-
-  test('requires all pages in allPages.js', () => {
-    // read allPages.js
-    const contents = readFileSync(join(router, "allPages.js"))
-
-    // Convert contents into an array, each line being one element
-    const requires = contents.toString().split("\n")
-
-    // Verify presence of require statements
-    expect(requires).toContain('require("./pages/index.js")')
-    expect(requires).toContain('require("./pages/shows/[id].js")')
-    expect(requires).toContain('require("./pages/shows/[...params].js")')
-  })
-
-  test('bundles all SSR-pages in /pages', () => {
-    const pages = join(PROJECT_PATH, "public", "_next", "pages")
-
-    expect(existsSync(join(router, "pages", "index.js"))).toBe(true)
-    expect(existsSync(join(router, "pages", "shows", "[id].js"))).toBe(true)
-    expect(existsSync(join(router, "pages", "shows", "[...params].js"))).toBe(true)
+  test('creates a Netlify Function for each SSR page', () => {
+    expect(existsSync(join(functionsDir, "next_index",             "next_index.js"))).toBe(true)
+    expect(existsSync(join(functionsDir, "next_shows_id",        "next_shows_id.js"))).toBe(true)
+    expect(existsSync(join(functionsDir, "next_shows_params", "next_shows_params.js"))).toBe(true)
   })
 })
 
 describe('API Pages', () => {
-  const router = join(PROJECT_PATH, "functions", "nextRouter")
+  const functionsDir = join(PROJECT_PATH, "out_functions")
 
-  test('creates nextRouter.js Netlify Function', () => {
-    expect(existsSync(join(router, "nextRouter.js"))).toBe(true)
-  })
-
-  test('lists all routes in routes.json', () => {
-    // read routes
-    const { routes } = readJsonSync(join(router, "routes.json"))
-
-    // check entries
-    expect(routes).toContainEqual({
-      file: "pages/api/static.js",
-      regex: "^\\/api\\/static[\\/#\\?]?$"
-    })
-    expect(routes).toContainEqual({
-      file: "pages/api/shows/[id].js",
-      regex: "^\\/api\\/shows(?:\\/([^\\/#\\?]+?))[\\/#\\?]?$"
-    })
-    expect(routes).toContainEqual({
-      file: "pages/api/shows/[...params].js",
-      regex: "^\\/api\\/shows(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?[\\/#\\?]?$"
-    })
-  })
-
-  test('requires all pages in allPages.js', () => {
-    // read allPages.js
-    const contents = readFileSync(join(router, "allPages.js"))
-
-    // Convert contents into an array, each line being one element
-    const requires = contents.toString().split("\n")
-
-    // Verify presence of require statements
-    expect(requires).toContain('require("./pages/api/static.js")')
-    expect(requires).toContain('require("./pages/api/shows/[id].js")')
-    expect(requires).toContain('require("./pages/api/shows/[...params].js")')
-  })
-
-  test('bundles all SSR-pages in /pages', () => {
-    const pages = join(PROJECT_PATH, "public", "_next", "pages")
-
-    expect(existsSync(join(router, "pages", "api", "static.js"))).toBe(true)
-    expect(existsSync(join(router, "pages", "api", "shows", "[id].js"))).toBe(true)
-    expect(existsSync(join(router, "pages", "api", "shows", "[...params].js"))).toBe(true)
+  test('creates a Netlify Function for each API endpoint', () => {
+    expect(existsSync(join(functionsDir, "next_api_static",            "next_api_static.js"))).toBe(true)
+    expect(existsSync(join(functionsDir, "next_api_shows_id",        "next_api_shows_id.js"))).toBe(true)
+    expect(existsSync(join(functionsDir, "next_api_shows_params", "next_api_shows_params.js"))).toBe(true)
   })
 })
 
 describe('Static Pages', () => {
   test('copies static pages to output directory', () => {
-    const OUTPUT_PATH = join(PROJECT_PATH, "out")
+    const OUTPUT_PATH = join(PROJECT_PATH, "out_publish")
 
     expect(existsSync(join(OUTPUT_PATH, "static.html"))).toBe(true)
     expect(existsSync(join(OUTPUT_PATH, "static/[id].html"))).toBe(true)
   })
 
-  test('copies static assets to out/_next/ directory', () => {
-    const dirs = readdirSync(join(PROJECT_PATH, "out", "_next", "static"))
+  test('copies static assets to out_publish/_next/ directory', () => {
+    const dirs = readdirSync(join(PROJECT_PATH, "out_publish", "_next", "static"))
 
     expect(dirs.length).toBe(3)
     expect(dirs).toContain("chunks")
@@ -188,7 +112,7 @@ describe('Static Pages', () => {
 
 describe('404 Page', () => {
   test('copies 404.html to output directory', () => {
-    const OUTPUT_PATH = join(PROJECT_PATH, "out")
+    const OUTPUT_PATH = join(PROJECT_PATH, "out_publish")
 
     expect(existsSync(join(OUTPUT_PATH, "404.html"))).toBe(true)
   })
@@ -201,7 +125,7 @@ describe('404 Page', () => {
 
 describe('Public assets', () => {
   test('copies public files to output directory', () => {
-    const OUTPUT_PATH = join(PROJECT_PATH, "out")
+    const OUTPUT_PATH = join(PROJECT_PATH, "out_publish")
 
     expect(existsSync(join(OUTPUT_PATH, "image.png"))).toBe(true)
   })
@@ -210,7 +134,7 @@ describe('Public assets', () => {
 describe('Routing',() => {
   test('creates Netlify redirects', async () => {
     // Read _redirects file
-    const contents = readFileSync(join(PROJECT_PATH, "out", "_redirects"))
+    const contents = readFileSync(join(PROJECT_PATH, "out_publish", "_redirects"))
 
     // Convert contents into an array, each line being one element
     const redirects = contents.toString().split("\n")
@@ -218,12 +142,12 @@ describe('Routing',() => {
     // Check that routes are present
     expect(redirects).toContain("/static  /static.html  200")
     expect(redirects).toContain("/static/:id  /static/[id].html  200")
-    expect(redirects).toContain("/  /.netlify/functions/nextRouter  200")
-    expect(redirects).toContain("/index  /.netlify/functions/nextRouter  200")
-    expect(redirects).toContain("/shows/:id  /.netlify/functions/nextRouter  200")
-    expect(redirects).toContain("/shows/*  /.netlify/functions/nextRouter  200")
-    expect(redirects).toContain("/api/static  /.netlify/functions/nextRouter  200")
-    expect(redirects).toContain("/api/shows/:id  /.netlify/functions/nextRouter  200")
-    expect(redirects).toContain("/api/shows/*  /.netlify/functions/nextRouter  200")
+    expect(redirects).toContain("/  /.netlify/functions/next_index  200")
+    expect(redirects).toContain("/index  /.netlify/functions/next_index  200")
+    expect(redirects).toContain("/shows/:id  /.netlify/functions/next_shows_id  200")
+    expect(redirects).toContain("/shows/*  /.netlify/functions/next_shows_params  200")
+    expect(redirects).toContain("/api/static  /.netlify/functions/next_api_static  200")
+    expect(redirects).toContain("/api/shows/:id  /.netlify/functions/next_api_shows_id  200")
+    expect(redirects).toContain("/api/shows/*  /.netlify/functions/next_api_shows_params  200")
   })
 })

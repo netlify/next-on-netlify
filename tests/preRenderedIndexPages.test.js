@@ -60,24 +60,20 @@ describe('Next', () => {
 
     // Next on Netlify output
     expect(BUILD_OUTPUT).toMatch("Next on Netlify")
-    expect(BUILD_OUTPUT).toMatch("Preparing Netlify Function for SSR pages: functions/nextRouter")
-    expect(BUILD_OUTPUT).toMatch("Writing pre-rendered HTML pages to out/")
-    expect(BUILD_OUTPUT).toMatch("Copying static NextJS assets to out/")
-    expect(BUILD_OUTPUT).toMatch("Setting up redirects")
     expect(BUILD_OUTPUT).toMatch("Success! All done!")
   })
 })
 
 describe('Static Pages', () => {
   test('copies static pages to output directory', () => {
-    const OUTPUT_PATH = join(PROJECT_PATH, "out")
+    const OUTPUT_PATH = join(PROJECT_PATH, "out_publish")
 
     expect(existsSync(join(OUTPUT_PATH, "index.html"))).toBe(true)
     expect(existsSync(join(OUTPUT_PATH, "shows.html"))).toBe(true)
   })
 
-  test('copies static assets to out/_next/ directory', () => {
-    const dirs = readdirSync(join(PROJECT_PATH, "out", "_next", "static"))
+  test('copies static assets to out_publish/_next/ directory', () => {
+    const dirs = readdirSync(join(PROJECT_PATH, "out_publish", "_next", "static"))
 
     expect(dirs.length).toBe(3)
     expect(dirs).toContain("chunks")
@@ -87,7 +83,7 @@ describe('Static Pages', () => {
 
 describe('404 Page', () => {
   test('copies 404.html to output directory', () => {
-    const OUTPUT_PATH = join(PROJECT_PATH, "out")
+    const OUTPUT_PATH = join(PROJECT_PATH, "out_publish")
 
     expect(existsSync(join(OUTPUT_PATH, "404.html"))).toBe(true)
   })
@@ -101,7 +97,7 @@ describe('404 Page', () => {
 describe('Routing',() => {
   test('creates Netlify redirects', async () => {
     // Read _redirects file
-    const contents = readFileSync(join(PROJECT_PATH, "out", "_redirects"))
+    const contents = readFileSync(join(PROJECT_PATH, "out_publish", "_redirects"))
 
     // Convert contents into an array, each line being one element
     const redirects = contents.toString().split("\n")

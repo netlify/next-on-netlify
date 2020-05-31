@@ -69,7 +69,12 @@ copySync(
 
 // 2.3 SSR Setup: Copy SSR pages to functions/_next/pages
 // From there, they can be served by our nextRouter Netlify function.
-ssrPages.forEach(({ file }) => {
+
+// Get unique set of JS files to copy. index.js might be present twice, for
+// example.
+const jsFilesToCopy = [...new Set(ssrPages.map(page => page.file))]
+
+jsFilesToCopy.forEach(file => {
   console.log(`   > ${file}`)
 
   copySync(
@@ -114,7 +119,13 @@ if(existsSync(PUBLIC_PATH)) {
 // These are static, so they do not need to be handled by our nextRouter.
 console.log(`\x1b[1m🔥 Writing pre-rendered HTML pages to ${OUTPUT_PATH}\x1b[22m`)
 
-htmlPages.forEach(({ file }) => {
+// Get unique set of html files to copy.
+// index.html might be present twice, for example. We need to filter one out,
+// otherwise our second attempt to copy the file would crash, since it already
+// exists.
+const htmlFilesToCopy = [...new Set(htmlPages.map(page => page.file))]
+
+htmlFilesToCopy.forEach(file => {
   console.log(`   > ${file}`)
 
   // The path to the file, relative to the pages directory

@@ -136,3 +136,4 @@ next-on-netlify has only been tested on NextJS version 9 and above.
 🙌 Big "thank you" to the following people for their contributions:
 - [@spencewood](https://github.com/spencewood)
 - [@alxhghs](https://github.com/alxhghs)
+- [@gamliela](https://github.com/gamliela)

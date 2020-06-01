@@ -43,6 +43,9 @@ module.exports = (on, config) => {
   on('task', {
     // Check if deployment is currently active
     isDeployed: () => {
+      if(config.env.SKIP_DEPLOY === true)
+        return true
+
       return config.activeDeployment !== null
     },
   })

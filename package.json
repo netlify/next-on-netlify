@@ -26,16 +26,16 @@
   ],
   "scripts": {
     "test": "jest --config tests/jest.config.js",
-    "cypress:local":    "env CYPRESS_DEPLOY=local   cypress run --config-file false",
-    "cypress:netlify":  "env CYPRESS_DEPLOY=netlify cypress run --config-file false",
-    "cypress:local:testonly":   "env CYPRESS_SKIP_DEPLOY=true npm run cypress:local",
+    "cypress:local": "env CYPRESS_DEPLOY=local   cypress run --config-file false",
+    "cypress:netlify": "env CYPRESS_DEPLOY=netlify cypress run --config-file false",
+    "cypress:local:testonly": "env CYPRESS_SKIP_DEPLOY=true npm run cypress:local",
     "cypress:netlify:testonly": "env CYPRESS_SKIP_DEPLOY=true npm run cypress:netlify"
   },
   "devDependencies": {
-    "cypress": "^4.6.0",
+    "cypress": "^4.7.0",
     "jest": "^26.0.1",
-    "netlify-cli": "^2.51.0",
-    "next": "^9.4.2",
+    "netlify-cli": "^2.52.0",
+    "next": "^9.4.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "wait-on": "^5.0.0"

@@ -98,6 +98,8 @@ describe('SSG Pages with getStaticProps', () => {
     const OUTPUT_PATH = join(PROJECT_PATH, "out_publish")
 
     expect(existsSync(join(OUTPUT_PATH, "getStaticProps", "static.html"))).toBe(true)
+    expect(existsSync(join(OUTPUT_PATH, "getStaticProps", "1.html"))).toBe(true)
+    expect(existsSync(join(OUTPUT_PATH, "getStaticProps", "2.html"))).toBe(true)
   })
 
   test('creates data .json file in /_next/data/ directory', () => {
@@ -107,6 +109,8 @@ describe('SSG Pages with getStaticProps', () => {
     const dataDir = join(PROJECT_PATH, "out_publish", "_next", "data", dirs[0])
 
     expect(existsSync(join(dataDir, "getStaticProps", "static.json"))).toBe(true)
+    expect(existsSync(join(dataDir, "getStaticProps", "1.json"))).toBe(true)
+    expect(existsSync(join(dataDir, "getStaticProps", "2.json"))).toBe(true)
   })
 })
 

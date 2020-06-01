@@ -144,6 +144,49 @@ describe('getStaticProps', () => {
       cy.get('p').should('contain',  'Dancing with the Stars')
     })
   })
+
+  context('with dynamic route and no fallback', () => {
+    it('loads shows 1 and 2', () => {
+      cy.visit('/getStaticProps/1')
+      cy.get('h1').should('contain', 'Show #1')
+      cy.get('p').should('contain',  'Under the Dome')
+
+      cy.visit('/getStaticProps/2')
+      cy.get('h1').should('contain', 'Show #2')
+      cy.get('p').should('contain',  'Person of Interest')
+    })
+
+    it('loads page props from data .json file when navigating to it', () => {
+      cy.visit('/')
+      cy.window().then(w => w.noReload = true)
+
+      // Navigate to page and test that no reload is performed
+      // See: https://glebbahmutov.com/blog/detect-page-reload/
+      cy.contains('getStaticProps/1').click()
+      cy.window().should('have.property', 'noReload', true)
+
+      cy.get('h1').should('contain', 'Show #1')
+      cy.get('p').should('contain',  'Under the Dome')
+
+      cy.contains('Go back home').click()
+      cy.contains('getStaticProps/2').click()
+
+      cy.get('h1').should('contain', 'Show #2')
+      cy.get('p').should('contain',  'Person of Interest')
+    })
+
+    it('returns 404 when trying to access non-defined path', () => {
+      cy.request({
+        url: '/getStaticProps/3',
+        failOnStatusCode: false
+      }).then(response => {
+        expect(response.status).to.eq(404)
+        cy.state('document').write(response.body)
+      })
+
+      cy.get('h2').should('contain', 'This page could not be found.')
+    })
+  })
 })
 
 describe('API endpoint', () => {

@@ -100,6 +100,16 @@ const Index = ({ shows }) => (
           <a>getStaticProps/static</a>
         </Link>
       </li>
+      <li>
+        <Link href="/getStaticProps/1">
+          <a>getStaticProps/1 (dynamic route)</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/getStaticProps/2">
+          <a>getStaticProps/2 (dynamic route)</a>
+        </Link>
+      </li>
     </ul>
 
     <h1>5. Static Pages Stay Static</h1>

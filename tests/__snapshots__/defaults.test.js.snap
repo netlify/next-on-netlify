@@ -8,6 +8,8 @@ exports[`Routing creates Netlify redirects 1`] = `
 /static  /static.html  200
 /404  /404.html  200
 /getStaticProps/static  /getStaticProps/static.html  200
+/getStaticProps/1  /getStaticProps/1.html  200
+/getStaticProps/2  /getStaticProps/2.html  200
 /api/shows/:id  /.netlify/functions/next_api_shows_id  200
 /api/shows/*  /.netlify/functions/next_api_shows_params  200
 /shows/:id  /.netlify/functions/next_shows_id  200

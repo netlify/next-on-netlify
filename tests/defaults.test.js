@@ -51,8 +51,8 @@ beforeAll(
     const { stdout } = await npmRunBuild({ directory: PROJECT_PATH })
     BUILD_OUTPUT = stdout
   },
-  // time out after 30 seconds
-  30 * 1000
+  // time out after 60 seconds
+  60 * 1000
 )
 
 describe('Next', () => {
@@ -90,6 +90,23 @@ describe('API Pages', () => {
     expect(existsSync(join(functionsDir, "next_api_static",            "next_api_static.js"))).toBe(true)
     expect(existsSync(join(functionsDir, "next_api_shows_id",        "next_api_shows_id.js"))).toBe(true)
     expect(existsSync(join(functionsDir, "next_api_shows_params", "next_api_shows_params.js"))).toBe(true)
+  })
+})
+
+describe('SSG Pages with getStaticProps', () => {
+  test('creates pre-rendered HTML file in output directory', () => {
+    const OUTPUT_PATH = join(PROJECT_PATH, "out_publish")
+
+    expect(existsSync(join(OUTPUT_PATH, "getStaticProps", "static.html"))).toBe(true)
+  })
+
+  test('creates data .json file in /_next/data/ directory', () => {
+    // Get path to data files
+    const dirs = readdirSync(join(PROJECT_PATH, "out_publish", "_next", "data"))
+    expect(dirs.length).toBe(1)
+    const dataDir = join(PROJECT_PATH, "out_publish", "_next", "data", dirs[0])
+
+    expect(existsSync(join(dataDir, "getStaticProps", "static.json"))).toBe(true)
   })
 })
 
@@ -135,19 +152,9 @@ describe('Routing',() => {
   test('creates Netlify redirects', async () => {
     // Read _redirects file
     const contents = readFileSync(join(PROJECT_PATH, "out_publish", "_redirects"))
+    const redirects = contents.toString()
 
-    // Convert contents into an array, each line being one element
-    const redirects = contents.toString().split("\n")
-
-    // Check that routes are present
-    expect(redirects).toContain("/static  /static.html  200")
-    expect(redirects).toContain("/static/:id  /static/[id].html  200")
-    expect(redirects).toContain("/  /.netlify/functions/next_index  200")
-    expect(redirects).toContain("/index  /.netlify/functions/next_index  200")
-    expect(redirects).toContain("/shows/:id  /.netlify/functions/next_shows_id  200")
-    expect(redirects).toContain("/shows/*  /.netlify/functions/next_shows_params  200")
-    expect(redirects).toContain("/api/static  /.netlify/functions/next_api_static  200")
-    expect(redirects).toContain("/api/shows/:id  /.netlify/functions/next_api_shows_id  200")
-    expect(redirects).toContain("/api/shows/*  /.netlify/functions/next_api_shows_params  200")
+    // Check that redirects match
+    expect(redirects).toMatchSnapshot()
   })
 })

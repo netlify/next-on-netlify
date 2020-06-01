@@ -52,151 +52,181 @@ after(() => {
   cy.task('clearDeployment')
 })
 
-describe('SSR page', () => {
-  it('loads TV shows', () => {
-    cy.visit('/')
+describe('getInitialProps', () => {
+  context('with static route', () => {
+    it('loads TV shows', () => {
+      cy.visit('/')
 
-    cy.get('ul').first().children().should('have.length', 5)
+      cy.get('ul').first().children().should('have.length', 5)
+    })
+
+    it('loads TV shows when SSR-ing', () => {
+      cy.ssr('/')
+
+      cy.get('ul').first().children().should('have.length', 5)
+    })
   })
 
-  it('loads TV shows when SSR-ing', () => {
-    cy.ssr('/')
+  context('with dynamic route', () => {
+    it('loads TV show', () => {
+      cy.visit('/shows/24251')
 
-    cy.get('ul').first().children().should('have.length', 5)
+      cy.get('h1').should('contain', 'Show #24251')
+      cy.get('p').should('contain',  'Animal Science')
+    })
+
+    it('loads TV show when SSR-ing', () => {
+      cy.ssr('/shows/24251')
+
+      cy.get('h1').should('contain', 'Show #24251')
+      cy.get('p').should('contain',  'Animal Science')
+    })
+  })
+
+  context('with catch-all route', () => {
+    it('displays all URL parameters, including query string parameters', () => {
+      cy.visit('/shows/94/this-is-all/being/captured/yay?search=dog&custom-param=cat')
+
+      // path parameters
+      cy.get('p').should('contain', '[0]: 94')
+      cy.get('p').should('contain', '[1]: this-is-all')
+      cy.get('p').should('contain', '[2]: being')
+      cy.get('p').should('contain', '[3]: captured')
+      cy.get('p').should('contain', '[4]: yay')
+
+      // query string parameters
+      cy.get('p').should('contain', '[search]: dog')
+      cy.get('p').should('contain', '[custom-param]: cat')
+
+      cy.get('h1').should('contain', 'Show #94')
+      cy.get('p').should('contain',  'Defiance')
+    })
+
+    it('displays all URL parameters when SSR-ing, including query string parameters', () => {
+      cy.visit('/shows/94/this-is-all/being/captured/yay?search=dog&custom-param=cat')
+
+      // path parameters
+      cy.get('p').should('contain', '[0]: 94')
+      cy.get('p').should('contain', '[1]: this-is-all')
+      cy.get('p').should('contain', '[2]: being')
+      cy.get('p').should('contain', '[3]: captured')
+      cy.get('p').should('contain', '[4]: yay')
+
+      // query string parameters
+      cy.get('p').should('contain', '[search]: dog')
+      cy.get('p').should('contain', '[custom-param]: cat')
+
+      cy.get('h1').should('contain', 'Show #94')
+      cy.get('p').should('contain',  'Defiance')
+    })
   })
 })
 
-describe('dynamic SSR page', () => {
-  it('loads TV show', () => {
-    cy.visit('/shows/24251')
+describe('getStaticProps', () => {
+  context('with static route', () => {
+    it('loads TV show', () => {
+      cy.visit('/getStaticProps/static')
 
-    cy.get('h1').should('contain', 'Show #24251')
-    cy.get('p').should('contain',  'Animal Science')
-  })
+      cy.get('h1').should('contain', 'Show #71')
+      cy.get('p').should('contain',  'Dancing with the Stars')
+    })
 
-  it('loads TV show when SSR-ing', () => {
-    cy.ssr('/shows/24251')
+    it('loads page props from data .json file when navigating to it', () => {
+      cy.visit('/')
+      cy.window().then(w => w.noReload = true)
 
-    cy.get('h1').should('contain', 'Show #24251')
-    cy.get('p').should('contain',  'Animal Science')
-  })
-})
+      // Navigate to page and test that no reload is performed
+      // See: https://glebbahmutov.com/blog/detect-page-reload/
+      cy.contains('getStaticProps/static').click()
+      cy.window().should('have.property', 'noReload', true)
 
-describe('dynamic catch-all SSR page', () => {
-  it('displays all URL parameters, including query string parameters', () => {
-    cy.visit('/shows/94/this-is-all/being/captured/yay?search=dog&custom-param=cat')
-
-    // path parameters
-    cy.get('p').should('contain', '[0]: 94')
-    cy.get('p').should('contain', '[1]: this-is-all')
-    cy.get('p').should('contain', '[2]: being')
-    cy.get('p').should('contain', '[3]: captured')
-    cy.get('p').should('contain', '[4]: yay')
-
-    // query string parameters
-    cy.get('p').should('contain', '[search]: dog')
-    cy.get('p').should('contain', '[custom-param]: cat')
-
-    cy.get('h1').should('contain', 'Show #94')
-    cy.get('p').should('contain',  'Defiance')
-  })
-
-  it('displays all URL parameters when SSR-ing, including query string parameters', () => {
-    cy.visit('/shows/94/this-is-all/being/captured/yay?search=dog&custom-param=cat')
-
-    // path parameters
-    cy.get('p').should('contain', '[0]: 94')
-    cy.get('p').should('contain', '[1]: this-is-all')
-    cy.get('p').should('contain', '[2]: being')
-    cy.get('p').should('contain', '[3]: captured')
-    cy.get('p').should('contain', '[4]: yay')
-
-    // query string parameters
-    cy.get('p').should('contain', '[search]: dog')
-    cy.get('p').should('contain', '[custom-param]: cat')
-
-    cy.get('h1').should('contain', 'Show #94')
-    cy.get('p').should('contain',  'Defiance')
+      cy.get('h1').should('contain', 'Show #71')
+      cy.get('p').should('contain',  'Dancing with the Stars')
+    })
   })
 })
 
 describe('API endpoint', () => {
-  it('returns hello world, with all response headers', () => {
-    cy.request('/api/static').then(response => {
-      expect(response.headers['content-type']).to.include('application/json')
-      expect(response.headers['my-custom-header']).to.include('header123')
+  context('with static route', () => {
+    it('returns hello world, with all response headers', () => {
+      cy.request('/api/static').then(response => {
+        expect(response.headers['content-type']).to.include('application/json')
+        expect(response.headers['my-custom-header']).to.include('header123')
 
-      expect(response.body).to.have.property('message', 'hello world :)')
+        expect(response.body).to.have.property('message', 'hello world :)')
+      })
     })
   })
-})
 
-describe('dynamic API endpoint', () => {
-  it('returns TV show', () => {
-    cy.request('/api/shows/305').then(response => {
-      expect(response.headers['content-type']).to.include('application/json')
-
-      expect(response.body).to.have.property('show')
-      expect(response.body.show).to.have.property('id', 305)
-      expect(response.body.show).to.have.property('name', 'Black Mirror')
-    })
-  })
-})
-
-describe('catch-all API endpoint', () => {
-  it('returns all URL paremeters, including query string parameters', () => {
-    cy.request('/api/shows/590/this/path/is/captured?metric=dog&p2=cat')
-      .then(response => {
+  context('with dynamic route', () => {
+    it('returns TV show', () => {
+      cy.request('/api/shows/305').then(response => {
         expect(response.headers['content-type']).to.include('application/json')
 
-        // Params
-        expect(response.body).to.have.property('params')
-        expect(response.body.params).to.deep.eq([
-          '590', 'this', 'path', 'is', 'captured'
-        ])
-
-        // Query string parameters
-        expect(response.body).to.have.property('queryStringParams')
-        expect(response.body.queryStringParams).to.deep.eq({
-          metric: 'dog',
-          p2: 'cat'
-        })
-
-        // Show
         expect(response.body).to.have.property('show')
-        expect(response.body.show).to.have.property('id', 590)
-        expect(response.body.show).to.have.property('name', 'Pokémon')
+        expect(response.body.show).to.have.property('id', 305)
+        expect(response.body.show).to.have.property('name', 'Black Mirror')
+      })
+    })
+  })
+
+  context('with catch-all route', () => {
+    it('returns all URL paremeters, including query string parameters', () => {
+      cy.request('/api/shows/590/this/path/is/captured?metric=dog&p2=cat')
+        .then(response => {
+          expect(response.headers['content-type']).to.include('application/json')
+
+          // Params
+          expect(response.body).to.have.property('params')
+          expect(response.body.params).to.deep.eq([
+            '590', 'this', 'path', 'is', 'captured'
+          ])
+
+          // Query string parameters
+          expect(response.body).to.have.property('queryStringParams')
+          expect(response.body.queryStringParams).to.deep.eq({
+            metric: 'dog',
+            p2: 'cat'
+          })
+
+          // Show
+          expect(response.body).to.have.property('show')
+          expect(response.body.show).to.have.property('id', 590)
+          expect(response.body.show).to.have.property('name', 'Pokémon')
+      })
     })
   })
 })
 
-describe('static page', () => {
-  it('renders', () => {
-    cy.visit('/static')
+describe('pre-rendered HTML pages', () => {
+  context('with static route', () => {
+    it('renders', () => {
+      cy.visit('/static')
 
-    cy.get('p').should('contain', 'It is a static page.')
+      cy.get('p').should('contain', 'It is a static page.')
+    })
+
+    it('renders when SSR-ing', () => {
+      cy.visit('/static')
+
+      cy.get('p').should('contain', 'It is a static page.')
+    })
   })
 
-  it('renders when SSR-ing', () => {
-    cy.visit('/static')
+  context('with dynamic route', () => {
+    it('renders', () => {
+      cy.visit('/static/superdynamic')
 
-    cy.get('p').should('contain', 'It is a static page.')
-  })
-})
+      cy.get('p').should('contain', 'It is a static page.')
+      cy.get('p').should('contain', 'it has a dynamic URL parameter: /static/:id.')
+    })
 
-describe('dynamic static page', () => {
-  it('renders', () => {
-    cy.visit('/static/superdynamic')
+    it('renders when SSR-ing', () => {
+      cy.visit('/static/superdynamic')
 
-    cy.get('p').should('contain', 'It is a static page.')
-    cy.get('p').should('contain', 'it has a dynamic URL parameter: /static/:id.')
-  })
-
-  it('renders when SSR-ing', () => {
-    cy.visit('/static/superdynamic')
-
-    cy.get('p').should('contain', 'It is a static page.')
-    cy.get('p').should('contain', 'it has a dynamic URL parameter: /static/:id.')
+      cy.get('p').should('contain', 'It is a static page.')
+      cy.get('p').should('contain', 'it has a dynamic URL parameter: /static/:id.')
+    })
   })
 })
 

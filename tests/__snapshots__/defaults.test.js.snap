@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Routing creates Netlify redirects 1`] = `
+"# Next-on-Netlify Redirects
+/api/static  /.netlify/functions/next_api_static  200
+/index  /.netlify/functions/next_index  200
+/  /.netlify/functions/next_index  200
+/static  /static.html  200
+/404  /404.html  200
+/getStaticProps/static  /getStaticProps/static.html  200
+/api/shows/:id  /.netlify/functions/next_api_shows_id  200
+/api/shows/*  /.netlify/functions/next_api_shows_params  200
+/shows/:id  /.netlify/functions/next_shows_id  200
+/shows/*  /.netlify/functions/next_shows_params  200
+/static/:id  /static/[id].html  200"
+`;

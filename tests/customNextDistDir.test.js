@@ -45,8 +45,8 @@ beforeAll(
     const { stdout } = await npmRunBuild({ directory: PROJECT_PATH })
     BUILD_OUTPUT = stdout
   },
-  // time out after 30 seconds
-  30 * 1000
+  // time out after 60 seconds
+  60 * 1000
 )
 
 describe('Next', () => {

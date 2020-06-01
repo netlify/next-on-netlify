@@ -89,7 +89,20 @@ const Index = ({ shows }) => (
       </li>
     </ul>
 
-    <h1>4. Static Pages Stay Static</h1>
+    <h1>4. getStaticProps? Yes!</h1>
+    <p>
+      next-on-netlify supports getStaticProps.
+    </p>
+
+    <ul>
+      <li>
+        <Link href="/getStaticProps/static">
+          <a>getStaticProps/static</a>
+        </Link>
+      </li>
+    </ul>
+
+    <h1>5. Static Pages Stay Static</h1>
     <p>
       next-on-netlify automatically determines which pages are dynamic and
       which ones are static.

@@ -51,8 +51,8 @@ beforeAll(
     const { stdout } = await npmRunBuild({ directory: PROJECT_PATH })
     BUILD_OUTPUT = stdout
   },
-  // time out after 60 seconds
-  60 * 1000
+  // time out after 180 seconds
+  180 * 1000
 )
 
 describe('Next', () => {
@@ -100,6 +100,8 @@ describe('SSG Pages with getStaticProps', () => {
     expect(existsSync(join(OUTPUT_PATH, "getStaticProps", "static.html"))).toBe(true)
     expect(existsSync(join(OUTPUT_PATH, "getStaticProps", "1.html"))).toBe(true)
     expect(existsSync(join(OUTPUT_PATH, "getStaticProps", "2.html"))).toBe(true)
+    expect(existsSync(join(OUTPUT_PATH, "getStaticProps", "withFallback", "3.html"))).toBe(true)
+    expect(existsSync(join(OUTPUT_PATH, "getStaticProps", "withFallback", "4.html"))).toBe(true)
   })
 
   test('creates data .json file in /_next/data/ directory', () => {
@@ -111,6 +113,13 @@ describe('SSG Pages with getStaticProps', () => {
     expect(existsSync(join(dataDir, "getStaticProps", "static.json"))).toBe(true)
     expect(existsSync(join(dataDir, "getStaticProps", "1.json"))).toBe(true)
     expect(existsSync(join(dataDir, "getStaticProps", "2.json"))).toBe(true)
+    expect(existsSync(join(dataDir, "getStaticProps", "withFallback", "3.json"))).toBe(true)
+    expect(existsSync(join(dataDir, "getStaticProps", "withFallback", "4.json"))).toBe(true)
+  })
+
+  test('creates Netlify Function for pages with fallback', () => {
+    const functionPath = "next_getStaticProps_withFallback_id/next_getStaticProps_withFallback_id.js"
+    expect(existsSync(join(PROJECT_PATH, "out_functions", functionPath))).toBe(true)
   })
 })
 
@@ -156,7 +165,10 @@ describe('Routing',() => {
   test('creates Netlify redirects', async () => {
     // Read _redirects file
     const contents = readFileSync(join(PROJECT_PATH, "out_publish", "_redirects"))
-    const redirects = contents.toString()
+    let redirects = contents.toString()
+
+    // Remove build-specific data path
+    redirects = redirects.replace(/\/_next\/data\/[^\/]+\//, "/_next/data/$path$/")
 
     // Check that redirects match
     expect(redirects).toMatchSnapshot()

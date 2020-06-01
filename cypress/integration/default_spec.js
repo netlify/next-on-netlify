@@ -138,53 +138,107 @@ describe('getStaticProps', () => {
       // Navigate to page and test that no reload is performed
       // See: https://glebbahmutov.com/blog/detect-page-reload/
       cy.contains('getStaticProps/static').click()
-      cy.window().should('have.property', 'noReload', true)
-
       cy.get('h1').should('contain', 'Show #71')
       cy.get('p').should('contain',  'Dancing with the Stars')
+      cy.window().should('have.property', 'noReload', true)
     })
   })
 
-  context('with dynamic route and no fallback', () => {
-    it('loads shows 1 and 2', () => {
-      cy.visit('/getStaticProps/1')
-      cy.get('h1').should('contain', 'Show #1')
-      cy.get('p').should('contain',  'Under the Dome')
+  context('with dynamic route', () => {
+    context('without fallback', () => {
+      it('loads shows 1 and 2', () => {
+        cy.visit('/getStaticProps/1')
+        cy.get('h1').should('contain', 'Show #1')
+        cy.get('p').should('contain',  'Under the Dome')
 
-      cy.visit('/getStaticProps/2')
-      cy.get('h1').should('contain', 'Show #2')
-      cy.get('p').should('contain',  'Person of Interest')
-    })
-
-    it('loads page props from data .json file when navigating to it', () => {
-      cy.visit('/')
-      cy.window().then(w => w.noReload = true)
-
-      // Navigate to page and test that no reload is performed
-      // See: https://glebbahmutov.com/blog/detect-page-reload/
-      cy.contains('getStaticProps/1').click()
-      cy.window().should('have.property', 'noReload', true)
-
-      cy.get('h1').should('contain', 'Show #1')
-      cy.get('p').should('contain',  'Under the Dome')
-
-      cy.contains('Go back home').click()
-      cy.contains('getStaticProps/2').click()
-
-      cy.get('h1').should('contain', 'Show #2')
-      cy.get('p').should('contain',  'Person of Interest')
-    })
-
-    it('returns 404 when trying to access non-defined path', () => {
-      cy.request({
-        url: '/getStaticProps/3',
-        failOnStatusCode: false
-      }).then(response => {
-        expect(response.status).to.eq(404)
-        cy.state('document').write(response.body)
+        cy.visit('/getStaticProps/2')
+        cy.get('h1').should('contain', 'Show #2')
+        cy.get('p').should('contain',  'Person of Interest')
       })
 
-      cy.get('h2').should('contain', 'This page could not be found.')
+      it('loads page props from data .json file when navigating to it', () => {
+        cy.visit('/')
+        cy.window().then(w => w.noReload = true)
+
+        // Navigate to page and test that no reload is performed
+        // See: https://glebbahmutov.com/blog/detect-page-reload/
+        cy.contains('getStaticProps/1').click()
+
+        cy.get('h1').should('contain', 'Show #1')
+        cy.get('p').should('contain',  'Under the Dome')
+
+        cy.contains('Go back home').click()
+        cy.contains('getStaticProps/2').click()
+
+        cy.get('h1').should('contain', 'Show #2')
+        cy.get('p').should('contain',  'Person of Interest')
+
+        cy.window().should('have.property', 'noReload', true)
+      })
+
+      it('returns 404 when trying to access non-defined path', () => {
+        cy.request({
+          url: '/getStaticProps/3',
+          failOnStatusCode: false
+        }).then(response => {
+          expect(response.status).to.eq(404)
+          cy.state('document').write(response.body)
+        })
+
+        cy.get('h2').should('contain', 'This page could not be found.')
+      })
+    })
+
+    context('with fallback', () => {
+      it('loads pre-rendered TV shows 3 and 4', () => {
+        cy.visit('/getStaticProps/withFallback/3')
+        cy.get('h1').should('contain', 'Show #3')
+        cy.get('p').should('contain',  'Bitten')
+
+        cy.visit('/getStaticProps/withFallback/4')
+        cy.get('h1').should('contain', 'Show #4')
+        cy.get('p').should('contain',  'Arrow')
+      })
+
+      it('loads non-pre-rendered TV show', () => {
+        cy.visit('/getStaticProps/withFallback/75')
+
+        cy.get('h1').should('contain', 'Show #75')
+        cy.get('p').should('contain',  'The Mindy Project')
+      })
+
+      it('loads non-pre-rendered TV shows when SSR-ing', () => {
+        cy.ssr('/getStaticProps/withFallback/75')
+
+        cy.get('h1').should('contain', 'Show #75')
+        cy.get('p').should('contain',  'The Mindy Project')
+      })
+
+      it('loads page props from data .json file when navigating to it', () => {
+        cy.visit('/')
+        cy.window().then(w => w.noReload = true)
+
+        // Navigate to page and test that no reload is performed
+        // See: https://glebbahmutov.com/blog/detect-page-reload/
+        cy.contains('getStaticProps/withFallback/3').click()
+
+        cy.get('h1').should('contain', 'Show #3')
+        cy.get('p').should('contain',  'Bitten')
+
+        cy.contains('Go back home').click()
+        cy.contains('getStaticProps/withFallback/4').click()
+
+        cy.get('h1').should('contain', 'Show #4')
+        cy.get('p').should('contain',  'Arrow')
+
+        cy.contains('Go back home').click()
+        cy.contains('getStaticProps/withFallback/75').click()
+
+        cy.get('h1').should('contain', 'Show #75')
+        cy.get('p').should('contain',  'The Mindy Project')
+
+        cy.window().should('have.property', 'noReload', true)
+      })
     })
   })
 })

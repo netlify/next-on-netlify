@@ -101,13 +101,28 @@ const Index = ({ shows }) => (
         </Link>
       </li>
       <li>
-        <Link href="/getStaticProps/1">
+        <Link href="/getStaticProps/[id]" as="/getStaticProps/1">
           <a>getStaticProps/1 (dynamic route)</a>
         </Link>
       </li>
       <li>
-        <Link href="/getStaticProps/2">
+        <Link href="/getStaticProps/[id]" as="/getStaticProps/2">
           <a>getStaticProps/2 (dynamic route)</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/getStaticProps/withFallback/[id]" as="/getStaticProps/withFallback/3">
+          <a>getStaticProps/withFallback/3 (dynamic route)</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/getStaticProps/withFallback/[id]" as="/getStaticProps/withFallback/4">
+          <a>getStaticProps/withFallback/4 (dynamic route)</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/getStaticProps/withFallback/[id]" as="/getStaticProps/withFallback/75">
+          <a>getStaticProps/withFallback/75 (dynamic route, not pre-rendered)</a>
         </Link>
       </li>
     </ul>

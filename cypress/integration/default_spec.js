@@ -37,7 +37,7 @@ before(() => {
     cy.task('buildProject', { project })
 
     // Deploy
-    cy.task('deployProject', { project })
+    cy.task('deployProject', { project }, { timeout: 180 * 1000 })
   })
 
   // Set base URL
@@ -118,6 +118,72 @@ describe('getInitialProps', () => {
 
       cy.get('h1').should('contain', 'Show #94')
       cy.get('p').should('contain',  'Defiance')
+    })
+  })
+})
+
+describe('getServerSideProps', () => {
+  context('with static route', () => {
+    it('loads TV shows', () => {
+      cy.visit('/getServerSideProps/static')
+
+      cy.get('h1').should('contain', 'Show #42')
+      cy.get('p').should('contain',  'Sleepy Hollow')
+    })
+
+    it('loads TV shows when SSR-ing', () => {
+      cy.ssr('/getServerSideProps/static')
+
+      cy.get('h1').should('contain', 'Show #42')
+      cy.get('p').should('contain',  'Sleepy Hollow')
+    })
+
+    it('loads page props from data .json file when navigating to it', () => {
+      cy.visit('/')
+      cy.window().then(w => w.noReload = true)
+
+      // Navigate to page and test that no reload is performed
+      // See: https://glebbahmutov.com/blog/detect-page-reload/
+      cy.contains('getServerSideProps/static').click()
+      cy.get('h1').should('contain', 'Show #42')
+      cy.get('p').should('contain',  'Sleepy Hollow')
+      cy.window().should('have.property', 'noReload', true)
+    })
+  })
+
+  context('with dynamic route', () => {
+    it('loads TV show', () => {
+      cy.visit('/shows/1337')
+
+      cy.get('h1').should('contain', 'Show #1337')
+      cy.get('p').should('contain',  'Whodunnit?')
+    })
+
+    it('loads TV show when SSR-ing', () => {
+      cy.ssr('/shows/1337')
+
+      cy.get('h1').should('contain', 'Show #1337')
+      cy.get('p').should('contain',  'Whodunnit?')
+    })
+
+    it('loads page props from data .json file when navigating to it', () => {
+      cy.visit('/')
+      cy.window().then(w => w.noReload = true)
+
+      // Navigate to page and test that no reload is performed
+      // See: https://glebbahmutov.com/blog/detect-page-reload/
+      cy.contains('getServerSideProps/1337').click()
+
+      cy.get('h1').should('contain', 'Show #1337')
+      cy.get('p').should('contain',  'Whodunnit?')
+
+      cy.contains('Go back home').click()
+      cy.contains('getServerSideProps/1338').click()
+
+      cy.get('h1').should('contain', 'Show #1338')
+      cy.get('p').should('contain',  'The Whole Truth')
+
+      cy.window().should('have.property', 'noReload', true)
     })
   })
 })

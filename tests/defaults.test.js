@@ -77,9 +77,11 @@ describe('SSR Pages', () => {
   const functionsDir = join(PROJECT_PATH, "out_functions")
 
   test('creates a Netlify Function for each SSR page', () => {
-    expect(existsSync(join(functionsDir, "next_index",             "next_index.js"))).toBe(true)
-    expect(existsSync(join(functionsDir, "next_shows_id",        "next_shows_id.js"))).toBe(true)
-    expect(existsSync(join(functionsDir, "next_shows_params", "next_shows_params.js"))).toBe(true)
+    expect(existsSync(join(functionsDir, "next_index",                      "next_index.js"))).toBe(true)
+    expect(existsSync(join(functionsDir, "next_shows_id",                   "next_shows_id.js"))).toBe(true)
+    expect(existsSync(join(functionsDir, "next_shows_params",               "next_shows_params.js"))).toBe(true)
+    expect(existsSync(join(functionsDir, "next_getServerSideProps_static",  "next_getServerSideProps_static.js"))).toBe(true)
+    expect(existsSync(join(functionsDir, "next_getServerSideProps_id",      "next_getServerSideProps_id.js"))).toBe(true)
   })
 })
 
@@ -167,8 +169,8 @@ describe('Routing',() => {
     const contents = readFileSync(join(PROJECT_PATH, "out_publish", "_redirects"))
     let redirects = contents.toString()
 
-    // Remove build-specific data path
-    redirects = redirects.replace(/\/_next\/data\/[^\/]+\//, "/_next/data/$path$/")
+    // Replace non-persistent build ID with placeholder
+    redirects = redirects.replace(/\/_next\/data\/[^\/]+\//g, "/_next/data/%BUILD_ID%/")
 
     // Check that redirects match
     expect(redirects).toMatchSnapshot()

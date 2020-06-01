@@ -127,7 +127,30 @@ const Index = ({ shows }) => (
       </li>
     </ul>
 
-    <h1>5. Static Pages Stay Static</h1>
+    <h1>5. getServerSideProps? Yes!</h1>
+    <p>
+      next-on-netlify supports getServerSideProps.
+    </p>
+
+    <ul>
+      <li>
+        <Link href="/getServerSideProps/static">
+          <a>getServerSideProps/static</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/getServerSideProps/[id]" as="/getServerSideProps/1337">
+          <a>getServerSideProps/1337 (dynamic route)</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/getServerSideProps/[id]" as="/getServerSideProps/1338">
+          <a>getServerSideProps/1338 (dynamic route)</a>
+        </Link>
+      </li>
+    </ul>
+
+    <h1>6. Static Pages Stay Static</h1>
     <p>
       next-on-netlify automatically determines which pages are dynamic and
       which ones are static.

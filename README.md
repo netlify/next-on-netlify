@@ -135,7 +135,9 @@ SSR pages and API endpoints. It is currently not possible to create custom Netli
 
 📣 Shoutout to [@mottox2](https://github.com/mottox2) (a pioneer of hosting NextJS on Netlify) and [@danielcondemarin](https://github.com/danielcondemarin) (author of serverless-next.js for AWS). The two were big inspirations for this package.
 
-🙌 Big "thank you" to the following people for their contributions:
+🙌 Big "thank you" to the following people for their contributions, support, and beta testing:
 - [@spencewood](https://github.com/spencewood)
 - [@alxhghs](https://github.com/alxhghs)
 - [@gamliela](https://github.com/gamliela)
+- [@wei](https://github.com/wei)
+- [@laugharn](https://github.com/laugharn)

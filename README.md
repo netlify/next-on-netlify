@@ -131,6 +131,21 @@ In the past, it was possible to define custom redirects in a `_redirects` file. 
 `next-on-netlify` creates one Netlify Function for each of your
 SSR pages and API endpoints. It is currently not possible to create custom Netlify Functions. Let me know if you have a need for this feature and we can add it.
 
+## Caveats
+
+### Preview Mode
+
+[NextJS Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode) is currently not supported. When you call `res.setPreviewData({})`, NextJS tries to set and send two cookies to the user. But Netlify Functions only support setting one cookie per function call at the moment. This is [a long-standing bug on Netlify's side](https://community.netlify.com/t/multiple-set-cookie-headers-cause-netlify-lambda-to-throw-an-error/975). We're discussing work-arounds. See: [Issue #10](https://github.com/FinnWoelm/next-on-netlify/issues/10)
+
+
+### Fallbacks for Pages with `getStaticPaths`
+
+[Fallback pages](https://nextjs.org/docs/basic-features/data-fetching#fallback-true) behave differently with `next-on-netlify` than they do with NextJS. On NextJS, when navigating to a path that is not defined in `getStaticPaths`, it first displays the fallback page. NextJS then generates the HTML in the background and caches it for future requests.
+
+With `next-on-netlify`, when navigating to a path that is not defined in `getStaticPaths`, it server-side renders the page and sends it directly to the user. The user never sees the fallback page. The page is not cached for future requests.
+
+For more on this, see: [Issue #7](https://github.com/FinnWoelm/next-on-netlify/issues/7#issuecomment-636883539)
+
 ## Credits
 
 📣 Shoutout to [@mottox2](https://github.com/mottox2) (a pioneer of hosting NextJS on Netlify) and [@danielcondemarin](https://github.com/danielcondemarin) (author of serverless-next.js for AWS). The two were big inspirations for this package.

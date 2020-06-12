@@ -172,6 +172,9 @@ describe('Routing',() => {
     // Replace non-persistent build ID with placeholder
     redirects = redirects.replace(/\/_next\/data\/[^\/]+\//g, "/_next/data/%BUILD_ID%/")
 
+    // Sort contents for a stable comparison
+    redirects = redirects.split(/\n/).sort().join("\n")
+
     // Check that redirects match
     expect(redirects).toMatchSnapshot()
   })

@@ -125,6 +125,21 @@ const Index = ({ shows }) => (
           <a>getStaticProps/withFallback/75 (dynamic route, not pre-rendered)</a>
         </Link>
       </li>
+      <li>
+        <Link href="/getStaticProps/withFallback/[...slug]" as="/getStaticProps/withFallback/my/path/1">
+          <a>getStaticProps/withFallback/my/path/1 (catch-all route)</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/getStaticProps/withFallback/[...slug]" as="/getStaticProps/withFallback/my/path/2">
+          <a>getStaticProps/withFallback/my/path/2 (catch-all route)</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/getStaticProps/withFallback/[...slug]" as="/getStaticProps/withFallback/my/undefined/path/75">
+          <a>getStaticProps/withFallback/my/undefined/path/75 (catch-all route, not pre-rendered)</a>
+        </Link>
+      </li>
     </ul>
 
     <h1>5. getServerSideProps? Yes!</h1>

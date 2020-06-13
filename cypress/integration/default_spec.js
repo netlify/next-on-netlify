@@ -307,6 +307,53 @@ describe('getStaticProps', () => {
       })
     })
   })
+
+  context('with catch-all route', () => {
+    context('with fallback', () => {
+      it('loads pre-rendered shows 1 and 2', () => {
+        cy.visit('/getStaticProps/withFallback/my/path/1')
+        cy.get('h1').should('contain', 'Show #1')
+        cy.get('p').should('contain',  'Under the Dome')
+
+        cy.visit('/getStaticProps/withFallback/my/path/2')
+        cy.get('h1').should('contain', 'Show #2')
+        cy.get('p').should('contain',  'Person of Interest')
+      })
+
+      it('loads non-pre-rendered TV show', () => {
+        cy.visit('/getStaticProps/withFallback/undefined/catch/all/path/75')
+
+        cy.get('h1').should('contain', 'Show #75')
+        cy.get('p').should('contain',  'The Mindy Project')
+      })
+
+      it('loads page props from data .json file when navigating to it', () => {
+        cy.visit('/')
+        cy.window().then(w => w.noReload = true)
+
+        // Navigate to page and test that no reload is performed
+        // See: https://glebbahmutov.com/blog/detect-page-reload/
+        cy.contains('getStaticProps/withFallback/my/path/1').click()
+
+        cy.get('h1').should('contain', 'Show #1')
+        cy.get('p').should('contain',  'Under the Dome')
+
+        cy.contains('Go back home').click()
+        cy.contains('getStaticProps/withFallback/my/path/2').click()
+
+        cy.get('h1').should('contain', 'Show #2')
+        cy.get('p').should('contain',  'Person of Interest')
+
+        cy.contains('Go back home').click()
+        cy.contains('getStaticProps/withFallback/my/undefined/path/75').click()
+
+        cy.get('h1').should('contain', 'Show #75')
+        cy.get('p').should('contain',  'The Mindy Project')
+
+        cy.window().should('have.property', 'noReload', true)
+      })
+    })
+  })
 })
 
 describe('API endpoint', () => {

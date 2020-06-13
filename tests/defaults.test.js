@@ -104,6 +104,8 @@ describe('SSG Pages with getStaticProps', () => {
     expect(existsSync(join(OUTPUT_PATH, "getStaticProps", "2.html"))).toBe(true)
     expect(existsSync(join(OUTPUT_PATH, "getStaticProps", "withFallback", "3.html"))).toBe(true)
     expect(existsSync(join(OUTPUT_PATH, "getStaticProps", "withFallback", "4.html"))).toBe(true)
+    expect(existsSync(join(OUTPUT_PATH, "getStaticProps", "withFallback", "my", "path", "1.html"))).toBe(true)
+    expect(existsSync(join(OUTPUT_PATH, "getStaticProps", "withFallback", "my", "path", "2.html"))).toBe(true)
   })
 
   test('creates data .json file in /_next/data/ directory', () => {
@@ -117,11 +119,16 @@ describe('SSG Pages with getStaticProps', () => {
     expect(existsSync(join(dataDir, "getStaticProps", "2.json"))).toBe(true)
     expect(existsSync(join(dataDir, "getStaticProps", "withFallback", "3.json"))).toBe(true)
     expect(existsSync(join(dataDir, "getStaticProps", "withFallback", "4.json"))).toBe(true)
+    expect(existsSync(join(dataDir, "getStaticProps", "withFallback", "my", "path", "1.json"))).toBe(true)
+    expect(existsSync(join(dataDir, "getStaticProps", "withFallback", "my", "path", "2.json"))).toBe(true)
   })
 
-  test('creates Netlify Function for pages with fallback', () => {
-    const functionPath = "next_getStaticProps_withFallback_id/next_getStaticProps_withFallback_id.js"
-    expect(existsSync(join(PROJECT_PATH, "out_functions", functionPath))).toBe(true)
+  test('creates Netlify Functions for pages with fallback', () => {
+    const functionPath1 = "next_getStaticProps_withFallback_id/next_getStaticProps_withFallback_id.js"
+    expect(existsSync(join(PROJECT_PATH, "out_functions", functionPath1))).toBe(true)
+
+    const functionPath2 = "next_getStaticProps_withFallback_slug/next_getStaticProps_withFallback_slug.js"
+    expect(existsSync(join(PROJECT_PATH, "out_functions", functionPath2))).toBe(true)
   })
 })
 

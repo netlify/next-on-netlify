@@ -26,8 +26,8 @@
   ],
   "scripts": {
     "test": "jest --config tests/jest.config.js",
-    "cypress:local": "env CYPRESS_DEPLOY=local   cypress run --config-file false",
-    "cypress:netlify": "env CYPRESS_DEPLOY=netlify cypress run --config-file false",
+    "cypress:local": "env CYPRESS_DEPLOY=local   cypress run --config-file false --config video=false",
+    "cypress:netlify": "env CYPRESS_DEPLOY=netlify cypress run --config-file false --config video=false",
     "cypress:local:testonly": "env CYPRESS_SKIP_DEPLOY=true npm run cypress:local",
     "cypress:netlify:testonly": "env CYPRESS_SKIP_DEPLOY=true npm run cypress:netlify"
   },

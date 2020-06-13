@@ -153,14 +153,14 @@ describe('getServerSideProps', () => {
 
   context('with dynamic route', () => {
     it('loads TV show', () => {
-      cy.visit('/shows/1337')
+      cy.visit('/getServerSideProps/1337')
 
       cy.get('h1').should('contain', 'Show #1337')
       cy.get('p').should('contain',  'Whodunnit?')
     })
 
     it('loads TV show when SSR-ing', () => {
-      cy.ssr('/shows/1337')
+      cy.ssr('/getServerSideProps/1337')
 
       cy.get('h1').should('contain', 'Show #1337')
       cy.get('p').should('contain',  'Whodunnit?')
@@ -179,6 +179,54 @@ describe('getServerSideProps', () => {
 
       cy.contains('Go back home').click()
       cy.contains('getServerSideProps/1338').click()
+
+      cy.get('h1').should('contain', 'Show #1338')
+      cy.get('p').should('contain',  'The Whole Truth')
+
+      cy.window().should('have.property', 'noReload', true)
+    })
+  })
+
+  context('with catch-all route', () => {
+    it('does not match base path (without params)', () => {
+      cy.request({
+        url: '/getServerSideProps/catch/all',
+        failOnStatusCode: false
+      }).then(response => {
+        expect(response.status).to.eq(404)
+        cy.state('document').write(response.body)
+      })
+
+      cy.get('h2').should('contain', 'This page could not be found.')
+    })
+
+    it('loads TV show with one param', () => {
+      cy.visit('/getServerSideProps/catch/all/1337')
+
+      cy.get('h1').should('contain', 'Show #1337')
+      cy.get('p').should('contain',  'Whodunnit?')
+    })
+
+    it('loads TV show with multiple params', () => {
+      cy.visit('/getServerSideProps/catch/all/1337/multiple/params')
+
+      cy.get('h1').should('contain', 'Show #1337')
+      cy.get('p').should('contain',  'Whodunnit?')
+    })
+
+    it('loads page props from data .json file when navigating to it', () => {
+      cy.visit('/')
+      cy.window().then(w => w.noReload = true)
+
+      // Navigate to page and test that no reload is performed
+      // See: https://glebbahmutov.com/blog/detect-page-reload/
+      cy.contains('getServerSideProps/catch/all/1337').click()
+
+      cy.get('h1').should('contain', 'Show #1337')
+      cy.get('p').should('contain',  'Whodunnit?')
+
+      cy.contains('Go back home').click()
+      cy.contains('getServerSideProps/catch/all/1338').click()
 
       cy.get('h1').should('contain', 'Show #1338')
       cy.get('p').should('contain',  'The Whole Truth')

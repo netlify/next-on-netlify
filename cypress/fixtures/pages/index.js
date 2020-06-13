@@ -163,6 +163,16 @@ const Index = ({ shows }) => (
           <a>getServerSideProps/1338 (dynamic route)</a>
         </Link>
       </li>
+      <li>
+        <Link href="/getServerSideProps/catch/all/[...slug]" as="/getServerSideProps/catch/all/1337">
+          <a>getServerSideProps/catch/all/1337 (catch-all route)</a>
+        </Link>
+      </li>
+      <li>
+        <Link href="/getServerSideProps/catch/all/[...slug]" as="/getServerSideProps/catch/all/1338">
+          <a>getServerSideProps/catch/all/1338 (catch-all route)</a>
+        </Link>
+      </li>
     </ul>
 
     <h1>6. Static Pages Stay Static</h1>

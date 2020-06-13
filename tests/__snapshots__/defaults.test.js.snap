@@ -17,14 +17,14 @@ exports[`Routing creates Netlify redirects 1`] = `
 /getStaticProps/withFallback/3  /getStaticProps/withFallback/3.html  200
 /getStaticProps/withFallback/4  /getStaticProps/withFallback/4.html  200
 /api/shows/:id  /.netlify/functions/next_api_shows_id  200
-/api/shows/*  /.netlify/functions/next_api_shows_params  200
+/api/shows/:params/*  /.netlify/functions/next_api_shows_params  200
 /getServerSideProps/:id  /.netlify/functions/next_getServerSideProps_id  200
 /_next/data/%BUILD_ID%/getServerSideProps/:id.json  /.netlify/functions/next_getServerSideProps_id  200
 /getStaticProps/withFallback/:id  /.netlify/functions/next_getStaticProps_withFallback_id  200
 /_next/data/%BUILD_ID%/getStaticProps/withFallback/:id.json  /.netlify/functions/next_getStaticProps_withFallback_id  200
-/getStaticProps/withFallback/*  /.netlify/functions/next_getStaticProps_withFallback_slug  200
-/_next/data/%BUILD_ID%/getStaticProps/withFallback/*  /.netlify/functions/next_getStaticProps_withFallback_slug  200
+/getStaticProps/withFallback/:slug/*  /.netlify/functions/next_getStaticProps_withFallback_slug  200
+/_next/data/%BUILD_ID%/getStaticProps/withFallback/:slug/*  /.netlify/functions/next_getStaticProps_withFallback_slug  200
 /shows/:id  /.netlify/functions/next_shows_id  200
-/shows/*  /.netlify/functions/next_shows_params  200
+/shows/:params/*  /.netlify/functions/next_shows_params  200
 /static/:id  /static/[id].html  200"
 `;

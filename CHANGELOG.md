@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.0 (2020-06-14)
+
+- Add support for [NextJS optional catch-all routes](https://nextjs.org/docs/api-routes/dynamic-api-routes#optional-catch-all-api-routes) ([#15](https://github.com/FinnWoelm/next-on-netlify/pull/15))
+- Fix: An `index.js` page with `getStaticProps` no longer causes `next-on-netlify` to fail ([#18](https://github.com/FinnWoelm/next-on-netlify/pull/18))
+- Fix: Catch-all routes now correctly require that at least one URL parameter is present (unlike optional catch-all routes) ([479b7e7](https://github.com/FinnWoelm/next-on-netlify/commit/479b7e73f1a11778eb5ef66ded02aa1c17e38697))
+- Fix: Data routes now correctly work for pages with catch-all routing ([0412b45](https://github.com/FinnWoelm/next-on-netlify/commit/0412b45fe3917a082be563c1720e85cf3affd4e1))
+
 ## 2.0.0 (2020-06-02)
 
 - **Breaking: You must change your `netlify.toml` configuration for next-on-netlify v2.0.0.** Please [look at the README](https://github.com/FinnWoelm/next-on-netlify#3-configure-netlify) for the latest configuration.  

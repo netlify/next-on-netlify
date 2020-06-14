@@ -157,3 +157,4 @@ For more on this, see: [Issue #7](https://github.com/FinnWoelm/next-on-netlify/i
 - [@wei](https://github.com/wei)
 - [@laugharn](https://github.com/laugharn)
 - [@rajington](https://github.com/rajington)
+- [@etrepum](https://github.com/etrepum)

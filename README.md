@@ -7,10 +7,24 @@
 
 next-on-netlify is a utility for hosting NextJS applications with Server-Side Rendering on Netlify. It wraps your NextJS application in a tiny compatibility layer, so that pages can be server-side rendered with Netlify functions.
 
-
-
 - Demo: https://next-on.netlify.com/  
 - Example repository: https://github.com/FinnWoelm/next-on-netlify-demo
+
+## Table of Contents
+* [Installation](#installation)
+* [Setup](#setup)
+  - [1. Set NextJS  target to serverless](#1-set-nextjs--target-to-serverless)
+  - [2. Add postbuild hook](#2-add-postbuild-hook)
+  - [3. Configure Netlify](#3-configure-netlify)
+* [Optional Extras](#optional-extras)
+  - [Preview Locally](#preview-locally)
+  - [Custom Netlify Redirects](#custom-netlify-redirects)
+  - [Custom Netlify Functions](#custom-netlify-functions)
+* [Caveats](#caveats)
+  + [Preview Mode](#preview-mode)
+  + [Fallbacks for Pages with `getStaticPaths`](#fallbacks-for-pages-with--getstaticpaths-)
+* [Showcase](#showcase)
+* [Credits](#credits)
 
 ## Installation
 
@@ -146,6 +160,15 @@ SSR pages and API endpoints. It is currently not possible to create custom Netli
 With `next-on-netlify`, when navigating to a path that is not defined in `getStaticPaths`, it server-side renders the page and sends it directly to the user. The user never sees the fallback page. The page is not cached for future requests.
 
 For more on this, see: [Issue #7](https://github.com/FinnWoelm/next-on-netlify/issues/7#issuecomment-636883539)
+
+## Showcase
+
+The following sites are built with `next-on-netlify`:
+
+![missionbit.org](https://raw.githubusercontent.com/FinnWoelm/next-on-netlify/assets/showcase-missionbit.png)  
+[missionbit.org](https://www.missionbit.org/) ([#18](https://github.com/FinnWoelm/next-on-netlify/pull/18#issuecomment-643828966))
+
+Are building something awesome with `next-on-netlify`? 🔥 Let me know and we will feature it here :)
 
 ## Credits
 

@@ -118,11 +118,12 @@ From now on, whenever you want to preview your application locally, just run:
 
 #### Custom Netlify Redirects
 
-You can define custom redirects in the `netlify.toml` file.
-Routes defined by `next-on-netlify` take precedence over routes
-defined in `netlify.toml`.
+You can define custom redirects in a `_redirects` and/or in your `netlify.toml` file.
+The precedence of these rules are:
 
-In the past, it was possible to define custom redirects in a `_redirects` file. This is not possible anymore. Let me know if you have a need for this feature and we can add it back.
+- `_redirects`
+- `next-on-netlify` redirects
+- `netlify.toml`
 
 [Read more about Netlify redirects here](https://docs.netlify.com/routing/redirects/).  
 

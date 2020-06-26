@@ -456,6 +456,62 @@ describe('API endpoint', () => {
   })
 })
 
+describe('Preview Mode', () => {
+  it('redirects to preview test page', () => {
+    cy.visit('/api/enterPreview?id=999')
+
+    cy.url().should('include', '/previewTest/999')
+  })
+
+  it('sets cookies on client', () => {
+    Cypress.Cookies.debug(true)
+    cy.getCookie('__prerender_bypass').should('not.exist')
+    cy.getCookie('__next_preview_data').should('not.exist')
+
+    cy.visit('/api/enterPreview?id=999')
+
+    cy.getCookie('__prerender_bypass').should('not.be', null)
+    cy.getCookie('__next_preview_data').should('not.be', null)
+  })
+
+  it('renders page in preview mode', () => {
+    cy.visit('/api/enterPreview?id=999')
+
+    if(Cypress.env('DEPLOY') === 'local') {
+      cy.makeCookiesWorkWithHttpAndReload()
+    }
+
+    cy.get('h1').should('contain', 'Person #999')
+    cy.get('p').should('contain',  'Sebastian Lacause')
+  })
+
+  it('can move in and out of preview mode', () => {
+    cy.visit('/api/enterPreview?id=999')
+
+    if(Cypress.env('DEPLOY') === 'local') {
+      cy.makeCookiesWorkWithHttpAndReload()
+    }
+
+    cy.get('h1').should('contain', 'Person #999')
+    cy.get('p').should('contain',  'Sebastian Lacause')
+
+    cy.contains("Go back home").click()
+
+    // Verify that we're still in preview mode
+    cy.contains("previewTest/222").click()
+    cy.get('h1').should('contain', 'Person #222')
+    cy.get('p').should('contain',  'Corey Lof')
+
+    // Exit preview mode
+    cy.visit('/api/exitPreview')
+
+    // Verify that we're no longer in preview mode
+    cy.contains("previewTest/222").click()
+    cy.get('h1').should('contain', 'Show #222')
+    cy.get('p').should('contain',  'Happyland')
+  })
+})
+
 describe('pre-rendered HTML pages', () => {
   context('with static route', () => {
     it('renders', () => {

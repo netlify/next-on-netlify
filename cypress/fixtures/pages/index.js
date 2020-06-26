@@ -175,6 +175,19 @@ const Index = ({ shows }) => (
       </li>
     </ul>
 
+    <h1>6. Preview mode? Yes!</h1>
+    <p>
+      next-on-netlify supports preview mode.
+    </p>
+
+    <ul>
+      <li>
+        <Link href="/previewTest/222">
+          <a>previewTest/222</a>
+        </Link>
+      </li>
+    </ul>
+
     <h1>6. Static Pages Stay Static</h1>
     <p>
       next-on-netlify automatically determines which pages are dynamic and

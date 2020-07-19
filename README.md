@@ -22,7 +22,7 @@ next-on-netlify is a utility for hosting NextJS applications with Server-Side Re
   - [Custom Netlify Functions](#custom-netlify-functions)
 * [Caveats](#caveats)
   + [Preview Mode](#preview-mode)
-  + [Fallbacks for Pages with `getStaticPaths`](#fallbacks-for-pages-with--getstaticpaths-)
+  + [Fallbacks for Pages with `getStaticPaths`](#fallbacks-for-pages-with-getstaticpaths)
 * [Showcase](#showcase)
 * [Credits](#credits)
 

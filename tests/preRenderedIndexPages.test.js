@@ -89,15 +89,12 @@ describe('404 Page', () => {
 })
 
 describe('Routing',() => {
-  test('creates Netlify redirects', async () => {
+  test('does not create any redirects', async () => {
     // Read _redirects file
     const contents = readFileSync(join(PROJECT_PATH, "out_publish", "_redirects"))
+    const redirects = contents.toString()
 
-    // Convert contents into an array, each line being one element
-    const redirects = contents.toString().split("\n")
-
-    // Check that routes are present
-    expect(redirects).toContain("/  /index.html  200")
-    expect(redirects).toContain("/shows  /shows.html  200")
+    // Check that no redirects are present
+    expect(redirects).toEqual("")
   })
 })

@@ -6,15 +6,6 @@ exports[`Routing creates Netlify redirects 1`] = `
 /getServerSideProps/static  /.netlify/functions/next_getServerSideProps_static  200
 /_next/data/%BUILD_ID%/getServerSideProps/static.json  /.netlify/functions/next_getServerSideProps_static  200
 /  /.netlify/functions/next_index  200
-/static  /static.html  200
-/404  /404.html  200
-/getStaticProps/static  /getStaticProps/static.html  200
-/getStaticProps/1  /getStaticProps/1.html  200
-/getStaticProps/2  /getStaticProps/2.html  200
-/getStaticProps/withFallback/my/path/1  /getStaticProps/withFallback/my/path/1.html  200
-/getStaticProps/withFallback/my/path/2  /getStaticProps/withFallback/my/path/2.html  200
-/getStaticProps/withFallback/3  /getStaticProps/withFallback/3.html  200
-/getStaticProps/withFallback/4  /getStaticProps/withFallback/4.html  200
 /api/shows/:id  /.netlify/functions/next_api_shows_id  200
 /api/shows/:params/*  /.netlify/functions/next_api_shows_params  200
 /getServerSideProps/:id  /.netlify/functions/next_getServerSideProps_id  200

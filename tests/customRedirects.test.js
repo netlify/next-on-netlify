@@ -69,15 +69,15 @@ describe('Next', () => {
 })
 
 describe('Routing',() => {
-  test('includes custom redirect rules', async () => {
+  test('includes only custom redirect rules', async () => {
     // Read _redirects file
     const contents = readFileSync(join(PROJECT_PATH, "out_publish", "_redirects"))
 
-    const redirects = contents.toString().split(/\n/)
+    const redirects = contents.toString().trim().split(/\n/)
     expect(redirects[0]).toEqual("# Custom Redirect Rules")
     expect(redirects[1]).toEqual("https://old.example.com/* https://new.example.com/:splat 301!")
 
-    // Check that other routes are present
-    expect(redirects).toContain("/  /index.html  200")
+    // Check that no other redirects are present
+    expect(redirects).toHaveLength(2)
   })
 })

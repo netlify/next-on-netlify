@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const { logTitle } = require('./lib/logger')
 const prepareFolders  = require('./lib/prepareFolders')
 const copyPublicFiles = require('./lib/copyPublicFiles')
 const copyNextAssets  = require('./lib/copyNextAssets')
@@ -22,4 +23,4 @@ setupHtmlPages()
 
 setupRedirects()
 
-console.log("\x1b[1m✅ Success! All done!\x1b[22m")
+logTitle("✅ Success! All done!")

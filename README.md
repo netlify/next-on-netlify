@@ -168,7 +168,7 @@ The following sites are built with `next-on-netlify`:
 ![missionbit.org](https://raw.githubusercontent.com/FinnWoelm/next-on-netlify/master/assets/showcase-missionbit.png)  
 [missionbit.org](https://www.missionbit.org/) ([#18](https://github.com/FinnWoelm/next-on-netlify/pull/18#issuecomment-643828966))
 
-Are building something awesome with `next-on-netlify`? 🔥 Let me know and we will feature it here :)
+Are you building something awesome with `next-on-netlify`? 🔥 Let me know and we will feature it here :)
 
 ## Credits
 

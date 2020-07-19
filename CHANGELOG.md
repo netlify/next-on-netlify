@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.1 (2020-07-19)
+
+- Fix: Correctly get distDir from `next.config.js` when config is a function ([#25](https://github.com/FinnWoelm/next-on-netlify/issues/25))
+
 ## 2.3.0 (2020-06-26)
 
 - Add support for [NextJS Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode) ([#10](https://github.com/FinnWoelm/next-on-netlify/issues/10))

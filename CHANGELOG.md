@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.2 (2020-08-04)
+
+- Fix: Bump elliptic to v6.5.3 to fix [CVE-2020-13822](https://github.com/advisories/GHSA-vh7m-p724-62c2)
+
 ## 2.3.1 (2020-07-19)
 
 - Fix: Correctly get distDir from `next.config.js` when config is a function ([#25](https://github.com/FinnWoelm/next-on-netlify/issues/25))

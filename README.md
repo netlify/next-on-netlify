@@ -36,7 +36,7 @@ npm install --save next-on-netlify
 
 #### 1. Set NextJS  target to serverless
 
-We must build our NextJS app as a serverless app. You can read more about serverless NextJS here.
+We must build our NextJS app as a serverless app. You can read more about serverless NextJS [here](https://nextjs.org/docs/api-reference/next.config.js/build-target#serverless-target).
 
 It's super simple. Just create a `next.config.js` file and write the following:
 

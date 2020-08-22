@@ -1,3 +1,24 @@
+## 🎉🎉🎉 Netlify is adopting `next-on-netlify` 🎉🎉🎉
+
+Great news for everyone using NextJS on Netlify: Netlify has decided to
+officially adopt the `next-on-netlify` npm package and to hire an engineer to
+support the development of this package. This will make `next-on-netlify`
+even better and ensure that using NextJS with Netlify is as seamless and
+feature-complete as possible! The code will remain completely open source 🙂
+
+I am excited to announce that [@cassidoo](https://github.com/cassidoo), the
+Principal Developer Experience Engineer at Netlify, will be joining
+`next-on-netlify` as a core maintainer. 🙌 Cassidy has a ton of experience with
+NextJS and obviously with Netlify ([and she also tweets fantastic content on
+  Twitter](https://twitter.com/cassidoo)).
+
+The `next-on-netlify` package will be moving owner a couple of times this
+weekend, from its old home at @FinnWoelm, to @cassidoo, and then on to its
+final destination under the @netlify org. Hopefully, this does not disrupt your
+work! As always, we're here to help if you run into any issues ❤
+
+---
+
 # README
 
 [![NPM version](https://img.shields.io/npm/v/next-on-netlify)](https://www.npmjs.com/package/next-on-netlify)

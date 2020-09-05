@@ -1,6 +1,3 @@
-
-
-
 # How to publish a new release
 
 - Update `CHANGELOG.md`

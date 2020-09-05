@@ -21,24 +21,25 @@ Principal Developer Experience Engineer at Netlify, will be joining
 
 next-on-netlify is a utility for hosting NextJS applications with Server-Side Rendering on Netlify. It wraps your NextJS application in a tiny compatibility layer, so that pages can be server-side rendered with Netlify functions.
 
-- Demo: https://next-on.netlify.com/  
+- Demo: https://next-on.netlify.com/
 - Example repository: https://github.com/FinnWoelm/next-on-netlify-demo
 
 ## Table of Contents
-* [Installation](#installation)
-* [Setup](#setup)
-  - [1. Set NextJS  target to serverless](#1-set-nextjs--target-to-serverless)
+
+- [Installation](#installation)
+- [Setup](#setup)
+  - [1. Set NextJS target to serverless](#1-set-nextjs--target-to-serverless)
   - [2. Add postbuild hook](#2-add-postbuild-hook)
   - [3. Configure Netlify](#3-configure-netlify)
-* [Optional Extras](#optional-extras)
+- [Optional Extras](#optional-extras)
   - [Preview Locally](#preview-locally)
   - [Custom Netlify Redirects](#custom-netlify-redirects)
   - [Custom Netlify Functions](#custom-netlify-functions)
-* [Caveats](#caveats)
-  + [Preview Mode](#preview-mode)
-  + [Fallbacks for Pages with `getStaticPaths`](#fallbacks-for-pages-with-getstaticpaths)
-* [Showcase](#showcase)
-* [Credits](#credits)
+- [Caveats](#caveats)
+  - [Preview Mode](#preview-mode)
+  - [Fallbacks for Pages with `getStaticPaths`](#fallbacks-for-pages-with-getstaticpaths)
+- [Showcase](#showcase)
+- [Credits](#credits)
 
 ## Installation
 
@@ -48,7 +49,7 @@ npm install --save next-on-netlify
 
 ## Setup
 
-#### 1. Set NextJS  target to serverless
+#### 1. Set NextJS target to serverless
 
 We must build our NextJS app as a serverless app. You can read more about serverless NextJS [here](https://nextjs.org/docs/api-reference/next.config.js/build-target#serverless-target).
 
@@ -59,13 +60,13 @@ It's super simple. Just create a `next.config.js` file and write the following:
 
 module.exports = {
   // Target must be serverless
-  target: 'serverless'
+  target: "serverless",
 };
 ```
 
 #### 2. Add postbuild hook
 
-The next-on-netlify package adds the `next-on-netlify`  command. When we run this command, some magic happens to prepare our NextJS app for hosting on Netlify*.
+The next-on-netlify package adds the `next-on-netlify` command. When we run this command, some magic happens to prepare our NextJS app for hosting on Netlify\*.
 
 We want the next-on-netlify command to run after we build our NextJS application. So let's add a postbuild hook to our package.json file:
 
@@ -140,6 +141,7 @@ Lastly, add the following lines to your `.gitignore`:
 Now you're all set.
 
 From now on, whenever you want to preview your application locally, just run:
+
 1. `npm run build`: This will run `next build` to build your NextJS app and `next-on-netlify` to prepare your NextJS app for compatibility with Netlify
 1. `netlify dev`: This will emulate Netlify on your computer and let you preview your app on `http://localhost:8888`.
 
@@ -152,7 +154,7 @@ The precedence of these rules are:
 - `next-on-netlify` redirects
 - `netlify.toml`
 
-[Read more about Netlify redirects here](https://docs.netlify.com/routing/redirects/).  
+[Read more about Netlify redirects here](https://docs.netlify.com/routing/redirects/).
 
 #### Custom Netlify Functions
 
@@ -164,7 +166,6 @@ SSR pages and API endpoints. It is currently not possible to create custom Netli
 ### Preview Mode
 
 [NextJS Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode) does not work on pages that are pre-rendered (pages with `getStaticProps`). Netlify currently does not support cookie-based redirects, which are needed for supporting preview mode on pre-rendered pages. Preview mode works correctly on any server-side-rendered pages (pages with `getInitialProps` or `getServerSideProps`). See: [Issue #10](https://github.com/netlify/next-on-netlify/issues/10)
-
 
 ### Fallbacks for Pages with `getStaticPaths`
 
@@ -188,6 +189,7 @@ Are you building something awesome with `next-on-netlify`? 🔥 Let me know and 
 📣 Shoutout to [@mottox2](https://github.com/mottox2) (a pioneer of hosting NextJS on Netlify) and [@danielcondemarin](https://github.com/danielcondemarin) (author of serverless-next.js for AWS). The two were big inspirations for this package.
 
 🙌 Big "thank you" to the following people for their contributions, support, and beta testing:
+
 - [@spencewood](https://github.com/spencewood)
 - [@alxhghs](https://github.com/alxhghs)
 - [@gamliela](https://github.com/gamliela)

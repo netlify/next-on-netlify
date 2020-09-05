@@ -1,33 +1,33 @@
-import Link from 'next/link'
+import Link from "next/link";
 
-const StaticWithID = props => (
+const StaticWithID = (props) => (
   <div>
     <p>
       This page does not use getInitialProps.
-      <br/>
+      <br />
       It is a static page.
-      <br/>
+      <br />
       It is never server-side rendered.
-      <br/>
+      <br />
       It is served directly by Netlify's CDN.
-      <br/>
-      <br/>
+      <br />
+      <br />
       But it has a dynamic URL parameter: /static/:id.
-      <br/>
+      <br />
       Try changing the ID. It will always render this page, no matter what you
       put.
-      <br/>
+      <br />
       I am not sure what this is useful for.
-      <br/>
+      <br />
       But it's a feature of NextJS, so... I'm supporting it.
     </p>
 
-    <hr/>
+    <hr />
 
     <Link href="/">
       <a>Go back home</a>
     </Link>
   </div>
-)
+);
 
-export default StaticWithID
+export default StaticWithID;

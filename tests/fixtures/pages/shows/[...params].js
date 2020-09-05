@@ -1,11 +1,10 @@
-import Error from 'next/error'
-import Link from 'next/link'
+import Error from "next/error";
+import Link from "next/link";
 
 const CatchAll = ({ errorCode, show, params }) => {
-
   // If show item was not found, render 404 page
   if (errorCode) {
-    return <Error statusCode={errorCode} />
+    return <Error statusCode={errorCode} />;
   }
 
   // Otherwise, render show
@@ -15,50 +14,49 @@ const CatchAll = ({ errorCode, show, params }) => {
         This is a server-side rendered catch-all page. It catches all requests
         made to /shows/:id/any/path/can/go/here... and makes those parameters
         available in getInitialProps():
-        <br/>
+        <br />
         {params.map((param, index) => (
           <span key={index}>
-            [{index}]: {param}<br/>
+            [{index}]: {param}
+            <br />
           </span>
         ))}
-        <br/>
+        <br />
         Refresh the page to see server-side rendering in action.
-        <br/>
-        You can also try changing the URL to something random,
-        such as /shows/{show.id}/whatever/path/you/want
+        <br />
+        You can also try changing the URL to something random, such as /shows/
+        {show.id}/whatever/path/you/want
       </p>
 
-      <hr/>
+      <hr />
 
       <h1>Show #{show.id}</h1>
-      <p>
-        {show.name}
-      </p>
+      <p>{show.name}</p>
 
-      <hr/>
+      <hr />
 
       <Link href="/">
         <a>Go back home</a>
       </Link>
     </div>
-  )
-}
+  );
+};
 
 CatchAll.getInitialProps = async ({ res: req, query }) => {
   // Get the params to render
-  const { params } = query
+  const { params } = query;
 
   // Get the ID to render
-  const id = params[0]
+  const id = params[0];
 
   // Get the data
   const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
   const data = await res.json();
 
   // Set error code if show item could not be found
-  const errorCode = res.status > 200 ? res.status : false
+  const errorCode = res.status > 200 ? res.status : false;
 
-  return { errorCode, show: data, params }
-}
+  return { errorCode, show: data, params };
+};
 
-export default CatchAll
+export default CatchAll;

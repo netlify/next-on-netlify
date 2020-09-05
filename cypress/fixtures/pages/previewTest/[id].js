@@ -1,11 +1,10 @@
-import Error from 'next/error'
-import Link from 'next/link'
+import Error from "next/error";
+import Link from "next/link";
 
 const Show = ({ errorCode, show, person }) => {
-
   // If show/person item was not found, render 404 page
   if (errorCode) {
-    return <Error statusCode={errorCode} />
+    return <Error statusCode={errorCode} />;
   }
 
   // Otherwise, render show
@@ -13,52 +12,49 @@ const Show = ({ errorCode, show, person }) => {
     <div>
       <p>
         This page uses getServerSideProps() and is SSRed.
-        <br/><br/>
+        <br />
+        <br />
         By default, it shows the TV show by ID.
-        <br/>
+        <br />
         But when in preview mode, it shows person by ID instead.
       </p>
 
-      <hr/>
+      <hr />
 
-      { show ? (
+      {show ? (
         <div>
           <h1>Show #{show.id}</h1>
-          <p>
-            {show.name}
-          </p>
+          <p>{show.name}</p>
         </div>
       ) : (
         <div>
           <h1>Person #{person.id}</h1>
-          <p>
-            {person.name}
-          </p>
+          <p>{person.name}</p>
         </div>
       )}
 
-      <hr/>
+      <hr />
 
       <Link href="/">
         <a>Go back home</a>
       </Link>
     </div>
-  )
-}
+  );
+};
 
 export const getServerSideProps = async (context) => {
-  console.log(context)
-  const { params, preview } = context
+  console.log(context);
+  const { params, preview } = context;
 
-  let res = null
-  let show = null
-  let person = null
+  let res = null;
+  let show = null;
+  let person = null;
 
   // The ID to render
-  const { id } = params
+  const { id } = params;
 
   // In preview mode, load person by ID
-  if(preview) {
+  if (preview) {
     res = await fetch(`https://api.tvmaze.com/people/${id}`);
     person = await res.json();
   }
@@ -69,15 +65,15 @@ export const getServerSideProps = async (context) => {
   }
 
   // Set error code if show/person could not be found
-  const errorCode = res.status > 200 ? res.status : false
+  const errorCode = res.status > 200 ? res.status : false;
 
   return {
     props: {
       errorCode,
       show,
-      person
-    }
-  }
-}
+      person,
+    },
+  };
+};
 
-export default Show
+export default Show;

@@ -1,62 +1,54 @@
-import { useRouter } from 'next/router'
-import Link from 'next/link'
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Show = ({ show }) => {
-  const router = useRouter()
+  const router = useRouter();
 
   // This is never shown on Netlify. We just need it for NextJS to be happy,
   // because NextJS will render a fallback HTML page.
   if (router.isFallback) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   return (
     <div>
-      <p>
-        This page uses getStaticProps() to pre-fetch a TV show.
-      </p>
+      <p>This page uses getStaticProps() to pre-fetch a TV show.</p>
 
-      <hr/>
+      <hr />
 
       <h1>Show #{show.id}</h1>
-      <p>
-        {show.name}
-      </p>
+      <p>{show.name}</p>
 
-      <hr/>
+      <hr />
 
       <Link href="/">
         <a>Go back home</a>
       </Link>
     </div>
-  )
-}
+  );
+};
 
 export async function getStaticPaths() {
   // Set the paths we want to pre-render
-  const paths = [
-    { params: { id: '3' } },
-    { params: { id: '4' } }
-  ]
+  const paths = [{ params: { id: "3" } }, { params: { id: "4" } }];
 
   // We'll pre-render these paths at build time.
   // { fallback: true } means other routes will be rendered at runtime.
-  return { paths, fallback: true }
+  return { paths, fallback: true };
 }
-
 
 export async function getStaticProps({ params }) {
   // The ID to render
-  const { id } = params
+  const { id } = params;
 
   const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
   const data = await res.json();
 
   return {
     props: {
-      show: data
-    }
-  }
+      show: data,
+    },
+  };
 }
 
-export default Show
+export default Show;

@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 const Index = () => (
   <div>
@@ -20,6 +20,6 @@ const Index = () => (
       </li>
     </ul>
   </div>
-)
+);
 
-export default Index
+export default Index;

@@ -1,83 +1,92 @@
 // Test next-on-netlify when a custom distDir is set in next.config.js
-const { parse, join } = require('path')
-const { copySync, emptyDirSync, readFileSync, writeFileSync } = require('fs-extra')
-const npmRunBuild = require("./helpers/npmRunBuild")
+const { parse, join } = require("path");
+const {
+  copySync,
+  emptyDirSync,
+  readFileSync,
+  writeFileSync,
+} = require("fs-extra");
+const npmRunBuild = require("./helpers/npmRunBuild");
 
 // The name of this test file (without extension)
-const FILENAME = parse(__filename).name
+const FILENAME = parse(__filename).name;
 
 // The directory which will be used for testing.
 // We simulate a NextJS app within that directory, with pages, and a
 // package.json file.
-const PROJECT_PATH = join(__dirname, "builds", FILENAME)
+const PROJECT_PATH = join(__dirname, "builds", FILENAME);
 
 // The directory that contains the fixtures, such as NextJS pages,
 // NextJS config, and package.json
-const FIXTURE_PATH = join(__dirname, "fixtures")
+const FIXTURE_PATH = join(__dirname, "fixtures");
 
 // Capture the output of `npm run build` to verify successful build
-let BUILD_OUTPUT
+let BUILD_OUTPUT;
 
 beforeAll(
   async () => {
     // Clear project directory
-    emptyDirSync(PROJECT_PATH)
-    emptyDirSync(join(PROJECT_PATH, "pages"))
+    emptyDirSync(PROJECT_PATH);
+    emptyDirSync(join(PROJECT_PATH, "pages"));
 
     // Copy NextJS pages and config
     copySync(
       join(FIXTURE_PATH, "pages-with-static-props-index"),
       join(PROJECT_PATH, "pages")
-    )
+    );
     copySync(
       join(FIXTURE_PATH, "next.config.js"),
       join(PROJECT_PATH, "next.config.js")
-    )
+    );
 
     // Copy package.json
     copySync(
       join(FIXTURE_PATH, "package.json"),
       join(PROJECT_PATH, "package.json")
-    )
+    );
 
     // Create a _redirects file
     writeFileSync(
       join(PROJECT_PATH, "_redirects"),
       "# Custom Redirect Rules\n" +
-      "https://old.example.com/* https://new.example.com/:splat 301!\n"
-    )
+        "https://old.example.com/* https://new.example.com/:splat 301!\n"
+    );
 
     // Invoke `npm run build`: Build Next and run next-on-netlify
-    const { stdout } = await npmRunBuild({ directory: PROJECT_PATH })
-    BUILD_OUTPUT = stdout
+    const { stdout } = await npmRunBuild({ directory: PROJECT_PATH });
+    BUILD_OUTPUT = stdout;
   },
   // time out after 180 seconds
   180 * 1000
-)
+);
 
-describe('Next', () => {
-  test('builds successfully', () => {
+describe("Next", () => {
+  test("builds successfully", () => {
     // NextJS output
-    expect(BUILD_OUTPUT).toMatch("Creating an optimized production build...")
-    expect(BUILD_OUTPUT).toMatch("Finalizing page optimization...")
-    expect(BUILD_OUTPUT).toMatch("First Load JS shared by all")
+    expect(BUILD_OUTPUT).toMatch("Creating an optimized production build...");
+    expect(BUILD_OUTPUT).toMatch("Finalizing page optimization...");
+    expect(BUILD_OUTPUT).toMatch("First Load JS shared by all");
 
     // Next on Netlify output
-    expect(BUILD_OUTPUT).toMatch("Next on Netlify")
-    expect(BUILD_OUTPUT).toMatch("Success! All done!")
-  })
-})
+    expect(BUILD_OUTPUT).toMatch("Next on Netlify");
+    expect(BUILD_OUTPUT).toMatch("Success! All done!");
+  });
+});
 
-describe('Routing',() => {
-  test('includes only custom redirect rules', async () => {
+describe("Routing", () => {
+  test("includes only custom redirect rules", async () => {
     // Read _redirects file
-    const contents = readFileSync(join(PROJECT_PATH, "out_publish", "_redirects"))
+    const contents = readFileSync(
+      join(PROJECT_PATH, "out_publish", "_redirects")
+    );
 
-    const redirects = contents.toString().trim().split(/\n/)
-    expect(redirects[0]).toEqual("# Custom Redirect Rules")
-    expect(redirects[1]).toEqual("https://old.example.com/* https://new.example.com/:splat 301!")
+    const redirects = contents.toString().trim().split(/\n/);
+    expect(redirects[0]).toEqual("# Custom Redirect Rules");
+    expect(redirects[1]).toEqual(
+      "https://old.example.com/* https://new.example.com/:splat 301!"
+    );
 
     // Check that no other redirects are present
-    expect(redirects).toHaveLength(2)
-  })
-})
+    expect(redirects).toHaveLength(2);
+  });
+});

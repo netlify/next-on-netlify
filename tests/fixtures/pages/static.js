@@ -1,27 +1,30 @@
-import Link from 'next/link'
+import Link from "next/link";
 
-const Static = props => (
+const Static = (props) => (
   <div>
     <p>
       This page does not use getInitialProps.
-      <br/>
+      <br />
       It is a static page.
-      <br/>
+      <br />
       It is never server-side rendered.
-      <br/>
+      <br />
       It is served directly by Netlify's CDN.
-      <br/>
-      The <a href="https://www.npmjs.com/package/next-on-netlify">next-on-netlify</a> npm
-      package takes care of deciding which pages to render server-side and which
-      ones to serve directly via CDN.
+      <br />
+      The{" "}
+      <a href="https://www.npmjs.com/package/next-on-netlify">
+        next-on-netlify
+      </a>{" "}
+      npm package takes care of deciding which pages to render server-side and
+      which ones to serve directly via CDN.
     </p>
 
-    <hr/>
+    <hr />
 
     <Link href="/">
       <a>Go back home</a>
     </Link>
   </div>
-)
+);
 
-export default Static
+export default Static;

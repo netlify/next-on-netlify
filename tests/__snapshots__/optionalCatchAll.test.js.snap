@@ -2,7 +2,6 @@
 
 exports[`Routing creates Netlify redirects 1`] = `
 "# Next-on-Netlify Redirects
-/index  /index.html  200
 /  /index.html  200
 /404  /404.html  200
 /catch*  /.netlify/functions/next_catch_all  200

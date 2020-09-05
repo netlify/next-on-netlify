@@ -5,7 +5,6 @@ exports[`Routing creates Netlify redirects 1`] = `
 /api/static  /.netlify/functions/next_api_static  200
 /getServerSideProps/static  /.netlify/functions/next_getServerSideProps_static  200
 /_next/data/%BUILD_ID%/getServerSideProps/static.json  /.netlify/functions/next_getServerSideProps_static  200
-/index  /.netlify/functions/next_index  200
 /  /.netlify/functions/next_index  200
 /static  /static.html  200
 /404  /404.html  200

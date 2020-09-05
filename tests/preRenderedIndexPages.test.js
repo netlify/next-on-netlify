@@ -55,7 +55,7 @@ describe('Next', () => {
   test('builds successfully', () => {
     // NextJS output
     expect(BUILD_OUTPUT).toMatch("Creating an optimized production build...")
-    expect(BUILD_OUTPUT).toMatch("Automatically optimizing pages...")
+    expect(BUILD_OUTPUT).toMatch("Finalizing page optimization...")
     expect(BUILD_OUTPUT).toMatch("First Load JS shared by all")
 
     // Next on Netlify output
@@ -75,9 +75,8 @@ describe('Static Pages', () => {
   test('copies static assets to out_publish/_next/ directory', () => {
     const dirs = readdirSync(join(PROJECT_PATH, "out_publish", "_next", "static"))
 
-    expect(dirs.length).toBe(3)
+    expect(dirs.length).toBe(2)
     expect(dirs).toContain("chunks")
-    expect(dirs).toContain("runtime")
   })
 })
 
@@ -104,7 +103,6 @@ describe('Routing',() => {
 
     // Check that routes are present
     expect(redirects).toContain("/  /index.html  200")
-    expect(redirects).toContain("/index  /index.html  200")
     expect(redirects).toContain("/shows  /shows.html  200")
   })
 })

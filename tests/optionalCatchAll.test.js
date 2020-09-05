@@ -55,7 +55,7 @@ describe('Next', () => {
   test('builds successfully', () => {
     // NextJS output
     expect(BUILD_OUTPUT).toMatch("Creating an optimized production build...")
-    expect(BUILD_OUTPUT).toMatch("Automatically optimizing pages...")
+    expect(BUILD_OUTPUT).toMatch("Finalizing page optimization...")
     expect(BUILD_OUTPUT).toMatch("First Load JS shared by all")
 
     // Next on Netlify output

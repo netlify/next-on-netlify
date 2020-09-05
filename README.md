@@ -105,7 +105,7 @@ I recommend you still use `next dev` to build and preview your application local
 
 But if you want to emulate the Netlify deployment on your computer, you can also run `next-on-netlify` locally and then use `netlify-cli` to preview the result.
 
-First, install the latest version of `netlify-cli` (you can also [look at package.json](https://github.com/netlify/next-on-netlify/blob/master/package.json) to see the version against which next-on-netlify has been tested):
+First, install the latest version of `netlify-cli` (you can also [look at package.json](https://github.com/netlify/next-on-netlify/blob/master/package.json) to see the version that next-on-netlify has been tested against):
 
 ```bash
 npm install -g netlify-cli

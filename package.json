@@ -35,13 +35,13 @@
     "next": "9.x"
   },
   "devDependencies": {
-    "cypress": "^4.11.0",
-    "jest": "^26.1.0",
-    "netlify-cli": "^2.58.0",
+    "cypress": "^5.1.0",
+    "jest": "^26.4.2",
+    "netlify-cli": "^2.61.0",
     "next": "^9.4.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "wait-on": "^5.1.0"
+    "wait-on": "^5.2.0"
   },
   "dependencies": {
     "@sls-next/lambda-at-edge": "^1.5.1",

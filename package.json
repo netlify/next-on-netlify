@@ -44,7 +44,7 @@
     "wait-on": "^5.2.0"
   },
   "dependencies": {
-    "@sls-next/lambda-at-edge": "^1.5.1",
+    "@sls-next/lambda-at-edge": "^1.5.2",
     "fs-extra": "^9.0.1",
     "next-aws-lambda": "^2.5.0"
   }

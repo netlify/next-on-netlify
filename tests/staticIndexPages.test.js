@@ -86,11 +86,6 @@ describe('404 Page', () => {
 
     expect(existsSync(join(OUTPUT_PATH, "404.html"))).toBe(true)
   })
-
-  // This is required for 404.html to work on netlify-dev
-  test('copies 404.html to directory root', () => {
-    expect(existsSync(join(PROJECT_PATH, "404.html"))).toBe(true)
-  })
 })
 
 describe('Routing',() => {

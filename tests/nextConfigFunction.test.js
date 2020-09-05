@@ -1,5 +1,5 @@
 // Test next-on-netlify when config is set from a function in next.config.js
-// See: https://github.com/FinnWoelm/next-on-netlify/issues/25
+// See: https://github.com/netlify/next-on-netlify/issues/25
 const { parse, join } = require('path')
 const { copySync, emptyDirSync, existsSync,
         readdirSync, readFileSync, readJsonSync } = require('fs-extra')

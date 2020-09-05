@@ -15,7 +15,7 @@ Principal Developer Experience Engineer at Netlify, will be joining
 # README
 
 [![NPM version](https://img.shields.io/npm/v/next-on-netlify)](https://www.npmjs.com/package/next-on-netlify)
-[![MIT license](https://img.shields.io/npm/l/next-on-netlify)](https://github.com/FinnWoelm/next-on-netlify/blob/master/LICENSE)
+[![MIT license](https://img.shields.io/npm/l/next-on-netlify)](https://github.com/netlify/next-on-netlify/blob/master/LICENSE)
 [![NPM downloads](https://img.shields.io/npm/dt/next-on-netlify)](https://www.npmjs.com/package/next-on-netlify)
 [![Tested with Cypress.io](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)](https://www.cypress.io/)
 
@@ -81,7 +81,7 @@ We want the next-on-netlify command to run after we build our NextJS application
 }
 ```
 
-\*If you're curious about the "magic", check out the well-documented [`next-on-netlify.js` file](https://github.com/FinnWoelm/next-on-netlify/blob/master/next-on-netlify.js).
+\*If you're curious about the "magic", check out the well-documented [`next-on-netlify.js` file](https://github.com/netlify/next-on-netlify/blob/master/next-on-netlify.js).
 
 #### 3. Configure Netlify
 
@@ -104,7 +104,7 @@ I recommend you still use `next dev` to build and preview your application local
 
 But if you want to emulate the Netlify deployment on your computer, you can also run `next-on-netlify` locally and then use `netlify-cli` to preview the result.
 
-First, install the latest version of `netlify-cli` (you can also [look at package.json](https://github.com/FinnWoelm/next-on-netlify/blob/master/package.json) to see the version against which next-on-netlify has been tested):
+First, install the latest version of `netlify-cli` (you can also [look at package.json](https://github.com/netlify/next-on-netlify/blob/master/package.json) to see the version against which next-on-netlify has been tested):
 
 ```bash
 npm install -g netlify-cli
@@ -163,7 +163,7 @@ SSR pages and API endpoints. It is currently not possible to create custom Netli
 
 ### Preview Mode
 
-[NextJS Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode) does not work on pages that are pre-rendered (pages with `getStaticProps`). Netlify currently does not support cookie-based redirects, which are needed for supporting preview mode on pre-rendered pages. Preview mode works correctly on any server-side-rendered pages (pages with `getInitialProps` or `getServerSideProps`). See: [Issue #10](https://github.com/FinnWoelm/next-on-netlify/issues/10)
+[NextJS Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode) does not work on pages that are pre-rendered (pages with `getStaticProps`). Netlify currently does not support cookie-based redirects, which are needed for supporting preview mode on pre-rendered pages. Preview mode works correctly on any server-side-rendered pages (pages with `getInitialProps` or `getServerSideProps`). See: [Issue #10](https://github.com/netlify/next-on-netlify/issues/10)
 
 
 ### Fallbacks for Pages with `getStaticPaths`
@@ -172,14 +172,14 @@ SSR pages and API endpoints. It is currently not possible to create custom Netli
 
 With `next-on-netlify`, when navigating to a path that is not defined in `getStaticPaths`, it server-side renders the page and sends it directly to the user. The user never sees the fallback page. The page is not cached for future requests.
 
-For more on this, see: [Issue #7](https://github.com/FinnWoelm/next-on-netlify/issues/7#issuecomment-636883539)
+For more on this, see: [Issue #7](https://github.com/netlify/next-on-netlify/issues/7#issuecomment-636883539)
 
 ## Showcase
 
 The following sites are built with `next-on-netlify`:
 
-![missionbit.org](https://raw.githubusercontent.com/FinnWoelm/next-on-netlify/master/assets/showcase-missionbit.png)  
-[missionbit.org](https://www.missionbit.org/) ([#18](https://github.com/FinnWoelm/next-on-netlify/pull/18#issuecomment-643828966))
+![missionbit.org](https://raw.githubusercontent.com/netlify/next-on-netlify/master/assets/showcase-missionbit.png)  
+[missionbit.org](https://www.missionbit.org/) ([#18](https://github.com/netlify/next-on-netlify/pull/18#issuecomment-643828966))
 
 Are you building something awesome with `next-on-netlify`? 🔥 Let me know and we will feature it here :)
 

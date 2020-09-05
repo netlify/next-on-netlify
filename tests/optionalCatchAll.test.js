@@ -1,5 +1,5 @@
 // Test that next-on-netlify does not crash when pre-rendering index.js file.
-// See: https://github.com/FinnWoelm/next-on-netlify/issues/2#issuecomment-636415494
+// See: https://github.com/netlify/next-on-netlify/issues/2#issuecomment-636415494
 
 const { parse, join } = require('path')
 const { copySync, emptyDirSync, existsSync,

@@ -1,0 +1,13 @@
+diff --git a/node_modules/next-aws-lambda/lib/compatLayer.js b/node_modules/next-aws-lambda/lib/compatLayer.js
+index e4b7bb5..f697cfa 100644
+--- a/node_modules/next-aws-lambda/lib/compatLayer.js
++++ b/node_modules/next-aws-lambda/lib/compatLayer.js
+@@ -40,6 +40,8 @@ const reqResMapper = (event, callback) => {
+     req.url += `?${qs}`;
+   }
+ 
++  req.clientContext = event.clientContext
++
+   req.method = event.httpMethod;
+   req.rawHeaders = [];
+   req.headers = {};

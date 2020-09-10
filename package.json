@@ -22,7 +22,8 @@
   "author": "Finn Woelm",
   "license": "MIT",
   "files": [
-    "/lib"
+    "/lib",
+    "/patches"
   ],
   "scripts": {
     "postinstall": "patch-package",

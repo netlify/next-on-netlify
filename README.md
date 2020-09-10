@@ -179,10 +179,13 @@ For more on this, see: [Issue #7](https://github.com/netlify/next-on-netlify/iss
 
 The following sites are built with `next-on-netlify`:
 
+![opinionatedreact.com](https://raw.githubusercontent.com/netlify/next-on-netlify/master/assets/showcase-opinionatedreact.png)  
+[opinionatedreact.com](https://opinionatedreact.com/) ([via Twitter](https://twitter.com/NikkitaFTW/status/1302667952920162309))
+
 ![missionbit.org](https://raw.githubusercontent.com/netlify/next-on-netlify/master/assets/showcase-missionbit.png)  
 [missionbit.org](https://www.missionbit.org/) ([#18](https://github.com/netlify/next-on-netlify/pull/18#issuecomment-643828966))
 
-Are you building something awesome with `next-on-netlify`? 🔥 Let me know and we will feature it here :)
+Are you building something awesome with `next-on-netlify`? 🔥 Let us know and we will feature it here :)
 
 ## Credits
 

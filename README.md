@@ -200,3 +200,4 @@ Are you building something awesome with `next-on-netlify`? 🔥 Let us know and 
 - [@laugharn](https://github.com/laugharn)
 - [@rajington](https://github.com/rajington)
 - [@etrepum](https://github.com/etrepum)
+- [@jonasbuntinx](https://github.com/jonasbuntinx)

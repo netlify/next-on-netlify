@@ -19,7 +19,11 @@ const Show = ({ show }) => (
 
 export async function getStaticPaths() {
   // Set the paths we want to pre-render
-  const paths = [{ params: { id: "1" } }, { params: { id: "2" } }];
+  const paths = [
+    { params: { id: "3" } },
+    { params: { id: "4" } },
+    { params: { id: "75" } },
+  ];
 
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
@@ -37,7 +41,7 @@ export async function getStaticProps({ params }) {
     props: {
       show: data,
     },
-    revalidate: 1
+    revalidate: 1,
   };
 }
 

@@ -141,6 +141,22 @@ const Index = ({ shows }) => (
       </li>
       <li>
         <Link
+          href="/getStaticProps/withRevalidate/[id]"
+          as="/getStaticProps/withRevalidate/3"
+        >
+          <a>getStaticProps/withRevalidate/3 (dynamic route)</a>
+        </Link>
+      </li>
+      <li>
+        <Link
+          href="/getStaticProps/withRevalidate/[id]"
+          as="/getStaticProps/withRevalidate/4"
+        >
+          <a>getStaticProps/withRevalidate/4 (dynamic route)</a>
+        </Link>
+      </li>
+      <li>
+        <Link
           href="/getStaticProps/withFallback/[...slug]"
           as="/getStaticProps/withFallback/my/path/1"
         >

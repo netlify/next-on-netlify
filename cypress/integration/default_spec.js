@@ -269,6 +269,22 @@ describe("getStaticProps", () => {
       cy.get("p").should("contain", "Dancing with the Stars");
       cy.window().should("have.property", "noReload", true);
     });
+
+    context("with revalidate", () => {
+      it("loads TV show", () => {
+        cy.visit("/getStaticProps/with-revalidate");
+
+        cy.get("h1").should("contain", "Show #71");
+        cy.get("p").should("contain", "Dancing with the Stars");
+      });
+
+      it("loads TV shows when SSR-ing", () => {
+        cy.ssr("/getStaticProps/with-revalidate");
+
+        cy.get("h1").should("contain", "Show #71");
+        cy.get("p").should("contain", "Dancing with the Stars");
+      });
+    });
   });
 
   context("with dynamic route", () => {
@@ -363,6 +379,42 @@ describe("getStaticProps", () => {
 
         cy.get("h1").should("contain", "Show #75");
         cy.get("p").should("contain", "The Mindy Project");
+
+        cy.window().should("have.property", "noReload", true);
+      });
+    });
+
+    context("with revalidate", () => {
+      it("loads TV show", () => {
+        cy.visit("/getStaticProps/withRevalidate/75");
+
+        cy.get("h1").should("contain", "Show #75");
+        cy.get("p").should("contain", "The Mindy Project");
+      });
+
+      it("loads TV shows when SSR-ing", () => {
+        cy.ssr("/getStaticProps/withRevalidate/75");
+
+        cy.get("h1").should("contain", "Show #75");
+        cy.get("p").should("contain", "The Mindy Project");
+      });
+
+      it("loads page props from data .json file when navigating to it", () => {
+        cy.visit("/");
+        cy.window().then((w) => (w.noReload = true));
+
+        // Navigate to page and test that no reload is performed
+        // See: https://glebbahmutov.com/blog/detect-page-reload/
+        cy.contains("getStaticProps/withRevalidate/3").click();
+
+        cy.get("h1").should("contain", "Show #3");
+        cy.get("p").should("contain", "Bitten");
+
+        cy.contains("Go back home").click();
+        cy.contains("getStaticProps/withRevalidate/4").click();
+
+        cy.get("h1").should("contain", "Show #4");
+        cy.get("p").should("contain", "Arrow");
 
         cy.window().should("have.property", "noReload", true);
       });

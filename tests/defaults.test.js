@@ -232,6 +232,40 @@ describe("SSG Pages with getStaticProps", () => {
   });
 });
 
+describe("SSG Pages with getStaticProps and revalidate", () => {
+  const functionsDir = join(PROJECT_PATH, "out_functions");
+
+  test("creates a Netlify Function for each page", () => {
+    expect(
+      existsSync(
+        join(
+          functionsDir,
+          "next_getStaticProps_withrevalidate",
+          "next_getStaticProps_withrevalidate.js"
+        )
+      )
+    ).toBe(true);
+    expect(
+      existsSync(
+        join(
+          functionsDir,
+          "next_getStaticProps_withRevalidate_id",
+          "next_getStaticProps_withRevalidate_id.js"
+        )
+      )
+    ).toBe(true);
+    expect(
+      existsSync(
+        join(
+          functionsDir,
+          "next_getStaticProps_withRevalidate_withFallback_id",
+          "next_getStaticProps_withRevalidate_withFallback_id.js"
+        )
+      )
+    ).toBe(true);
+  });
+});
+
 describe("Static Pages", () => {
   test("copies static pages to output directory", () => {
     const OUTPUT_PATH = join(PROJECT_PATH, "out_publish");

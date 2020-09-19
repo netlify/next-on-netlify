@@ -1,12 +1,8 @@
 // Test next-on-netlify when a custom distDir is set in next.config.js
+
 const { parse, join } = require("path");
-const {
-  copySync,
-  emptyDirSync,
-  readFileSync,
-  writeFileSync,
-} = require("fs-extra");
-const npmRunBuild = require("./helpers/npmRunBuild");
+const { readFileSync } = require("fs-extra");
+const buildNextApp = require("./helpers/buildNextApp");
 
 // The name of this test file (without extension)
 const FILENAME = parse(__filename).name;
@@ -16,60 +12,27 @@ const FILENAME = parse(__filename).name;
 // package.json file.
 const PROJECT_PATH = join(__dirname, "builds", FILENAME);
 
-// The directory that contains the fixtures, such as NextJS pages,
-// NextJS config, and package.json
-const FIXTURE_PATH = join(__dirname, "fixtures");
-
-// Capture the output of `npm run build` to verify successful build
-let BUILD_OUTPUT;
+// Capture the output to verify successful build
+let buildOutput;
 
 beforeAll(
   async () => {
-    // Clear project directory
-    emptyDirSync(PROJECT_PATH);
-    emptyDirSync(join(PROJECT_PATH, "pages"));
-
-    // Copy NextJS pages and config
-    copySync(
-      join(FIXTURE_PATH, "pages-with-static-props-index"),
-      join(PROJECT_PATH, "pages")
-    );
-    copySync(
-      join(FIXTURE_PATH, "next.config.js"),
-      join(PROJECT_PATH, "next.config.js")
-    );
-
-    // Copy package.json
-    copySync(
-      join(FIXTURE_PATH, "package.json"),
-      join(PROJECT_PATH, "package.json")
-    );
-
-    // Create a _redirects file
-    writeFileSync(
-      join(PROJECT_PATH, "_redirects"),
-      "# Custom Redirect Rules\n" +
-        "https://old.example.com/* https://new.example.com/:splat 301!\n"
-    );
-
-    // Invoke `npm run build`: Build Next and run next-on-netlify
-    const { stdout } = await npmRunBuild({ directory: PROJECT_PATH });
-    BUILD_OUTPUT = stdout;
+    buildOutput = await buildNextApp()
+      .forTest(__filename)
+      .withPages("pages-with-static-props-index")
+      .withNextConfig("next.config.js")
+      .withPackageJson("package.json")
+      .withFile("_redirects")
+      .build();
   },
   // time out after 180 seconds
   180 * 1000
 );
 
-describe("Next", () => {
+describe("next-on-netlify", () => {
   test("builds successfully", () => {
-    // NextJS output
-    expect(BUILD_OUTPUT).toMatch("Creating an optimized production build...");
-    expect(BUILD_OUTPUT).toMatch("Finalizing page optimization...");
-    expect(BUILD_OUTPUT).toMatch("First Load JS shared by all");
-
-    // Next on Netlify output
-    expect(BUILD_OUTPUT).toMatch("Next on Netlify");
-    expect(BUILD_OUTPUT).toMatch("Success! All done!");
+    expect(buildOutput).toMatch("Next on Netlify");
+    expect(buildOutput).toMatch("Success! All done!");
   });
 });
 

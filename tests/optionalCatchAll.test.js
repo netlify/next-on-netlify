@@ -2,15 +2,8 @@
 // See: https://github.com/netlify/next-on-netlify/issues/2#issuecomment-636415494
 
 const { parse, join } = require("path");
-const {
-  copySync,
-  emptyDirSync,
-  existsSync,
-  readdirSync,
-  readFileSync,
-  readJsonSync,
-} = require("fs-extra");
-const npmRunBuild = require("./helpers/npmRunBuild");
+const { readFileSync } = require("fs-extra");
+const buildNextApp = require("./helpers/buildNextApp");
 
 // The name of this test file (without extension)
 const FILENAME = parse(__filename).name;
@@ -24,49 +17,26 @@ const PROJECT_PATH = join(__dirname, "builds", FILENAME);
 // NextJS config, and package.json
 const FIXTURE_PATH = join(__dirname, "fixtures");
 
-// Capture the output of `npm run build` to verify successful build
-let BUILD_OUTPUT;
+// Capture the output to verify successful build
+let buildOutput;
 
 beforeAll(
   async () => {
-    // Clear project directory
-    emptyDirSync(PROJECT_PATH);
-    emptyDirSync(join(PROJECT_PATH, "pages"));
-
-    // Copy NextJS pages and config
-    copySync(
-      join(FIXTURE_PATH, "pages-with-optionalCatchAll"),
-      join(PROJECT_PATH, "pages")
-    );
-    copySync(
-      join(FIXTURE_PATH, "next.config.js-with-optionalCatchAll"),
-      join(PROJECT_PATH, "next.config.js")
-    );
-
-    // Copy package.json
-    copySync(
-      join(FIXTURE_PATH, "package.json"),
-      join(PROJECT_PATH, "package.json")
-    );
-
-    // Invoke `npm run build`: Build Next and run next-on-netlify
-    const { stdout } = await npmRunBuild({ directory: PROJECT_PATH });
-    BUILD_OUTPUT = stdout;
+    buildOutput = await buildNextApp()
+      .forTest(__filename)
+      .withPages("pages-with-optionalCatchAll")
+      .withNextConfig("next.config.js-with-optionalCatchAll")
+      .withPackageJson("package.json")
+      .build();
   },
   // time out after 180 seconds
   180 * 1000
 );
 
-describe("Next", () => {
+describe("next-on-netlify", () => {
   test("builds successfully", () => {
-    // NextJS output
-    expect(BUILD_OUTPUT).toMatch("Creating an optimized production build...");
-    expect(BUILD_OUTPUT).toMatch("Finalizing page optimization...");
-    expect(BUILD_OUTPUT).toMatch("First Load JS shared by all");
-
-    // Next on Netlify output
-    expect(BUILD_OUTPUT).toMatch("Next on Netlify");
-    expect(BUILD_OUTPUT).toMatch("Success! All done!");
+    expect(buildOutput).toMatch("Next on Netlify");
+    expect(buildOutput).toMatch("Success! All done!");
   });
 });
 

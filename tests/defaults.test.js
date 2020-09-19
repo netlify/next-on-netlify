@@ -1,14 +1,13 @@
 // Test default next-on-netlify configuration
+
 const { parse, join } = require("path");
 const {
-  copySync,
-  emptyDirSync,
   existsSync,
   readdirSync,
   readFileSync,
   readJsonSync,
 } = require("fs-extra");
-const npmRunBuild = require("./helpers/npmRunBuild");
+const buildNextApp = require("./helpers/buildNextApp");
 
 // The name of this test file (without extension)
 const FILENAME = parse(__filename).name;
@@ -18,70 +17,46 @@ const FILENAME = parse(__filename).name;
 // package.json file.
 const PROJECT_PATH = join(__dirname, "builds", FILENAME);
 
-// The directory that contains the fixtures, such as NextJS pages,
-// NextJS config, and package.json
-const FIXTURE_PATH = join(__dirname, "fixtures");
-
-// Capture the output of `npm run build` to verify successful build
-let BUILD_OUTPUT;
+// Capture the output to verify successful build
+let buildOutput;
 
 beforeAll(
   async () => {
-    // Clear project directory
-    emptyDirSync(PROJECT_PATH);
-    emptyDirSync(join(PROJECT_PATH, "pages"));
-
-    // Copy NextJS pages and config
-    copySync(join(FIXTURE_PATH, "pages"), join(PROJECT_PATH, "pages"));
-    copySync(
-      join(FIXTURE_PATH, "next.config.js"),
-      join(PROJECT_PATH, "next.config.js")
-    );
-
-    // Copy package.json
-    copySync(
-      join(FIXTURE_PATH, "package.json"),
-      join(PROJECT_PATH, "package.json")
-    );
-
-    // Copy image.png to public folder
-    copySync(
-      join(FIXTURE_PATH, "image.png"),
-      join(PROJECT_PATH, "public", "image.png")
-    );
-
-    // Invoke `npm run build`: Build Next and run next-on-netlify
-    const { stdout } = await npmRunBuild({ directory: PROJECT_PATH });
-    BUILD_OUTPUT = stdout;
+    buildOutput = await buildNextApp()
+      .forTest(__filename)
+      .withPages("pages")
+      .withNextConfig("next.config.js")
+      .withPackageJson("package.json")
+      .withFile("image.png", join("public", "image.png"))
+      .build();
   },
   // time out after 180 seconds
   180 * 1000
 );
 
-describe("Next", () => {
+describe("next-on-netlify", () => {
   test("builds successfully", () => {
-    // NextJS output
-    expect(BUILD_OUTPUT).toMatch("Creating an optimized production build...");
-    expect(BUILD_OUTPUT).toMatch("Finalizing page optimization...");
-    expect(BUILD_OUTPUT).toMatch("First Load JS shared by all");
+    expect(buildOutput).toMatch("Next on Netlify");
+    expect(buildOutput).toMatch("Success! All done!");
+  });
+});
 
-    // Next on Netlify output
-    expect(BUILD_OUTPUT).toMatch("Next on Netlify");
-    expect(BUILD_OUTPUT).toMatch("Copying public/ folder to out_publish/");
-    expect(BUILD_OUTPUT).toMatch(
-      "Copying static NextJS assets to out_publish/"
-    );
-    expect(BUILD_OUTPUT).toMatch(
+describe("next-on-netlify", () => {
+  test("builds successfully", () => {
+    expect(buildOutput).toMatch("Next on Netlify");
+    expect(buildOutput).toMatch("Copying public/ folder to out_publish/");
+    expect(buildOutput).toMatch("Copying static NextJS assets to out_publish/");
+    expect(buildOutput).toMatch(
       "Setting up SSR pages and SSG pages with fallback as Netlify Functions in out_functions/"
     );
-    expect(BUILD_OUTPUT).toMatch(
+    expect(buildOutput).toMatch(
       "Copying pre-rendered SSG pages to out_publish/ and JSON data to out_publish/_next/data/"
     );
-    expect(BUILD_OUTPUT).toMatch(
+    expect(buildOutput).toMatch(
       "Writing pre-rendered HTML pages to out_publish/"
     );
-    expect(BUILD_OUTPUT).toMatch("Setting up redirects");
-    expect(BUILD_OUTPUT).toMatch("Success! All done!");
+    expect(buildOutput).toMatch("Setting up redirects");
+    expect(buildOutput).toMatch("Success! All done!");
   });
 });
 

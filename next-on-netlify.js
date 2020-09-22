@@ -9,14 +9,14 @@ program
   )
   .parse(process.argv);
 
-const { logTitle } = require("./lib/logger");
-const prepareFolders = require("./lib/prepareFolders");
-const copyPublicFiles = require("./lib/copyPublicFiles");
-const copyNextAssets = require("./lib/copyNextAssets");
-const setupSsrPages = require("./lib/setupSsrPages");
-const setupSsgPages = require("./lib/setupSsgPages");
-const setupHtmlPages = require("./lib/setupHtmlPages");
-const setupRedirects = require("./lib/setupRedirects");
+const { logTitle } = require("./lib/helpers/logger");
+const prepareFolders = require("./lib/steps/prepareFolders");
+const copyPublicFiles = require("./lib/steps/copyPublicFiles");
+const copyNextAssets = require("./lib/steps/copyNextAssets");
+const setupSsrPages = require("./lib/steps/setupSsrPages");
+const setupSsgPages = require("./lib/steps/setupSsgPages");
+const setupHtmlPages = require("./lib/steps/setupHtmlPages");
+const setupRedirects = require("./lib/steps/setupRedirects");
 
 prepareFolders();
 

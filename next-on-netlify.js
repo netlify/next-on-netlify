@@ -13,9 +13,7 @@ const { logTitle } = require("./lib/helpers/logger");
 const prepareFolders = require("./lib/steps/prepareFolders");
 const copyPublicFiles = require("./lib/steps/copyPublicFiles");
 const copyNextAssets = require("./lib/steps/copyNextAssets");
-const setupSsrPages = require("./lib/steps/setupSsrPages");
-const setupSsgPages = require("./lib/steps/setupSsgPages");
-const setupHtmlPages = require("./lib/steps/setupHtmlPages");
+const setupPages = require("./lib/steps/setupPages");
 const setupRedirects = require("./lib/steps/setupRedirects");
 
 prepareFolders();
@@ -24,11 +22,7 @@ copyPublicFiles();
 
 copyNextAssets();
 
-setupSsrPages();
-
-setupSsgPages();
-
-setupHtmlPages();
+setupPages();
 
 setupRedirects();
 

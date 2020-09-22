@@ -47,13 +47,25 @@ describe("next-on-netlify", () => {
     expect(buildOutput).toMatch("Copying public/ folder to out_publish/");
     expect(buildOutput).toMatch("Copying static NextJS assets to out_publish/");
     expect(buildOutput).toMatch(
-      "Setting up SSR pages and SSG pages with fallback as Netlify Functions in out_functions/"
+      "Setting up API endpoints as Netlify Functions in out_functions/"
     );
     expect(buildOutput).toMatch(
-      "Copying pre-rendered SSG pages to out_publish/ and JSON data to out_publish/_next/data/"
+      "Setting up pages with getInitialProps as Netlify Functions in out_functions/"
     );
     expect(buildOutput).toMatch(
-      "Writing pre-rendered HTML pages to out_publish/"
+      "Setting up pages with getServerSideProps as Netlify Functions in out_functions/"
+    );
+    expect(buildOutput).toMatch(
+      "Copying pre-rendered pages with getStaticProps and JSON data to out_publish/"
+    );
+    expect(buildOutput).toMatch(
+      "Setting up pages with getStaticProps and fallback: true as Netlify Functions in out_functions/"
+    );
+    expect(buildOutput).toMatch(
+      "Setting up pages with getStaticProps and revalidation interval as Netlify Functions in out_functions/"
+    );
+    expect(buildOutput).toMatch(
+      "Copying pre-rendered pages without props to out_publish/"
     );
     expect(buildOutput).toMatch("Setting up redirects");
     expect(buildOutput).toMatch("Success! All done!");

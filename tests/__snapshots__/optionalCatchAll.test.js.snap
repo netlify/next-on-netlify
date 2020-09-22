@@ -2,6 +2,8 @@
 
 exports[`Routing creates Netlify redirects 1`] = `
 "# Next-on-Netlify Redirects
-/catch*  /.netlify/functions/next_catch_all  200
-/_next/data/%BUILD_ID%/catch*  /.netlify/functions/next_catch_all  200"
+/_next/data/%BUILD_ID%/catch/*  /.netlify/functions/next_catch_all  200
+/_next/data/%BUILD_ID%/catch.json  /.netlify/functions/next_catch_all  200
+/catch/*  /.netlify/functions/next_catch_all  200
+/catch  /.netlify/functions/next_catch_all  200"
 `;

@@ -1,5 +1,11 @@
 # Changelog
 
+# 2.5.0 (2020-10-01)
+
+- Copy host property from headers to multiValueHeaders [#44](https://github.com/netlify/next-on-netlify/pull/44)
+- More support for ISR (getStaticProps with revalidate) [Discussion](https://github.com/netlify/next-on-netlify/issues/35) / [Commit](https://github.com/netlify/next-on-netlify/commit/ef45cc5aa0ea6755544901ea364533b40f78cdcb)
+- Fixed redirect for index with getServerSideProps [#39](https://github.com/netlify/next-on-netlify/pull/39)
+
 ## 2.4.0 (2020-09-05)
 
 - Add support for base64 encoding in responses returned from SSR pages and API

@@ -25,7 +25,7 @@ beforeAll(
     buildOutput = await buildNextApp()
       .forTest(__filename)
       .withPages("pages-with-optionalCatchAll")
-      .withNextConfig("next.config.js-with-optionalCatchAll")
+      .withNextConfig("next.config.js")
       .withPackageJson("package.json")
       .build();
   },

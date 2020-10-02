@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.5.1 (2020-10-02)
+
+- Fix: broken redirects for optional catch-alls ([#47](https://github.com/netlify/next-on-netlify/pull/47))
+
 # 2.5.0 (2020-10-01)
 
 - Copy host property from headers to multiValueHeaders [#44](https://github.com/netlify/next-on-netlify/pull/44)

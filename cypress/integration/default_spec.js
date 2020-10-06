@@ -529,10 +529,16 @@ describe("API endpoint", () => {
 });
 
 describe("Preview Mode", () => {
-  it("redirects to preview test page", () => {
+  it("redirects to preview test page with dynamic route", () => {
     cy.visit("/api/enterPreview?id=999");
 
     cy.url().should("include", "/previewTest/999");
+  });
+
+  it("redirects to static preview test page", () => {
+    cy.visit("/api/enterPreviewStatic");
+
+    cy.url().should("include", "/previewTest/static");
   });
 
   it("sets cookies on client", () => {
@@ -546,7 +552,18 @@ describe("Preview Mode", () => {
     cy.getCookie("__next_preview_data").should("not.be", null);
   });
 
-  it("renders page in preview mode", () => {
+  it("sets cookies on client with static redirect", () => {
+    Cypress.Cookies.debug(true);
+    cy.getCookie("__prerender_bypass").should("not.exist");
+    cy.getCookie("__next_preview_data").should("not.exist");
+
+    cy.visit("/api/enterPreviewStatic");
+
+    cy.getCookie("__prerender_bypass").should("not.be", null);
+    cy.getCookie("__next_preview_data").should("not.be", null);
+  });
+
+  it("renders serverSideProps page in preview mode", () => {
     cy.visit("/api/enterPreview?id=999");
 
     if (Cypress.env("DEPLOY") === "local") {
@@ -557,7 +574,15 @@ describe("Preview Mode", () => {
     cy.get("p").should("contain", "Sebastian Lacause");
   });
 
-  it("can move in and out of preview mode", () => {
+  it("renders staticProps page in preview mode", () => {
+    // cypress local (aka netlify dev) doesn't support cookie-based redirects
+    if (Cypress.env("DEPLOY") !== "local") {
+      cy.visit("/api/enterPreviewStatic");
+      cy.get("h1").should("contain", "Number: 3");
+    }
+  });
+
+  it("can move in and out of preview mode for SSRed page", () => {
     cy.visit("/api/enterPreview?id=999");
 
     if (Cypress.env("DEPLOY") === "local") {
@@ -581,6 +606,45 @@ describe("Preview Mode", () => {
     cy.contains("previewTest/222").click();
     cy.get("h1").should("contain", "Show #222");
     cy.get("p").should("contain", "Happyland");
+  });
+
+  it("can move in and out of preview mode for static page", () => {
+    if (Cypress.env("DEPLOY") !== "local") {
+      cy.visit("/api/enterPreviewStatic");
+      cy.window().then((w) => (w.noReload = true));
+
+      cy.get("h1").should("contain", "Number: 3");
+
+      cy.contains("Go back home").click();
+
+      // Verify that we're still in preview mode
+      cy.contains("previewTest/static").click();
+      cy.get("h1").should("contain", "Number: 3");
+
+      cy.window().should("have.property", "noReload", true);
+
+      // Exit preview mode
+      cy.visit("/api/exitPreview");
+
+      // TO-DO: test if this is the static html?
+      // Verify that we're no longer in preview mode
+      cy.contains("previewTest/static").click();
+      cy.get("h1").should("contain", "Number: 4");
+    }
+  });
+
+  it("hits the prerendered html out of preview mode and netlify function in preview mode", () => {
+    if (Cypress.env("DEPLOY") !== "local") {
+      cy.request("/previewTest/static").then((response) => {
+        expect(response.headers["cache-control"]).to.include("public");
+      });
+
+      cy.visit("/api/enterPreviewStatic");
+
+      cy.request("/previewTest/static").then((response) => {
+        expect(response.headers["cache-control"]).to.include("private");
+      });
+    }
   });
 });
 

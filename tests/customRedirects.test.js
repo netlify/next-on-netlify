@@ -37,7 +37,7 @@ describe("next-on-netlify", () => {
 });
 
 describe("Routing", () => {
-  test("includes only custom redirect rules", async () => {
+  test("includes custom redirect rules", async () => {
     // Read _redirects file
     const contents = readFileSync(
       join(PROJECT_PATH, "out_publish", "_redirects")
@@ -48,8 +48,5 @@ describe("Routing", () => {
     expect(redirects[1]).toEqual(
       "https://old.example.com/* https://new.example.com/:splat 301!"
     );
-
-    // Check that no other redirects are present
-    expect(redirects).toHaveLength(2);
   });
 });

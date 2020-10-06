@@ -230,6 +230,11 @@ const Index = ({ shows }) => (
           <a>previewTest/222</a>
         </Link>
       </li>
+      <li>
+        <Link href="/previewTest/static">
+          <a>previewTest/static</a>
+        </Link>
+      </li>
     </ul>
 
     <h1>6. Static Pages Stay Static</h1>

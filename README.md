@@ -163,10 +163,6 @@ SSR pages and API endpoints. It is currently not possible to create custom Netli
 
 ## Caveats
 
-### Preview Mode
-
-[NextJS Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode) does not work on pages that are pre-rendered (pages with `getStaticProps`). Netlify currently does not support cookie-based redirects, which are needed for supporting preview mode on pre-rendered pages. Preview mode works correctly on any server-side-rendered pages (pages with `getInitialProps` or `getServerSideProps`). See: [Issue #10](https://github.com/netlify/next-on-netlify/issues/10)
-
 ### Fallbacks for Pages with `getStaticPaths`
 
 [Fallback pages](https://nextjs.org/docs/basic-features/data-fetching#fallback-true) behave differently with `next-on-netlify` than they do with NextJS. On NextJS, when navigating to a path that is not defined in `getStaticPaths`, it first displays the fallback page. NextJS then generates the HTML in the background and caches it for future requests.

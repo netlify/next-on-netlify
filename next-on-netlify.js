@@ -7,6 +7,10 @@ program
     "lines of build output to show for each section",
     50
   )
+  .option(
+    "--with-trigger-functions",
+    "Will parse functions that match Netlify Trigger Functions in 'pages/api/'"
+  )
   .parse(process.argv);
 
 const { logTitle } = require("./lib/helpers/logger");

@@ -60,6 +60,18 @@ It's super simple. Just create a `next.config.js` file and write the following:
 
 module.exports = {
   // Target must be serverless
+  target: "serverless",
+};
+```
+
+If binaries are needed in the deployment the following configuration is needed ([Prisma](https://github.com/prisma/prisma) is an example):
+
+```js
+// next.config.js
+
+module.exports = {
+  // Target must be experimental-serverless-trace
+  // Your build time will be longer with this option
   target: "experimental-serverless-trace",
 };
 ```

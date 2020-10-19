@@ -64,6 +64,18 @@ module.exports = {
 };
 ```
 
+If binaries are needed in the deployment the following configuration is needed ([Prisma](https://github.com/prisma/prisma) is an example):
+
+```js
+// next.config.js
+
+module.exports = {
+  // Target must be experimental-serverless-trace
+  // Your build time will be longer with this option
+  target: "experimental-serverless-trace",
+};
+```
+
 #### 2. Add postbuild hook
 
 The next-on-netlify package adds the `next-on-netlify` command. When we run this command, some magic happens to prepare our NextJS app for hosting on Netlify\*.

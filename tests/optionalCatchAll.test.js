@@ -13,10 +13,6 @@ const FILENAME = parse(__filename).name;
 // package.json file.
 const PROJECT_PATH = join(__dirname, "builds", FILENAME);
 
-// The directory that contains the fixtures, such as NextJS pages,
-// NextJS config, and package.json
-const FIXTURE_PATH = join(__dirname, "fixtures");
-
 // Capture the output to verify successful build
 let buildOutput;
 

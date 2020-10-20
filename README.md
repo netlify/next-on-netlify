@@ -1,10 +1,18 @@
 ![Next.js on Netlify](nextonnetlify.png)
 
 <p align="center">
-  [![NPM version](https://img.shields.io/npm/v/next-on-netlify)](https://www.npmjs.com/package/next-on-netlify)
-  [![MIT license](https://img.shields.io/npm/l/next-on-netlify)](https://github.com/netlify/next-on-netlify/blob/master/LICENSE)
-  [![NPM downloads](https://img.shields.io/npm/dt/next-on-netlify)](https://www.npmjs.com/package/next-on-netlify)
-  [![Tested with Cypress.io](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)](https://www.cypress.io/)
+  <a aria-label="npm version" href="https://www.npmjs.com/package/next-on-netlify">
+    <img alt="" src="https://img.shields.io/npm/v/next-on-netlify">
+  </a>
+  <a aria-label="MIT License" href="https://img.shields.io/npm/l/next-on-netlify">
+    <img alt="" src="https://img.shields.io/npm/l/next-on-netlify">
+  </a>
+  <a aria-label="npm downloads" href="https://www.npmjs.com/package/next-on-netlify">
+    <img alt="" src="https://img.shields.io/npm/dt/next-on-netlify">
+  </a>
+  <a aria-label="Tested with Cypress" href="https://www.cypress.io/">
+    <img alt="" src="https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg">
+  </a>
 </p>
 
 

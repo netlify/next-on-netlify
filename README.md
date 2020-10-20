@@ -18,9 +18,10 @@
 
 `next-on-netlify` is a utility for enabling server-side rendering in Next.js on Netlify. It wraps your application in a tiny compatibility layer, so that pages can use Netlify Functions to be server-side rendered.
 
+**TL;DR: You can enable SSR in your Next.js applications with 3 simple steps, listed [here](#setup)!**
+
 - Demo: https://next-on.netlify.com/
 - Example repository: https://github.com/FinnWoelm/next-on-netlify-demo
-
 
 ## Table of Contents
 

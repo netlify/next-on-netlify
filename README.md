@@ -26,7 +26,7 @@
 
 - [Installation](#installation)
 - [Setup](#setup)
-  - [1. Set NextJS target to serverless](#1-set-nextjs--target-to-serverless)
+  - [1. Set Next.js target to serverless](#1-set-nextjs-target-to-serverless)
   - [2. Add postbuild hook](#2-add-postbuild-hook)
   - [3. Configure Netlify](#3-configure-netlify)
 - [Optional Extras](#optional-extras)

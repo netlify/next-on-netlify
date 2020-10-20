@@ -22,7 +22,8 @@
   "author": "Finn Woelm",
   "license": "MIT",
   "files": [
-    "/lib"
+    "/lib",
+    "index.js"
   ],
   "scripts": {
     "format": "prettier --write .",

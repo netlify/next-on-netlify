@@ -1,6 +1,6 @@
 {
   "name": "next-on-netlify",
-  "version": "2.4.0",
+  "version": "2.5.1",
   "description": "Wrapper for hosting NextJS applications with Server-Side Rendering on Netlify",
   "bin": "./next-on-netlify.js",
   "keywords": [
@@ -39,6 +39,7 @@
   "devDependencies": {
     "cypress": "^5.1.0",
     "folder-hash": "^3.3.3",
+    "husky": "^4.3.0",
     "jest": "^26.4.2",
     "netlify-cli": "^2.61.0",
     "next": "^9.5.3",
@@ -52,5 +53,10 @@
     "commander": "^6.0.0",
     "fs-extra": "^9.0.1",
     "next-aws-lambda": "^2.5.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "prettier --check ."
+    }
   }
 }

@@ -35,7 +35,6 @@
   - [Custom Netlify Redirects](#custom-netlify-redirects)
   - [Custom Netlify Functions](#custom-netlify-functions)
 - [Caveats](#caveats)
-  - [Preview Mode](#preview-mode)
   - [Fallbacks for Pages with `getStaticPaths`](#fallbacks-for-pages-with-getstaticpaths)
 - [Credits](#credits)
 - [Showcase](#showcase)
@@ -174,10 +173,6 @@ The precedence of these rules are:
 SSR pages and API endpoints. It is currently not possible to create custom Netlify Functions. Let me know if you have a need for this feature and we can add it.
 
 ## Caveats
-
-### Preview Mode
-
-[Next.js Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode) does not work on pages that are pre-rendered (pages with `getStaticProps`). Netlify currently does not support cookie-based redirects, which are needed for supporting preview mode on pre-rendered pages. Preview mode works correctly on any server-side-rendered pages (pages with `getInitialProps` or `getServerSideProps`). See: [Issue #10](https://github.com/netlify/next-on-netlify/issues/10)
 
 ### Fallbacks for Pages with `getStaticPaths`
 

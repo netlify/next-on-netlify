@@ -21,7 +21,7 @@
 **TL;DR: You can enable SSR in your Next.js applications with 3 simple steps, listed [here](#setup)!**
 
 - Demo: https://next-on.netlify.com/
-- Example repository: https://github.com/FinnWoelm/next-on-netlify-demo
+- Example repository: https://github.com/netlify-labs/next-on-netlify-demo
 
 ## Table of Contents
 

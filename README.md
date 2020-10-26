@@ -82,7 +82,7 @@ The next-on-netlify package adds the `next-on-netlify` command. When we run this
 
 We want the next-on-netlify command to run after we build our NextJS application. So let's add a postbuild hook to our package.json file:
 
-```json
+```
 {
   "name": "my-nextjs-app",
   "scripts": {

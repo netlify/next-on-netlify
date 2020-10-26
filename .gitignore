@@ -42,6 +42,3 @@ jspm_packages
 
 # Local Netlify folder
 .netlify
-
-# Cypress Netlify Site ID
-cypress/fixtures/.netlify/state.json

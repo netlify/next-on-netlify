@@ -174,6 +174,12 @@ SSR pages and API endpoints. It is currently not possible to create custom Netli
 
 ## Caveats
 
+### Preview Mode
+
+Preview Mode is not yet available locally, running `netlify dev`, for static pages without revalidate or fallback. This will be supported soon.
+
+For now, Preview Mode *is* supported in production for all Next.js page types.
+
 ### Fallbacks for Pages with `getStaticPaths`
 
 [Fallback pages](https://nextjs.org/docs/basic-features/data-fetching#fallback-true) behave differently with `next-on-netlify` than they do with Next.js. On Next.js, when navigating to a path that is not defined in `getStaticPaths`, it first displays the fallback page. Next.js then generates the HTML in the background and caches it for future requests.

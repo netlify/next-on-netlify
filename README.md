@@ -90,7 +90,7 @@ We want the next-on-netlify command to run after we build our NextJS application
     "build": "next build",
     "postbuild": "next-on-netlify"
   },
-  ....
+  ...
 }
 ```
 

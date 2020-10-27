@@ -79,7 +79,7 @@ module.exports = {
 
 The next-on-netlify package adds the `next-on-netlify` command. When we run this command, some magic happens to prepare our Next.js app for hosting on Netlify\*.
 
-We want the next-on-netlify command to run after we build our NextJS application. So let's add a postbuild hook to our package.json file:
+We want the next-on-netlify command to run after we build our Next.js application. So let's add a postbuild hook to our package.json file:
 
 ```
 {

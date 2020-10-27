@@ -35,7 +35,6 @@
   - [Custom Netlify Redirects](#custom-netlify-redirects)
   - [Custom Netlify Functions](#custom-netlify-functions)
 - [Caveats](#caveats)
-  - [Preview Mode](#preview-mode)
   - [Fallbacks for Pages with `getStaticPaths`](#fallbacks-for-pages-with-getstaticpaths)
 - [Credits](#credits)
 - [Showcase](#showcase)
@@ -157,6 +156,12 @@ From now on, whenever you want to preview your application locally, just run:
 1. `npm run build`: This will run `next build` to build your Next.js app and `next-on-netlify` to prepare your Next.js app for compatibility with Netlify
 1. `netlify dev`: This will emulate Netlify on your computer and let you preview your app on `http://localhost:8888`.
 
+*Note:*
+
+Preview Mode is not yet available locally, running `netlify dev`, for static pages without revalidate or fallback. This will be supported soon.
+
+For now, Preview Mode *is* supported in production for all Next.js page types.
+
 #### Custom Netlify Redirects
 
 You can define custom redirects in a `_redirects` and/or in your `netlify.toml` file.
@@ -174,10 +179,6 @@ The precedence of these rules are:
 SSR pages and API endpoints. It is currently not possible to create custom Netlify Functions. Let me know if you have a need for this feature and we can add it.
 
 ## Caveats
-
-### Preview Mode
-
-[Next.js Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode) does not work on pages that are pre-rendered (pages with `getStaticProps`). Netlify currently does not support cookie-based redirects, which are needed for supporting preview mode on pre-rendered pages. Preview mode works correctly on any server-side-rendered pages (pages with `getInitialProps` or `getServerSideProps`). See: [Issue #10](https://github.com/netlify/next-on-netlify/issues/10)
 
 ### Fallbacks for Pages with `getStaticPaths`
 

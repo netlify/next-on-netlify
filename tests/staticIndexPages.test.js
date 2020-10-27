@@ -63,14 +63,32 @@ describe("404 Page", () => {
 });
 
 describe("Routing", () => {
-  test("does not create any redirects", async () => {
+  test("creates preview mode redirects for index and static routes", () => {
     // Read _redirects file
-    const contents = readFileSync(
+    let contents = readFileSync(
       join(PROJECT_PATH, "out_publish", "_redirects")
-    );
-    const redirects = contents.toString();
+    ).toString();
 
-    // Check that no redirects are present
-    expect(redirects).toEqual("");
+    // Replace non-persistent build ID with placeholder
+    contents = contents.replace(
+      /\/_next\/data\/[^\/]+\//g,
+      "/_next/data/%BUILD_ID%/"
+    );
+
+    const redirects = contents.trim().split(/\n/);
+
+    expect(redirects[0]).toEqual("# Next-on-Netlify Redirects");
+    expect(redirects[1]).toEqual(
+      "/  /.netlify/functions/next_index  200!  Cookie=__prerender_bypass,__next_preview_data"
+    );
+    expect(redirects[2]).toEqual(
+      "/_next/data/%BUILD_ID%/index.json  /.netlify/functions/next_index  200!  Cookie=__prerender_bypass,__next_preview_data"
+    );
+    expect(redirects[3]).toEqual(
+      "/_next/data/%BUILD_ID%/static.json  /.netlify/functions/next_static  200!  Cookie=__prerender_bypass,__next_preview_data"
+    );
+    expect(redirects[4]).toEqual(
+      "/static  /.netlify/functions/next_static  200!  Cookie=__prerender_bypass,__next_preview_data"
+    );
   });
 });

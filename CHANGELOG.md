@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.6.0 (2020-10-26)
+
+- Support for SSG Preview Mode ([#50](https://github.com/netlify/next-on-netlify/pull/50))
+- Expose core setup logic to be required as a package ([#64](https://github.com/netlify/next-on-netlify/pull/64))
+- Miscellaneous README cleanup
+
 ## 2.5.2 (2020-10-23)
 
 - README rebrand

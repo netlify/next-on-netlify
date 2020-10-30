@@ -42,6 +42,5 @@ exports[`Routing creates Netlify redirects 1`] = `
 /getStaticProps/withRevalidate/withFallback/:id  /.netlify/functions/next_getStaticProps_withRevalidate_withFallback_id  200
 /shows/:id  /.netlify/functions/next_shows_id  200
 /shows/:params/*  /.netlify/functions/next_shows_params  200
-/static/:id  /static/[id].html  200
-/*  /:splat  200"
+/static/:id  /static/[id].html  200"
 `;

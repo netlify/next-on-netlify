@@ -8,6 +8,5 @@ exports[`Routing creates Netlify redirects 1`] = `
 /page  /.netlify/functions/next_page  200
 /  /.netlify/functions/next_all  200
 /_next/*  /_next/:splat  200
-/*  /.netlify/functions/next_all  200
-/*  /:splat  200"
+/*  /.netlify/functions/next_all  200"
 `;

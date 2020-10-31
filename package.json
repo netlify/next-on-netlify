@@ -1,6 +1,6 @@
 {
   "name": "next-on-netlify",
-  "version": "2.5.1",
+  "version": "2.6.0",
   "description": "Wrapper for hosting NextJS applications with Server-Side Rendering on Netlify",
   "bin": "./next-on-netlify.js",
   "keywords": [
@@ -22,7 +22,8 @@
   "author": "Finn Woelm",
   "license": "MIT",
   "files": [
-    "/lib"
+    "/lib",
+    "index.js"
   ],
   "scripts": {
     "format": "prettier --write .",

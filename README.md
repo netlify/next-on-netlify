@@ -21,7 +21,7 @@
 **TL;DR: You can enable SSR in your Next.js applications with 3 simple steps, listed [here](#setup)!**
 
 - Demo: https://next-on.netlify.com/
-- Example repository: https://github.com/FinnWoelm/next-on-netlify-demo
+- Example repository: https://github.com/netlify-labs/next-on-netlify-demo
 
 ## Table of Contents
 
@@ -35,7 +35,6 @@
   - [Custom Netlify Redirects](#custom-netlify-redirects)
   - [Custom Netlify Functions](#custom-netlify-functions)
 - [Caveats](#caveats)
-  - [Preview Mode](#preview-mode)
   - [Fallbacks for Pages with `getStaticPaths`](#fallbacks-for-pages-with-getstaticpaths)
 - [Credits](#credits)
 - [Showcase](#showcase)
@@ -80,9 +79,9 @@ module.exports = {
 
 The next-on-netlify package adds the `next-on-netlify` command. When we run this command, some magic happens to prepare our Next.js app for hosting on Netlify\*.
 
-We want the next-on-netlify command to run after we build our NextJS application. So let's add a postbuild hook to our package.json file:
+We want the next-on-netlify command to run after we build our Next.js application. So let's add a postbuild hook to our package.json file:
 
-```json
+```
 {
   "name": "my-nextjs-app",
   "scripts": {
@@ -90,7 +89,7 @@ We want the next-on-netlify command to run after we build our NextJS application
     "build": "next build",
     "postbuild": "next-on-netlify"
   },
-  ....
+  ...
 }
 ```
 
@@ -157,6 +156,12 @@ From now on, whenever you want to preview your application locally, just run:
 1. `npm run build`: This will run `next build` to build your Next.js app and `next-on-netlify` to prepare your Next.js app for compatibility with Netlify
 1. `netlify dev`: This will emulate Netlify on your computer and let you preview your app on `http://localhost:8888`.
 
+*Note:*
+
+Preview Mode is not yet available locally, running `netlify dev`, for static pages without revalidate or fallback. This will be supported soon.
+
+For now, Preview Mode *is* supported in production for all Next.js page types.
+
 #### Custom Netlify Redirects
 
 You can define custom redirects in a `_redirects` and/or in your `netlify.toml` file.
@@ -174,10 +179,6 @@ The precedence of these rules are:
 SSR pages and API endpoints. It is currently not possible to create custom Netlify Functions. Let me know if you have a need for this feature and we can add it.
 
 ## Caveats
-
-### Preview Mode
-
-[Next.js Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode) does not work on pages that are pre-rendered (pages with `getStaticProps`). Netlify currently does not support cookie-based redirects, which are needed for supporting preview mode on pre-rendered pages. Preview mode works correctly on any server-side-rendered pages (pages with `getInitialProps` or `getServerSideProps`). See: [Issue #10](https://github.com/netlify/next-on-netlify/issues/10)
 
 ### Fallbacks for Pages with `getStaticPaths`
 

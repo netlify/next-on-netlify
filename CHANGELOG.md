@@ -1,10 +1,25 @@
 # Changelog
 
+## 2.6.0 (2020-10-26)
+
+- Support for SSG Preview Mode ([#50](https://github.com/netlify/next-on-netlify/pull/50))
+- Expose core setup logic to be required as a package ([#64](https://github.com/netlify/next-on-netlify/pull/64))
+- Miscellaneous README cleanup
+
+## 2.5.2 (2020-10-23)
+
+- README rebrand
+- Fix: update logs to correct path constants in prepareFolders ([#58](https://github.com/netlify/next-on-netlify/pull/58))
+- Fix: show experimental-serverless-trace target option in README ([#59](https://github.com/netlify/next-on-netlify/pull/59))
+- Fix: x-forwarded-host is undefined on Netlify ([#54](https://github.com/netlify/next-on-netlify/pull/54))
+- Fix: No-op redirect for root catch-all page chunks ([#52](https://github.com/netlify/next-on-netlify/pull/52))
+- prettier pre-commit hook
+
 ## 2.5.1 (2020-10-02)
 
 - Fix: broken redirects for optional catch-alls ([#47](https://github.com/netlify/next-on-netlify/pull/47))
 
-# 2.5.0 (2020-10-01)
+## 2.5.0 (2020-10-01)
 
 - Copy host property from headers to multiValueHeaders [#44](https://github.com/netlify/next-on-netlify/pull/44)
 - More support for ISR (getStaticProps with revalidate) [Discussion](https://github.com/netlify/next-on-netlify/issues/35) / [Commit](https://github.com/netlify/next-on-netlify/commit/ef45cc5aa0ea6755544901ea364533b40f78cdcb)

@@ -535,6 +535,12 @@ describe("Preview Mode", () => {
     cy.url().should("include", "/previewTest/999");
   });
 
+  it("redirects to test page with res.redirect", () => {
+    cy.visit("/api/redirect?to=999");
+
+    cy.url().should("include", "/redirectTest/999");
+  });
+
   it("redirects to static preview test page", () => {
     cy.visit("/api/enterPreviewStatic");
 

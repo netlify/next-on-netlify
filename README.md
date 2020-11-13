@@ -218,4 +218,8 @@ The following sites are built with `next-on-netlify`:
 ![missionbit.org](https://raw.githubusercontent.com/netlify/next-on-netlify/master/assets/showcase-missionbit.png)  
 [missionbit.org](https://www.missionbit.org/) ([#18](https://github.com/netlify/next-on-netlify/pull/18#issuecomment-643828966))
 
+![gemini.com](https://user-images.githubusercontent.com/6261646/99102161-4efc8100-25a3-11eb-96ce-81192a3602a9.png)
+
+[gemini.com](https://gemini.com/)
+
 Are you building something awesome with `next-on-netlify`? 🔥 Let us know and we will feature it here :)

@@ -106,6 +106,8 @@ We're almost done! We just have to tell Netlify how to build our Next.js app, wh
   publish   = "out_publish"
 ```
 
+Note: `out_functions` and `out_publish` are hard-coded into next-on-netlify. These are not configurable at the moment.
+
 We're done. Let's deploy 🚀🚀🚀
 
 ## Optional Extras
@@ -169,14 +171,15 @@ The precedence of these rules are:
 
 - `_redirects`
 - `next-on-netlify` redirects
-- `netlify.toml`
+
+Currently, there is no support for redirects set in your `netlify.toml` file.
 
 [Read more about Netlify redirects here](https://docs.netlify.com/routing/redirects/).
 
 #### Custom Netlify Functions
 
 `next-on-netlify` creates one Netlify Function for each of your
-SSR pages and API endpoints. It is currently not possible to create custom Netlify Functions. Let me know if you have a need for this feature and we can add it.
+SSR pages and API endpoints. It is currently not possible to create custom Netlify Functions. This feature is on our list to do.
 
 ## Caveats
 

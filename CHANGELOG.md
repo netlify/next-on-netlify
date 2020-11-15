@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.6.1 (2020-11-15)
+
+- Hotfix: no-cache Cache-Control for preview mode ([Commit](https://github.com/netlify/next-on-netlify/commit/990b4a8c31bbd0b89ef2620d9c30493a1fed08f4))
+- README updates
+- Update isRootCatchAllRedirect condition ([#77](https://github.com/netlify/next-on-netlify/pull/77))
+
 ## 2.6.0 (2020-10-26)
 
 - Support for SSG Preview Mode ([#50](https://github.com/netlify/next-on-netlify/pull/50))

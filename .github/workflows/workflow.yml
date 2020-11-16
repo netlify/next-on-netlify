@@ -1,0 +1,31 @@
+name: Tests
+on:
+  # Ensure GitHub actions are not run twice for same commits
+  push:
+    branches: [master]
+    tags: ["*"]
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest]
+        node-version: [12.x, 14.x]
+        exclude:
+          - os: macOS-latest
+            node-version: 12.x
+      fail-fast: false
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+      - name: Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Tests
+        run: npm test

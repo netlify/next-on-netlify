@@ -19,9 +19,6 @@ const { NEXT_VERSION } = require("./nextVersion");
 // run next-on-netlify.
 
 class NextAppBuilder {
-  // Name of the app to build. This determines the build path.
-  __appName = null;
-
   // Set the application name. This determines the build path.
   forTest(testFile) {
     this.__appName = parse(testFile).name;

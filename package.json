@@ -59,5 +59,8 @@
     "hooks": {
       "pre-commit": "prettier --check ."
     }
+  },
+  "engines": {
+    "node": ">=10.17.0"
   }
 }

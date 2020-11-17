@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.6.2 (2020-11-17)
+
+- Upgrade version range of `next` ([#90](https://github.com/netlify/next-on-netlify/pull/90))
+- Configurable functionsDir and publishDir (via exported func only) ([#89](https://github.com/netlify/next-on-netlify/pull/89))
+- Support for Node 10.17.0 ([#84](https://github.com/netlify/next-on-netlify/pull/84))
+- CI tests ([#83](https://github.com/netlify/next-on-netlify/pull/83))
+
 ## 2.6.1 (2020-11-15)
 
 - Hotfix: no-cache Cache-Control for preview mode ([Commit](https://github.com/netlify/next-on-netlify/commit/990b4a8c31bbd0b89ef2620d9c30493a1fed08f4))

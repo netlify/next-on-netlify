@@ -35,7 +35,7 @@
     "cypress:netlify:testonly": "env CYPRESS_SKIP_DEPLOY=true npm run cypress:netlify"
   },
   "peerDependencies": {
-    "next": "9.x"
+    "next": ">=9.5.3"
   },
   "devDependencies": {
     "cypress": "^5.1.0",

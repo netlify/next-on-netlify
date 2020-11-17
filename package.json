@@ -52,8 +52,7 @@
   "dependencies": {
     "@sls-next/lambda-at-edge": "^1.5.2",
     "commander": "^6.0.0",
-    "fs-extra": "^9.0.1",
-    "next-aws-lambda": "^2.5.0"
+    "fs-extra": "^9.0.1"
   },
   "husky": {
     "hooks": {

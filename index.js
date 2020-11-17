@@ -3,17 +3,30 @@ const copyPublicFiles = require("./lib/steps/copyPublicFiles");
 const copyNextAssets = require("./lib/steps/copyNextAssets");
 const setupPages = require("./lib/steps/setupPages");
 const setupRedirects = require("./lib/steps/setupRedirects");
+const {
+  NETLIFY_PUBLISH_PATH,
+  NETLIFY_FUNCTIONS_PATH,
+} = require("./lib/config");
 
-const nextOnNetlify = () => {
-  prepareFolders();
+/** options param:
+ * {
+ *   functionsDir: string to path
+ *   publishDir: string to path
+ * }
+ */
+const nextOnNetlify = (options = {}) => {
+  const functionsPath = options.functionsDir || NETLIFY_FUNCTIONS_PATH;
+  const publishPath = options.pubishDir || NETLIFY_PUBLISH_PATH;
 
-  copyPublicFiles();
+  prepareFolders({ functionsPath, publishPath });
 
-  copyNextAssets();
+  copyPublicFiles(publishPath);
 
-  setupPages();
+  copyNextAssets(publishPath);
 
-  setupRedirects();
+  setupPages({ functionsPath, publishPath });
+
+  setupRedirects(publishPath);
 };
 
 module.exports = nextOnNetlify;

@@ -526,6 +526,14 @@ describe("API endpoint", () => {
       );
     });
   });
+
+  it("redirects with res.redirect", () => {
+    cy.visit("/api/redirect?to=999");
+
+    cy.url().should("include", "/shows/999");
+    cy.get("h1").should("contain", "Show #999");
+    cy.get("p").should("contain", "Flash Gordon");
+  });
 });
 
 describe("Preview Mode", () => {

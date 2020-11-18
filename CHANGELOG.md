@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.6.3 (2020-11-18)
+
+- Fix: don't empty publish/function paths unless they're default ([#94](https://github.com/netlify/next-on-netlify/pull/94))
+- Fix: add support for res.redirect in API routes ([#93](https://github.com/netlify/next-on-netlify/pull/93))
+- Remove next-aws-lambda dependency (now inlined) ([#92](https://github.com/netlify/next-on-netlify/pull/92))
+- Fix: Node.js version in CI ([#91](https://github.com/netlify/next-on-netlify/pull/91))
+
 ## 2.6.2 (2020-11-17)
 
 - Upgrade version range of `next` ([#90](https://github.com/netlify/next-on-netlify/pull/90))

@@ -1,6 +1,6 @@
 {
   "name": "next-on-netlify",
-  "version": "2.6.2",
+  "version": "2.6.3",
   "description": "Wrapper for hosting NextJS applications with Server-Side Rendering on Netlify",
   "bin": "./next-on-netlify.js",
   "keywords": [

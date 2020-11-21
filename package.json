@@ -1,6 +1,6 @@
 {
   "name": "next-on-netlify",
-  "version": "2.6.0",
+  "version": "2.6.3",
   "description": "Wrapper for hosting NextJS applications with Server-Side Rendering on Netlify",
   "bin": "./next-on-netlify.js",
   "keywords": [
@@ -35,7 +35,7 @@
     "cypress:netlify:testonly": "env CYPRESS_SKIP_DEPLOY=true npm run cypress:netlify"
   },
   "peerDependencies": {
-    "next": "9.x"
+    "next": ">=9.5.3"
   },
   "devDependencies": {
     "cypress": "^5.1.0",
@@ -52,12 +52,14 @@
   "dependencies": {
     "@sls-next/lambda-at-edge": "^1.5.2",
     "commander": "^6.0.0",
-    "fs-extra": "^9.0.1",
-    "next-aws-lambda": "^2.5.0"
+    "fs-extra": "^9.0.1"
   },
   "husky": {
     "hooks": {
       "pre-commit": "prettier --check ."
     }
+  },
+  "engines": {
+    "node": ">=10.17.0"
   }
 }

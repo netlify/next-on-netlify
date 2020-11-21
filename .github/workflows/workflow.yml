@@ -1,0 +1,33 @@
+name: Tests
+on:
+  # Ensure GitHub actions are not run twice for same commits
+  push:
+    branches: [master]
+    tags: ["*"]
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest]
+        # We should test on 10.13.0 but don't due to a bug in Jest
+        # https://github.com/facebook/jest/issues/9453
+        node-version: [10.15.0, 14.x]
+        exclude:
+          - os: macOS-latest
+            node-version: 10.15.0
+      fail-fast: false
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+      - name: Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm install
+      - name: Tests
+        run: npm test

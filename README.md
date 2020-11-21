@@ -106,6 +106,8 @@ We're almost done! We just have to tell Netlify how to build our Next.js app, wh
   publish   = "out_publish"
 ```
 
+Note: `out_functions` and `out_publish` are hard-coded into next-on-netlify. These are not configurable at the moment.
+
 We're done. Let's deploy 🚀🚀🚀
 
 ## Optional Extras
@@ -169,14 +171,15 @@ The precedence of these rules are:
 
 - `_redirects`
 - `next-on-netlify` redirects
-- `netlify.toml`
+
+Currently, there is no support for redirects set in your `netlify.toml` file.
 
 [Read more about Netlify redirects here](https://docs.netlify.com/routing/redirects/).
 
 #### Custom Netlify Functions
 
 `next-on-netlify` creates one Netlify Function for each of your
-SSR pages and API endpoints. It is currently not possible to create custom Netlify Functions. Let me know if you have a need for this feature and we can add it.
+SSR pages and API endpoints. It is currently not possible to create custom Netlify Functions. This feature is on our list to do.
 
 ## Caveats
 
@@ -217,5 +220,9 @@ The following sites are built with `next-on-netlify`:
 
 ![missionbit.org](https://raw.githubusercontent.com/netlify/next-on-netlify/master/assets/showcase-missionbit.png)  
 [missionbit.org](https://www.missionbit.org/) ([#18](https://github.com/netlify/next-on-netlify/pull/18#issuecomment-643828966))
+
+![gemini.com](https://user-images.githubusercontent.com/6261646/99102161-4efc8100-25a3-11eb-96ce-81192a3602a9.png)
+
+[gemini.com](https://gemini.com/)
 
 Are you building something awesome with `next-on-netlify`? 🔥 Let us know and we will feature it here :)

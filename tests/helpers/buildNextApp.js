@@ -73,7 +73,7 @@ class NextAppBuilder {
     // cache the result
     if (!existsSync(this.__cachePath)) {
       // Build the nextJS app
-      npmRun("next-build", this.__stagingPath);
+      await npmRun("next-build", this.__stagingPath);
 
       // Cache the build
       copySync(this.__stagingPath, this.__cachePath);
@@ -84,7 +84,7 @@ class NextAppBuilder {
     copySync(this.__cachePath, this.__appPath);
 
     // Run next-on-netlify
-    const { stdout } = npmRun("next-on-netlify", this.__appPath);
+    const { stdout } = await npmRun("next-on-netlify", this.__appPath);
     return stdout;
   }
 

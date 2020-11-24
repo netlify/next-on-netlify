@@ -12,12 +12,14 @@ jobs:
     timeout-minutes: 30
     strategy:
       matrix:
-        os: [ubuntu-latest, macOS-latest]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
         # We should test on 10.13.0 but don't due to a bug in Jest
         # https://github.com/facebook/jest/issues/9453
         node-version: [10.15.0, 14.x]
         exclude:
           - os: macOS-latest
+            node-version: 10.15.0
+          - os: windows-latest
             node-version: 10.15.0
       fail-fast: false
     steps:

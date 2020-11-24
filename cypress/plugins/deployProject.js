@@ -1,5 +1,5 @@
 const waitOn = require("wait-on");
-const { spawn, spawnSync } = require("child_process");
+const execa = require("execa");
 const { join } = require("path");
 const getBaseUrl = require("./getBaseUrl");
 
@@ -10,9 +10,10 @@ const deployLocally = ({ project }, config) => {
   // Start server. Must start in detached mode, so that we can kill it later.
   // Otherwise, we seem unable to kill it.
   // See: https://medium.com/@almenon214/killing-processes-with-node-772ffdd19aad
-  const server = spawn("npm", ["run", "preview"], {
+  const server = execa("npm", ["run", "preview"], {
     cwd: join(config.buildsFolder, project),
     detached: true,
+    localDir: true,
   });
 
   // Set deployment
@@ -36,9 +37,9 @@ const deployOnNetlify = ({ project }, config) => {
   process.stdout.write(`Deploying project: ${project}...`);
 
   // Trigger deploy
-  const deploy = spawnSync("npm", ["run", "deploy"], {
+  const deploy = execa.sync("npm", ["run", "deploy"], {
     cwd: join(config.buildsFolder, project),
-    encoding: "utf-8",
+    localDir: true,
   });
 
   // Verify success

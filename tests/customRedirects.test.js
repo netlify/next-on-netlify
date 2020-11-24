@@ -1,5 +1,6 @@
 // Test next-on-netlify when a custom distDir is set in next.config.js
 
+const { EOL } = require("os");
 const { parse, join } = require("path");
 const { readFileSync } = require("fs-extra");
 const buildNextApp = require("./helpers/buildNextApp");
@@ -40,10 +41,11 @@ describe("Routing", () => {
   test("includes custom redirect rules", async () => {
     // Read _redirects file
     const contents = readFileSync(
-      join(PROJECT_PATH, "out_publish", "_redirects")
+      join(PROJECT_PATH, "out_publish", "_redirects"),
+      "utf8"
     );
 
-    const redirects = contents.toString().trim().split(/\n/);
+    const redirects = contents.trim().split(EOL);
     expect(redirects[0]).toEqual("# Custom Redirect Rules");
     expect(redirects[1]).toEqual(
       "https://old.example.com/* https://new.example.com/:splat 301!"

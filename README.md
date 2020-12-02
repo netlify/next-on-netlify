@@ -42,6 +42,12 @@
 
 ## Installation
 
+### Build Plugin
+
+If you'd like to use this package but not use any of the following steps, you can install [this build plugin](https://github.com/netlify/netlify-plugin-nextjs) that wraps this package! With the build plugin, you can skip all of the following installation and setup steps.
+
+### npm Package
+
 ```
 npm install --save next-on-netlify
 ```

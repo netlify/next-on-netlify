@@ -225,4 +225,8 @@ The following sites are built with `next-on-netlify`:
 
 [gemini.com](https://gemini.com/)
 
+[![next-cms-ghost](https://static.gotsby.org/v1/assets/images/next-cms-ghost-demo.png)](https://netlify.jamify.org)
+
+[Create your own blog and deploy to Netlify!](https://github.com/styxlab/next-cms-ghost)
+
 Are you building something awesome with `next-on-netlify`? 🔥 Let us know and we will feature it here :)

@@ -1,4 +1,4 @@
-![Next.js on Netlify](nextonnetlify.png)
+![Next.js on Netlify](next-on-netlify.png)
 
 <p align="center">
   <a aria-label="npm version" href="https://www.npmjs.com/package/next-on-netlify">

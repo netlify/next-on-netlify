@@ -15,6 +15,22 @@
   </a>
 </p>
 
+## The Future of Next.js on Netlify
+
+The future of Next.js on Netlify is growing beyond `next-on-netlify`. The recommended path forward is to install [@netlify/plugin-nextjs](https://github.com/netlify/netlify-plugin-nextjs) - a build plugin released and supported by the team behind `next-on-netlify`.
+
+The plugin relies on `next-on-netlify` but offers a smoother experience, including:
+
+1. one-click, zero-config installation
+2. allowing custom functions and publish directories
+
+See the [plugin's README](https://github.com/netlify/netlify-plugin-nextjs#readme) for more information. Our team's end goal is to make the Next.js on Netlify experience as seamless as possible.
+
+Note: since `next-on-netlify` will remain the primary source of logic for Next.js on Netlify, the existing `next-on-netlify` setup will continue to work for users who prefer manual installation and configuration.
+
+The plugin can be found on [npm here](https://www.npmjs.com/package/@netlify/plugin-nextjs).
+
+## About
 
 `next-on-netlify` is a utility for enabling server-side rendering in Next.js on Netlify. It wraps your application in a tiny compatibility layer, so that pages can use Netlify Functions to be server-side rendered.
 

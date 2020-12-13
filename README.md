@@ -15,7 +15,12 @@
   </a>
 </p>
 
-## The Future of Next.js on Netlify
+`next-on-netlify` is a utility for enabling server-side rendering in Next.js on Netlify. It wraps your application in a tiny compatibility layer, so that pages can use Netlify Functions to be server-side rendered.
+
+- Build plugin [@netlify/plugin-nextjs](https://github.com/netlify/netlify-plugin-nextjs)
+- [Plugin npm package](https://www.npmjs.com/package/@netlify/plugin-nextjs)
+
+## Next on Netlify Roadmap
 
 The future of Next.js on Netlify is growing beyond `next-on-netlify`. The recommended path forward is to install [@netlify/plugin-nextjs](https://github.com/netlify/netlify-plugin-nextjs) - a build plugin released and supported by the team behind `next-on-netlify`.
 
@@ -30,15 +35,6 @@ Note: since `next-on-netlify` will remain the primary source of logic for Next.j
 
 The plugin can be found on [npm here](https://www.npmjs.com/package/@netlify/plugin-nextjs).
 
-## About
-
-`next-on-netlify` is a utility for enabling server-side rendering in Next.js on Netlify. It wraps your application in a tiny compatibility layer, so that pages can use Netlify Functions to be server-side rendered.
-
-**TL;DR: You can enable SSR in your Next.js applications with 3 simple steps, listed [here](#setup)!**
-
-- Demo: https://next-on.netlify.com/
-- Example repository: https://github.com/netlify-labs/next-on-netlify-demo
-
 ## Table of Contents
 
 - [Installation](#installation)
@@ -46,6 +42,7 @@ The plugin can be found on [npm here](https://www.npmjs.com/package/@netlify/plu
   - [1. Set Next.js target to serverless](#1-set-nextjs-target-to-serverless)
   - [2. Add postbuild hook](#2-add-postbuild-hook)
   - [3. Configure Netlify](#3-configure-netlify)
+- [Demo](#demo)
 - [Optional Extras](#optional-extras)
   - [Preview Locally](#preview-locally)
   - [Custom Netlify Redirects](#custom-netlify-redirects)
@@ -125,6 +122,11 @@ We're almost done! We just have to tell Netlify how to build our Next.js app, wh
 Note: `out_functions` and `out_publish` are hard-coded into next-on-netlify. These are not configurable at the moment.
 
 We're done. Let's deploy 🚀🚀🚀
+
+## Demo
+
+- Site: https://next-on.netlify.com/
+- Code: https://github.com/netlify-labs/next-on-netlify-demo
 
 ## Optional Extras
 

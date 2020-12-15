@@ -47,6 +47,7 @@ The plugin can be found on [npm here](https://www.npmjs.com/package/@netlify/plu
   - [Preview Locally](#preview-locally)
   - [Custom Netlify Redirects](#custom-netlify-redirects)
   - [Custom Netlify Functions](#custom-netlify-functions)
+  - [Using Netlify Identity](#using-netlify-identity)
 - [Caveats](#caveats)
   - [Fallbacks for Pages with `getStaticPaths`](#fallbacks-for-pages-with-getstaticpaths)
 - [Credits](#credits)
@@ -198,6 +199,52 @@ Currently, there is no support for redirects set in your `netlify.toml` file.
 
 `next-on-netlify` creates one Netlify Function for each of your
 SSR pages and API endpoints. It is currently not possible to create custom Netlify Functions. This feature is on our list to do.
+
+#### Using Netlify Identity
+
+You can use [Netlify Identity](https://docs.netlify.com/visitor-access/identity/) with `next-on-netlify`. For all pages with server-side rendering (getInitialProps*, getServerSideProps, and API routes), you can access the [clientContext object](https://docs.netlify.com/functions/functions-and-identity/#access-identity-info-via-clientcontext) via the `req` parameter.
+
+For example:
+
+```js
+const Page = () => <p>Hello World!</p>;
+
+export const getServerSideProps = async ({ req }) => {
+  // Get event and context from Netlify Function
+  const {
+    netlifyFunction: { event, context },
+  } = req;
+
+  // Access Netlify identity
+  const { identity, user } = context.clientContext;
+
+  return {
+    props: {},
+  };
+};
+
+export default Page;
+```
+
+To access Netlify Identity from pages without server-side rendering, you can create a [Next API route](https://nextjs.org/docs/api-routes/introduction) that performs identity-related logic:
+
+```js
+export default async function getUser(req, res) {
+  // Get event and context from Netlify Function
+  const {
+    netlifyFunction: { event, context },
+  } = req;
+
+  // Access Netlify identity
+  const { user } = context.clientContext;
+
+  // Respond with user object
+  res.json({ user });
+}
+```
+
+\* Note that pages using getInitialProps are only server-side rendered on initial page load and not when the user navigates client-side between pages.
+
 
 ## Caveats
 

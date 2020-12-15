@@ -161,6 +161,24 @@ describe("getServerSideProps", () => {
       });
   });
 
+  it("can modify the callbackWaitsForEmptyEventLoop behavior", () => {
+    // netlify dev never waits on empty event loop
+    if (Cypress.env("DEPLOY") !== "local") {
+      cy.request({
+        url: "/getServerSideProps/wait-on-empty-event-loop/true",
+        failOnStatusCode: false,
+        // Functions time out after 10s, so we need to wait a bit
+        timeout: 15000,
+      }).then((response) => {
+        expect(response.status).to.eq(502);
+        expect(response.body).to.contain("Task timed out");
+      });
+    }
+
+    cy.visit("/getServerSideProps/wait-on-empty-event-loop/false");
+    cy.get("p").should("contain", "Successfully rendered page!");
+  });
+
   context("with static route", () => {
     it("loads TV shows", () => {
       cy.visit("/getServerSideProps/static");

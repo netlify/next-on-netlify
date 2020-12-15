@@ -104,9 +104,11 @@ describe("pre-rendered pages: /subfolder/[id].js", () => {
   });
 
   it("serves the pre-rendered HTML (and not the Netlify Function)", () => {
-    cy.request("/subfolder/static").then((response) => {
-      expect(response.headers["cache-control"]).to.include("public");
-    });
+    if (Cypress.env("DEPLOY") !== "local") {
+      cy.request("/subfolder/static").then((response) => {
+        expect(response.headers["cache-control"]).to.include("public");
+      });
+    }
   });
 });
 

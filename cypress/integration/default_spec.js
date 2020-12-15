@@ -136,6 +136,31 @@ describe("getInitialProps", () => {
 });
 
 describe("getServerSideProps", () => {
+  it("exposes function context on the req object", () => {
+    cy.visit("/getServerSideProps/context");
+
+    cy.get("pre")
+      .first()
+      .then((json) => {
+        const {
+          req: {
+            netlifyFunction: { event, context },
+          },
+        } = JSON.parse(json.html());
+
+        expect(event).to.have.property("path", "/getServerSideProps/context");
+        expect(event).to.have.property("httpMethod", "GET");
+        expect(event).to.have.property("headers");
+        expect(event).to.have.property("multiValueHeaders");
+        expect(event).to.have.property("isBase64Encoded");
+        expect(context.done).to.be.undefined;
+        expect(context.getRemainingTimeInMillis).to.be.undefined;
+        expect(context).to.have.property("awsRequestId");
+        expect(context).to.have.property("callbackWaitsForEmptyEventLoop");
+        expect(context).to.have.property("clientContext");
+      });
+  });
+
   context("with static route", () => {
     it("loads TV shows", () => {
       cy.visit("/getServerSideProps/static");
@@ -533,6 +558,27 @@ describe("API endpoint", () => {
     cy.url().should("include", "/shows/999");
     cy.get("h1").should("contain", "Show #999");
     cy.get("p").should("contain", "Flash Gordon");
+  });
+
+  it("exposes function context on the req object", () => {
+    cy.request("/api/context").then((response) => {
+      const {
+        req: {
+          netlifyFunction: { event, context },
+        },
+      } = response.body;
+
+      expect(event).to.have.property("path", "/api/context");
+      expect(event).to.have.property("httpMethod", "GET");
+      expect(event).to.have.property("headers");
+      expect(event).to.have.property("multiValueHeaders");
+      expect(event).to.have.property("isBase64Encoded");
+      expect(context.done).to.be.undefined;
+      expect(context.getRemainingTimeInMillis).to.be.undefined;
+      expect(context).to.have.property("awsRequestId");
+      expect(context).to.have.property("callbackWaitsForEmptyEventLoop");
+      expect(context).to.have.property("clientContext");
+    });
   });
 });
 

@@ -1,3 +1,7 @@
 module.exports = {
   target: "experimental-serverless-trace",
+  i18n: {
+    locales: ["en", "fr"],
+    defaultLocale: "en"
+  }
 };

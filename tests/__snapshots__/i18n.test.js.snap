@@ -4,6 +4,10 @@ exports[`Routing creates Netlify redirects 1`] = `
 "# Next-on-Netlify Redirects
 /  /.netlify/functions/next_index  200
 /404  /en/404.html  200
+/_next/data/%BUILD_ID%/en/getServerSideProps/all.json  /.netlify/functions/next_getServerSideProps_all_slug  200
+/_next/data/%BUILD_ID%/en/getServerSideProps/all/*  /.netlify/functions/next_getServerSideProps_all_slug  200
+/_next/data/%BUILD_ID%/en/getServerSideProps/static.json  /.netlify/functions/next_getServerSideProps_static  200
+/_next/data/%BUILD_ID%/en/getServerSideProps/:id.json  /.netlify/functions/next_getServerSideProps_id  200
 /_next/data/%BUILD_ID%/en/getStaticProps/1.json  /.netlify/functions/next_getStaticProps_id  200!  Cookie=__prerender_bypass,__next_preview_data
 /_next/data/%BUILD_ID%/en/getStaticProps/2.json  /.netlify/functions/next_getStaticProps_id  200!  Cookie=__prerender_bypass,__next_preview_data
 /_next/data/%BUILD_ID%/en/getStaticProps/static.json  /.netlify/functions/next_getStaticProps_static  200!  Cookie=__prerender_bypass,__next_preview_data
@@ -12,16 +16,20 @@ exports[`Routing creates Netlify redirects 1`] = `
 /_next/data/%BUILD_ID%/en/getStaticProps/withFallback/4.json  /.netlify/functions/next_getStaticProps_withFallback_id  200!  Cookie=__prerender_bypass,__next_preview_data
 /_next/data/%BUILD_ID%/en/getStaticProps/withFallback/my/path/1.json  /.netlify/functions/next_getStaticProps_withFallback_slug  200!  Cookie=__prerender_bypass,__next_preview_data
 /_next/data/%BUILD_ID%/en/getStaticProps/withFallback/my/path/2.json  /.netlify/functions/next_getStaticProps_withFallback_slug  200!  Cookie=__prerender_bypass,__next_preview_data
-/_next/data/%BUILD_ID%/en/getStaticProps/withRevalidate/1.json  /.netlify/functions/next_getStaticProps_withRevalidate_id  200
+/_next/data/%BUILD_ID%/en/getStaticProps/withFallback/:id.json  /.netlify/functions/next_getStaticProps_withFallback_id  200
+/_next/data/%BUILD_ID%/en/getStaticProps/withFallback/:slug/*  /.netlify/functions/next_getStaticProps_withFallback_slug  200
+/_next/data/%BUILD_ID%/en/getStaticProps/withRevalidate/withFallback/:id.json  /.netlify/functions/next_getStaticProps_withRevalidate_withFallback_id  200
+/_next/data/%BUILD_ID%/en/getStaticProps/withRevalidate/:id.json  /.netlify/functions/next_getStaticProps_withRevalidate_id  200
+/_next/data/%BUILD_ID%/es/getServerSideProps/all.json  /.netlify/functions/next_getServerSideProps_all_slug  200
+/_next/data/%BUILD_ID%/es/getServerSideProps/all/*  /.netlify/functions/next_getServerSideProps_all_slug  200
+/_next/data/%BUILD_ID%/es/getServerSideProps/static.json  /.netlify/functions/next_getServerSideProps_static  200
+/_next/data/%BUILD_ID%/es/getServerSideProps/:id.json  /.netlify/functions/next_getServerSideProps_id  200
 /_next/data/%BUILD_ID%/es/getStaticProps/static.json  /.netlify/functions/next_getStaticProps_static  200!  Cookie=__prerender_bypass,__next_preview_data
 /_next/data/%BUILD_ID%/es/getStaticProps/with-revalidate.json  /.netlify/functions/next_getStaticProps_withrevalidate  200
 /_next/data/%BUILD_ID%/getServerSideProps/all.json  /.netlify/functions/next_getServerSideProps_all_slug  200
 /_next/data/%BUILD_ID%/getServerSideProps/all/*  /.netlify/functions/next_getServerSideProps_all_slug  200
 /_next/data/%BUILD_ID%/getServerSideProps/static.json  /.netlify/functions/next_getServerSideProps_static  200
 /_next/data/%BUILD_ID%/getServerSideProps/:id.json  /.netlify/functions/next_getServerSideProps_id  200
-/_next/data/%BUILD_ID%/getStaticProps/withFallback/:id.json  /.netlify/functions/next_getStaticProps_withFallback_id  200
-/_next/data/%BUILD_ID%/getStaticProps/withFallback/:slug/*  /.netlify/functions/next_getStaticProps_withFallback_slug  200
-/_next/data/%BUILD_ID%/getStaticProps/withRevalidate/withFallback/:id.json  /.netlify/functions/next_getStaticProps_withRevalidate_withFallback_id  200
 /api/shows/:id  /.netlify/functions/next_api_shows_id  200
 /api/shows/:params/*  /.netlify/functions/next_api_shows_params  200
 /api/static  /.netlify/functions/next_api_static  200
@@ -49,10 +57,8 @@ exports[`Routing creates Netlify redirects 1`] = `
 /getServerSideProps/:id  /.netlify/functions/next_getServerSideProps_id  200
 /getStaticProps/static  /en/getStaticProps/static  200
 /getStaticProps/with-revalidate  /.netlify/functions/next_getStaticProps_withrevalidate  200
-/getStaticProps/withFallback/:id  /en/getStaticProps/withFallback/:id  200
-/getStaticProps/withFallback/:id  /en/getStaticProps/withFallback/:id  200
-/getStaticProps/withFallback/:slug/*  /en/getStaticProps/withFallback/:...slug  200
-/getStaticProps/withFallback/:slug/*  /en/getStaticProps/withFallback/:...slug  200
+/getStaticProps/withFallback/:id  /.netlify/functions/next_getStaticProps_withFallback_id  200
+/getStaticProps/withFallback/:slug/*  /.netlify/functions/next_getStaticProps_withFallback_slug  200
 /getStaticProps/withRevalidate/withFallback/:id  /.netlify/functions/next_getStaticProps_withRevalidate_withFallback_id  200
 /getStaticProps/withRevalidate/:id  /.netlify/functions/next_getStaticProps_withRevalidate_id  200
 /getStaticProps/:id  /en/getStaticProps/:id  200

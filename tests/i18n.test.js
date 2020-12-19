@@ -132,7 +132,6 @@ describe("API Pages", () => {
 
 describe("SSG Pages with getStaticProps", () => {
   test("creates pre-rendered HTML file in output directory", () => {
-    const defaultLocale = "en";
     const OUTPUT_PATH = join(PROJECT_PATH, "out_publish", DEFAULT_LOCALE);
 
     expect(existsSync(join(OUTPUT_PATH, "getStaticProps", "static.html"))).toBe(

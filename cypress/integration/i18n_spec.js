@@ -207,7 +207,6 @@ describe("getServerSideProps", () => {
         failOnStatusCode: false,
       }).then((response) => {
         expect(response.status).to.eq(404);
-        console.log("RESSSPONSEEEE", response.status, response.body);
         cy.state("document").write(response.body);
       });
 
@@ -381,8 +380,7 @@ describe("getStaticProps", () => {
         cy.get("h1").should("contain", "Show #75");
         cy.get("p").should("contain", "The Mindy Project");
 
-        // fails in this test
-        // cy.window().should("have.property", "noReload", true);
+        cy.window().should("have.property", "noReload", true);
       });
     });
 
@@ -418,8 +416,7 @@ describe("getStaticProps", () => {
         cy.get("h1").should("contain", "Show #4");
         cy.get("p").should("contain", "Arrow");
 
-        // fails with this test
-        // cy.window().should("have.property", "noReload", true);
+        cy.window().should("have.property", "noReload", true);
       });
     });
   });
@@ -466,8 +463,7 @@ describe("getStaticProps", () => {
         cy.get("h1").should("contain", "Show #75");
         cy.get("p").should("contain", "The Mindy Project");
 
-        // fails in this test
-        // cy.window().should("have.property", "noReload", true);
+        cy.window().should("have.property", "noReload", true);
       });
     });
   });

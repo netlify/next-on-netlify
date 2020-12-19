@@ -6,7 +6,7 @@ export const getServerSideProps = async ({ params, req }) => {
 
   // Set behavior of whether to wait for empty event loop
   const wait = String(params.wait).toLowerCase() === "true";
-  const { context: functionContext } = req.netlifyFunction;
+  const { context: functionContext } = req.netlifyFunctionParams;
   functionContext.callbackWaitsForEmptyEventLoop = wait;
 
   return {

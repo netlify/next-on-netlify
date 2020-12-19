@@ -212,7 +212,7 @@ const Page = () => <p>Hello World!</p>;
 export const getServerSideProps = async ({ req }) => {
   // Get event and context from Netlify Function
   const {
-    netlifyFunction: { event, context },
+    netlifyFunctionParams: { event, context },
   } = req;
 
   // Access Netlify identity
@@ -232,7 +232,7 @@ To access Netlify Identity from pages without server-side rendering, you can cre
 export default async function getUser(req, res) {
   // Get event and context from Netlify Function
   const {
-    netlifyFunction: { event, context },
+    netlifyFunctionParams: { event, context },
   } = req;
 
   // Access Netlify identity

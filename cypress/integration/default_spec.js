@@ -144,7 +144,7 @@ describe("getServerSideProps", () => {
       .then((json) => {
         const {
           req: {
-            netlifyFunction: { event, context },
+            netlifyFunctionParams: { event, context },
           },
         } = JSON.parse(json.html());
 
@@ -582,7 +582,7 @@ describe("API endpoint", () => {
     cy.request("/api/context").then((response) => {
       const {
         req: {
-          netlifyFunction: { event, context },
+          netlifyFunctionParams: { event, context },
         },
       } = response.body;
 

@@ -210,7 +210,7 @@ describe("getServerSideProps", () => {
         cy.state("document").write(response.body);
       });
 
-      // cy.get("h2").should("contain", "This page could not be found.");
+      cy.get("h2").should("contain", "This page could not be found.");
     });
 
     it("loads TV show with one param", () => {
@@ -328,7 +328,7 @@ describe("getStaticProps", () => {
           cy.state("document").write(response.body);
         });
 
-        // cy.get("h2").should("contain", "This page could not be found.");
+        cy.get("h2").should("contain", "This page could not be found.");
       });
     });
 
@@ -704,6 +704,6 @@ describe("404 page", () => {
       cy.state("document").write(response.body);
     });
 
-    // cy.get("h2").should("contain", "This page could not be found.");
+    cy.get("h2").should("contain", "This page could not be found.");
   });
 });

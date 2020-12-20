@@ -14,7 +14,7 @@ before(() => {
     // Copy NextJS files
     cy.task("copyFixture", {
       project,
-      from: "pages",
+      from: "pages-with-i18n",
       to: "pages",
     });
     cy.task("copyFixture", {
@@ -705,5 +705,120 @@ describe("404 page", () => {
     });
 
     cy.get("h2").should("contain", "This page could not be found.");
+  });
+});
+
+describe("i18n-specific behavior", () => {
+  context("static pages", () => {
+    it("renders dynamic route for non-default locale", () => {
+      cy.visit("/fr/static/superdynamic");
+
+      cy.get("p").should("contain", "It is a static page.");
+      cy.get("p").should(
+        "contain",
+        "it has a dynamic URL parameter: /static/:id."
+      );
+    });
+
+    it("renders static page for non-default locale", () => {
+      cy.visit("/fr/getStaticProps/static");
+
+      cy.get("h1").should("contain", "Show #71");
+    });
+
+    it("renders static page for default locale with path included in getStaticPaths", () => {
+      cy.visit("/en/getStaticProps/1");
+
+      cy.get("h1").should("contain", "Show #1");
+    });
+
+    it("does not render non-default locale route not included in getStaticPaths", () => {
+      cy.request({
+        url: "/fr/getStaticProps/34",
+        failOnStatusCode: false,
+      }).then((response) => {
+        expect(response.status).to.eq(404);
+        cy.state("document").write(response.body);
+      });
+
+      cy.get("h2").should("contain", "This page could not be found.");
+    });
+
+    it("renders a not-included path for fallback routes with default locale", () => {
+      cy.visit("/getStaticProps/withFallback/5");
+
+      cy.get("h1").should("contain", "Show #5");
+    });
+
+    it("does render an included path for fallback routes with non-default locale defined", () => {
+      cy.visit("/fr/getStaticProps/withFallback/4");
+
+      cy.get("h1").should("contain", "Show #4");
+    });
+
+    it("does not render an included path for fallback routes with non-default locale", () => {
+      // because the locale needs to be included in the paths provided to getStaticPaths
+      cy.request({
+        url: "/fr/getStaticProps/withFallback/3",
+        failOnStatusCode: false,
+      }).then((response) => {
+        expect(response.status).to.eq(404);
+        cy.state("document").write(response.body);
+      });
+
+      cy.get("h2").should("contain", "This page could not be found.");
+    });
+
+    it("does not render a not-included path for fallback routes with non-default locale", () => {
+      cy.request({
+        url: "/fr/getStaticProps/withFallback/5",
+        failOnStatusCode: false,
+      }).then((response) => {
+        expect(response.status).to.eq(404);
+        cy.state("document").write(response.body);
+      });
+
+      cy.get("h2").should("contain", "This page could not be found.");
+    });
+
+    it("renders non-default locale path for revalidate page", () => {
+      cy.visit("/fr/getStaticProps/with-revalidate");
+
+      cy.get("h1").should("contain", "Show #71");
+    });
+
+    it("renders default locale page for reval", () => {
+      cy.visit("/en/getStaticProps/withRevalidate/3");
+      cy.get("h1").should("contain", "Show #3");
+
+      cy.visit("/getStaticProps/withRevalidate/3");
+      cy.get("h1").should("contain", "Show #3");
+    });
+
+    it("loads pre-rendered show 3 for catch-all non-default locale", () => {
+      // defined in getStaticPaths
+      cy.visit("/fr/getStaticProps/withFallback/my/path/3");
+      cy.get("h1").should("contain", "Show #3");
+    });
+  });
+
+  context("SSR'd pages", () => {
+    it("renders non-default locale for SSR'd non-dynamic route", () => {
+      cy.visit("/fr/getServerSideProps/static");
+
+      cy.get("h1").should("contain", "Show #42");
+    });
+
+    it("renders non-default locale for SSR'd dynamic route", () => {
+      cy.visit("/fr/getServerSideProps/5");
+
+      cy.get("h1").should("contain", "Show #5");
+    });
+
+    it("renders non-default locale for catch-all", () => {
+      cy.visit("/fr/getServerSideProps/catch/all/5");
+
+      cy.get("h1").should("contain", "Show #5");
+    });
   });
 });

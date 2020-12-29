@@ -135,7 +135,7 @@ We're done. Let's deploy 🚀🚀🚀
 
 I recommend you still use `next dev` to build and preview your application locally.
 
-But if you want to emulate the Netlify deployment on your computer, you can also run `next-on-netlify` locally and then use `netlify-cli` to preview the result.
+But if you want to emulate the Netlify deployment on your computer, you can also run a cusotmized `netlify-cli` to preview the result.
 
 First, install the latest version of `netlify-cli` (you can also [look at package.json](https://github.com/netlify/next-on-netlify/blob/master/package.json) to see the version that next-on-netlify has been tested against):
 
@@ -154,10 +154,10 @@ Then, add the following `[dev]` block to your `netlify.toml`:
 [dev]
   functions = "out_functions"
   publish   = "out_publish"
-  # We manually set the framework to static, otherwise Netlify automatically
-  # detects Next.js and redirects do not work.
-  # Read more: https://github.com/netlify/cli/blob/master/docs/netlify-dev.md#project-detection
-  framework = "#static"
+  framework = "#custom" # necessary so netlify-dev allows the passthrough to your 3000 port
+  targetPort = 3000 # port your nextjs site is locally served from
+  port = 8888 # a nice port for you computer
+  command = "npm run dev" # The local next development command you use
 ```
 
 Lastly, add the following lines to your `.gitignore`:
@@ -174,7 +174,6 @@ Now you're all set.
 
 From now on, whenever you want to preview your application locally, just run:
 
-1. `npm run build`: This will run `next build` to build your Next.js app and `next-on-netlify` to prepare your Next.js app for compatibility with Netlify
 1. `netlify dev`: This will emulate Netlify on your computer and let you preview your app on `http://localhost:8888`.
 
 *Note:*

@@ -156,7 +156,7 @@ Then, add the following `[dev]` block to your `netlify.toml`:
   publish   = "out_publish"
   framework = "#custom" # necessary so netlify-dev allows the passthrough to your 3000 port
   targetPort = 3000 # port your nextjs site is locally served from
-  port = 8888 # a nice port for you computer
+  port = 8888 # a nice port for your computer
   command = "npm run dev" # The local next development command you use
 ```
 

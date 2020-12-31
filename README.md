@@ -174,6 +174,7 @@ Now you're all set.
 
 From now on, whenever you want to preview your application locally, just run:
 
+1. `npx next-on-netlify`: This ensures assets are in working order before starting the dev server 
 1. `netlify dev`: This will emulate Netlify on your computer and let you preview your app on `http://localhost:8888`.
 
 *Note:*

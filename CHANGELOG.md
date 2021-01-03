@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.7.0 (2021-01-03)
+
+- Support for i18n in Next 10 ([#75](https://github.com/netlify/next-on-netlify/pull/75))
+- dependabot: node-notifier from 8.0.0 to 8.0.1 ([#125](https://github.com/netlify/next-on-netlify/pull/125))
+- Expose Netlify function params as netlifyFunctionParams ([#119](https://github.com/netlify/next-on-netlify/pull/119))
+- Fix: local cypress cache control ([#118](https://github.com/netlify/next-on-netlify/pull/118))
+- Fix: add res.finished to createResponseObject ([#117](https://github.com/netlify/next-on-netlify/pull/117))
+- Fix: Windows support ([#101](https://github.com/netlify/next-on-netlify/pull/101))
+- Improve logs for specified functions/publish dirs ([#100](https://github.com/netlify/next-on-netlify/pull/100))
+
 ## 2.6.3 (2020-11-18)
 
 - Fix: don't empty publish/function paths unless they're default ([#94](https://github.com/netlify/next-on-netlify/pull/94))

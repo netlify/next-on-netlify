@@ -750,35 +750,16 @@ describe("i18n-specific behavior", () => {
       cy.get("h1").should("contain", "Show #5");
     });
 
-    it("does render an included path for fallback routes with non-default locale defined", () => {
+    it("renders an included path for fallback routes with non-default locale defined", () => {
       cy.visit("/fr/getStaticProps/withFallback/4");
 
       cy.get("h1").should("contain", "Show #4");
     });
 
-    it("does not render an included path for fallback routes with non-default locale", () => {
-      // because the locale needs to be included in the paths provided to getStaticPaths
-      cy.request({
-        url: "/fr/getStaticProps/withFallback/3",
-        failOnStatusCode: false,
-      }).then((response) => {
-        expect(response.status).to.eq(404);
-        cy.state("document").write(response.body);
-      });
+    it("renders non-included path for fallback routes with non-default locale", () => {
+      cy.visit("/fr/getStaticProps/withFallback/71");
 
-      cy.get("h2").should("contain", "This page could not be found.");
-    });
-
-    it("does not render a not-included path for fallback routes with non-default locale", () => {
-      cy.request({
-        url: "/fr/getStaticProps/withFallback/5",
-        failOnStatusCode: false,
-      }).then((response) => {
-        expect(response.status).to.eq(404);
-        cy.state("document").write(response.body);
-      });
-
-      cy.get("h2").should("contain", "This page could not be found.");
+      cy.get("h1").should("contain", "Show #71");
     });
 
     it("renders non-default locale path for revalidate page", () => {
@@ -803,13 +784,13 @@ describe("i18n-specific behavior", () => {
   });
 
   context("SSR'd pages", () => {
-    it("renders non-default locale for SSR'd non-dynamic route", () => {
+    it("renders non-default locale for non-dynamic route", () => {
       cy.visit("/fr/getServerSideProps/static");
 
       cy.get("h1").should("contain", "Show #42");
     });
 
-    it("renders non-default locale for SSR'd dynamic route", () => {
+    it("renders non-default locale for dynamic route", () => {
       cy.visit("/fr/getServerSideProps/5");
 
       cy.get("h1").should("contain", "Show #5");
@@ -819,6 +800,32 @@ describe("i18n-specific behavior", () => {
       cy.visit("/fr/getServerSideProps/catch/all/5");
 
       cy.get("h1").should("contain", "Show #5");
+    });
+  });
+
+  context("getInitialProps pages", () => {
+    it("renders naked route", () => {
+      cy.visit("/shows/42");
+
+      cy.get("h1").should("contain", "Show #42");
+    });
+
+    it("renders non-default locale", () => {
+      cy.visit("/fr/shows/42");
+
+      cy.get("h1").should("contain", "Show #42");
+    });
+  });
+
+  context("withoutProps pages", () => {
+    it("renders default locale", () => {
+      cy.visit("/en/static");
+      cy.get("p").should("contain", "It is a static page.");
+    });
+
+    it("renders non-default locale", () => {
+      cy.visit("/fr/static");
+      cy.get("p").should("contain", "It is a static page.");
     });
   });
 });

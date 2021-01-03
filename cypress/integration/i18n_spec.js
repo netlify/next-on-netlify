@@ -1,4 +1,4 @@
-const project = "default";
+const project = "i18n";
 
 before(() => {
   // When changing the base URL within a spec file, Cypress runs the spec twice
@@ -14,12 +14,12 @@ before(() => {
     // Copy NextJS files
     cy.task("copyFixture", {
       project,
-      from: "pages",
+      from: "pages-with-i18n",
       to: "pages",
     });
     cy.task("copyFixture", {
       project,
-      from: "next.config.js",
+      from: "next.config.js-with-i18n",
       to: "next.config.js",
     });
 
@@ -136,49 +136,6 @@ describe("getInitialProps", () => {
 });
 
 describe("getServerSideProps", () => {
-  it("exposes function context on the req object", () => {
-    cy.visit("/getServerSideProps/context");
-
-    cy.get("pre")
-      .first()
-      .then((json) => {
-        const {
-          req: {
-            netlifyFunctionParams: { event, context },
-          },
-        } = JSON.parse(json.html());
-
-        expect(event).to.have.property("path", "/getServerSideProps/context");
-        expect(event).to.have.property("httpMethod", "GET");
-        expect(event).to.have.property("headers");
-        expect(event).to.have.property("multiValueHeaders");
-        expect(event).to.have.property("isBase64Encoded");
-        expect(context.done).to.be.undefined;
-        expect(context.getRemainingTimeInMillis).to.be.undefined;
-        expect(context).to.have.property("awsRequestId");
-        expect(context).to.have.property("callbackWaitsForEmptyEventLoop");
-        expect(context).to.have.property("clientContext");
-      });
-  });
-
-  it("can modify the callbackWaitsForEmptyEventLoop behavior", () => {
-    // netlify dev never waits on empty event loop
-    if (Cypress.env("DEPLOY") !== "local") {
-      cy.request({
-        url: "/getServerSideProps/wait-on-empty-event-loop/true",
-        failOnStatusCode: false,
-        // Functions time out after 10s, so we need to wait a bit
-        timeout: 15000,
-      }).then((response) => {
-        expect(response.status).to.eq(502);
-        expect(response.body).to.contain("Task timed out");
-      });
-    }
-
-    cy.visit("/getServerSideProps/wait-on-empty-event-loop/false");
-    cy.get("p").should("contain", "Successfully rendered page!");
-  });
-
   context("with static route", () => {
     it("loads TV shows", () => {
       cy.visit("/getServerSideProps/static");
@@ -577,27 +534,6 @@ describe("API endpoint", () => {
     cy.get("h1").should("contain", "Show #999");
     cy.get("p").should("contain", "Flash Gordon");
   });
-
-  it("exposes function context on the req object", () => {
-    cy.request("/api/context").then((response) => {
-      const {
-        req: {
-          netlifyFunctionParams: { event, context },
-        },
-      } = response.body;
-
-      expect(event).to.have.property("path", "/api/context");
-      expect(event).to.have.property("httpMethod", "GET");
-      expect(event).to.have.property("headers");
-      expect(event).to.have.property("multiValueHeaders");
-      expect(event).to.have.property("isBase64Encoded");
-      expect(context.done).to.be.undefined;
-      expect(context.getRemainingTimeInMillis).to.be.undefined;
-      expect(context).to.have.property("awsRequestId");
-      expect(context).to.have.property("callbackWaitsForEmptyEventLoop");
-      expect(context).to.have.property("clientContext");
-    });
-  });
 });
 
 describe("Preview Mode", () => {
@@ -769,5 +705,127 @@ describe("404 page", () => {
     });
 
     cy.get("h2").should("contain", "This page could not be found.");
+  });
+});
+
+describe("i18n-specific behavior", () => {
+  context("static pages", () => {
+    it("renders dynamic route for non-default locale", () => {
+      cy.visit("/fr/static/superdynamic");
+
+      cy.get("p").should("contain", "It is a static page.");
+      cy.get("p").should(
+        "contain",
+        "it has a dynamic URL parameter: /static/:id."
+      );
+    });
+
+    it("renders static page for non-default locale", () => {
+      cy.visit("/fr/getStaticProps/static");
+
+      cy.get("h1").should("contain", "Show #71");
+    });
+
+    it("renders static page for default locale with path included in getStaticPaths", () => {
+      cy.visit("/en/getStaticProps/1");
+
+      cy.get("h1").should("contain", "Show #1");
+    });
+
+    it("does not render non-default locale route not included in getStaticPaths", () => {
+      cy.request({
+        url: "/fr/getStaticProps/34",
+        failOnStatusCode: false,
+      }).then((response) => {
+        expect(response.status).to.eq(404);
+        cy.state("document").write(response.body);
+      });
+
+      cy.get("h2").should("contain", "This page could not be found.");
+    });
+
+    it("renders a not-included path for fallback routes with default locale", () => {
+      cy.visit("/getStaticProps/withFallback/5");
+
+      cy.get("h1").should("contain", "Show #5");
+    });
+
+    it("renders an included path for fallback routes with non-default locale defined", () => {
+      cy.visit("/fr/getStaticProps/withFallback/4");
+
+      cy.get("h1").should("contain", "Show #4");
+    });
+
+    it("renders non-included path for fallback routes with non-default locale", () => {
+      cy.visit("/fr/getStaticProps/withFallback/71");
+
+      cy.get("h1").should("contain", "Show #71");
+    });
+
+    it("renders non-default locale path for revalidate page", () => {
+      cy.visit("/fr/getStaticProps/with-revalidate");
+
+      cy.get("h1").should("contain", "Show #71");
+    });
+
+    it("renders default locale page for reval", () => {
+      cy.visit("/en/getStaticProps/withRevalidate/3");
+      cy.get("h1").should("contain", "Show #3");
+
+      cy.visit("/getStaticProps/withRevalidate/3");
+      cy.get("h1").should("contain", "Show #3");
+    });
+
+    it("loads pre-rendered show 3 for catch-all non-default locale", () => {
+      // defined in getStaticPaths
+      cy.visit("/fr/getStaticProps/withFallback/my/path/3");
+      cy.get("h1").should("contain", "Show #3");
+    });
+  });
+
+  context("SSR'd pages", () => {
+    it("renders non-default locale for non-dynamic route", () => {
+      cy.visit("/fr/getServerSideProps/static");
+
+      cy.get("h1").should("contain", "Show #42");
+    });
+
+    it("renders non-default locale for dynamic route", () => {
+      cy.visit("/fr/getServerSideProps/5");
+
+      cy.get("h1").should("contain", "Show #5");
+    });
+
+    it("renders non-default locale for catch-all", () => {
+      cy.visit("/fr/getServerSideProps/catch/all/5");
+
+      cy.get("h1").should("contain", "Show #5");
+    });
+  });
+
+  context("getInitialProps pages", () => {
+    it("renders naked route", () => {
+      cy.visit("/shows/42");
+
+      cy.get("h1").should("contain", "Show #42");
+    });
+
+    it("renders non-default locale", () => {
+      cy.visit("/fr/shows/42");
+
+      cy.get("h1").should("contain", "Show #42");
+    });
+  });
+
+  context("withoutProps pages", () => {
+    it("renders default locale", () => {
+      cy.visit("/en/static");
+      cy.get("p").should("contain", "It is a static page.");
+    });
+
+    it("renders non-default locale", () => {
+      cy.visit("/fr/static");
+      cy.get("p").should("contain", "It is a static page.");
+    });
   });
 });

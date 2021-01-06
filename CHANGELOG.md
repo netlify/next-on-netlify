@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.1 (2021-01-06)
+
+- Hotfix: update logic for allowing colliding route redirects ([#130](https://github.com/netlify/next-on-netlify/pull/130))
+
 ## 2.7.0 (2021-01-03)
 
 - Support for i18n in Next 10 ([#75](https://github.com/netlify/next-on-netlify/pull/75))

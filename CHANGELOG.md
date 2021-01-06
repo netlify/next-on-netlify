@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.2 (2021-01-06)
+
+- Hotfix: index gsp pages caused builds to fail in i18n ([#75](https://github.com/netlify/next-on-netlify/pull/131))
+
 ## 2.7.1 (2021-01-06)
 
 - Hotfix: update logic for allowing colliding route redirects ([#130](https://github.com/netlify/next-on-netlify/pull/130))

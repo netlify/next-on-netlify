@@ -16,11 +16,15 @@ const {
  *   publishDir: string to path
  * }
  */
+
 const nextOnNetlify = (options = {}) => {
   const functionsPath = options.functionsDir || NETLIFY_FUNCTIONS_PATH;
   const publishPath = options.publishDir || NETLIFY_PUBLISH_PATH;
 
-  prepareFolders({ functionsPath, publishPath });
+  const trackNextOnNetlifyFiles = prepareFolders({
+    functionsPath,
+    publishPath,
+  });
 
   copyPublicFiles(publishPath);
 
@@ -33,6 +37,8 @@ const nextOnNetlify = (options = {}) => {
   setupRedirects(publishPath);
 
   setupHeaders(publishPath);
+
+  trackNextOnNetlifyFiles();
 };
 
 module.exports = nextOnNetlify;

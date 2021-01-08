@@ -63,7 +63,7 @@ class NextAppBuilder {
 
   // Build the application with next build
   async build() {
-    // Generate a cach hash ID from the current contents of the staging folder.
+    // Generate a cache hash ID from the current contents of the staging folder.
     const { hash: cacheHash } = await hashElement(this.__stagingPath, {
       encoding: "hex",
     });
@@ -87,6 +87,39 @@ class NextAppBuilder {
     const { stdout } = await npmRun("next-on-netlify", this.__appPath);
     return stdout;
   }
+
+  async runWithRequire(options) {
+    // Generate a cach hash ID from the current contents of the staging folder.
+    const { hash: cacheHash } = await hashElement(this.__stagingPath, {
+      encoding: "hex",
+    });
+    this.__cacheHash = cacheHash;
+
+    // If we have no cached build for this NextJS app, let's run next build and
+    // cache the result
+    if (!existsSync(this.__cachePath)) {
+      // Build the nextJS app
+      await npmRun("next-build", this.__stagingPath);
+
+      // Cache the build
+      copySync(this.__stagingPath, this.__cachePath);
+    }
+
+    // Copy the built NextJS app from the cache to the app folder, where we will
+    // run next-on-netlify
+    copySync(this.__cachePath, this.__appPath);
+
+    process.chdir(this.__appPath);
+    const nextOnNetlify = require("../..");
+    nextOnNetlify({
+      functionsDir: join(this.__appPath, options.functionsDir),
+      publishDir: join(this.__appPath, options.publishDir),
+    });
+    return "Built successfully!";
+  }
+
+  // TO-DO: when I try to split out the shared logic between build & runWithRequire into its own
+  // function on NextBuilder, everything breaks; not sure why
 
   /*****************************************************************************
    * Private functions

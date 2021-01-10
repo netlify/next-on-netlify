@@ -174,8 +174,12 @@ Now you're all set.
 
 From now on, whenever you want to preview your application locally, just run:
 
-1. `npx next-on-netlify`: This ensures assets are in working order before starting the dev server 
-1. `netlify dev`: This will emulate Netlify on your computer and let you preview your app on `http://localhost:8888`.
+1. `npm run build`: First build your site and get all the files ready
+1. `netlify dev`: This will emulate Netlify on your computer and let you preview your app on `http://localhost:8888` (initially this will show 404 page).
+1. Open another terminal window
+1. `npx next-on-netlify`: This ensures assets are in working order your `http://localhost:8888` should hot reload and show your application
+1. Now you can edit your application locally -- you'll need to repeat these steps if you update a function
+
 
 *Note:*
 

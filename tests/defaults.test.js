@@ -317,3 +317,16 @@ describe("Routing", () => {
     expect(redirects).toMatchSnapshot();
   });
 });
+
+describe("Headers", () => {
+  test("creates Netlify headers", async () => {
+    // Read _headers file
+    const contents = readFileSync(
+      join(PROJECT_PATH, "out_publish", "_headers")
+    );
+    let headers = contents.toString();
+
+    // Check that headers match
+    expect(headers).toMatchSnapshot();
+  });
+});

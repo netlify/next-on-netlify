@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Headers creates Netlify headers 1`] = `
+"# Next-on-Netlify Headers
+/_next/static/chunks/*:
+  cache-control: public,max-age=31536000,immutable"
+`;
+
 exports[`Routing creates Netlify redirects 1`] = `
 "# Next-on-Netlify Redirects
 /  /.netlify/functions/next_index  200

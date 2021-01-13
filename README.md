@@ -50,6 +50,7 @@ The plugin can be found on [npm here](https://www.npmjs.com/package/@netlify/plu
   - [Using Netlify Identity](#using-netlify-identity)
 - [Caveats](#caveats)
   - [Fallbacks for Pages with `getStaticPaths`](#fallbacks-for-pages-with-getstaticpaths)
+  - [next/image](#next/image)
 - [Credits](#credits)
 - [Showcase](#showcase)
 
@@ -256,6 +257,11 @@ With `next-on-netlify`, when navigating to a path that is not defined in `getSta
 
 For more on this, see: [Issue #7](https://github.com/netlify/next-on-netlify/issues/7#issuecomment-636883539)
 
+### next/image
+
+Our existing solution for next/image is not very performant. We have performance improvements on our roadmap, dependent on internal work.
+
+To get better performance now, we recommend using a cloud provider like Cloudinary ([see the Next.js docs](https://nextjs.org/docs/basic-features/image-optimization#loader)).
 
 ## Credits
 

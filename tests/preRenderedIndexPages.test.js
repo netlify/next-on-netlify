@@ -63,14 +63,17 @@ describe("404 Page", () => {
 });
 
 describe("Routing", () => {
-  test("does not create any redirects", async () => {
+  test("adds next_image redirect only", async () => {
     // Read _redirects file
     const contents = readFileSync(
       join(PROJECT_PATH, "out_publish", "_redirects")
     );
-    const redirects = contents.toString();
+    const redirects = contents.toString().trim().split(/\n/);
 
     // Check that no redirects are present
-    expect(redirects).toEqual("");
+    expect(redirects[0]).toEqual("# Next-on-Netlify Redirects");
+    expect(redirects[1]).toEqual(
+      "/_next/image*  url=:url w=:width q=:quality  /.netlify/functions/next_image?url=:url&w=:width&q=:quality  200"
+    );
   });
 });

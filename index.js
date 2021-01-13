@@ -2,6 +2,7 @@ const prepareFolders = require("./lib/steps/prepareFolders");
 const copyPublicFiles = require("./lib/steps/copyPublicFiles");
 const copyNextAssets = require("./lib/steps/copyNextAssets");
 const setupPages = require("./lib/steps/setupPages");
+const setupImageFunction = require("./lib/steps/setupImageFunction");
 const setupRedirects = require("./lib/steps/setupRedirects");
 const {
   NETLIFY_PUBLISH_PATH,
@@ -25,6 +26,8 @@ const nextOnNetlify = (options = {}) => {
   copyNextAssets(publishPath);
 
   setupPages({ functionsPath, publishPath });
+
+  setupImageFunction(functionsPath);
 
   setupRedirects(publishPath);
 };

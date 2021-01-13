@@ -48,6 +48,7 @@ exports[`Routing creates Netlify redirects 1`] = `
 /_next/data/%BUILD_ID%/getStaticProps/withFallback/:slug/*  /.netlify/functions/next_getStaticProps_withFallback_slug  200
 /_next/data/%BUILD_ID%/getStaticProps/withFallbackBlocking/:id.json  /.netlify/functions/next_getStaticProps_withFallbackBlocking_id  200
 /_next/data/%BUILD_ID%/getStaticProps/withRevalidate/withFallback/:id.json  /.netlify/functions/next_getStaticProps_withRevalidate_withFallback_id  200
+/_next/image*  url=:url w=:width q=:quality  /.netlify/functions/next_image?url=:url&w=:width&q=:quality  200
 /api/shows/:id  /.netlify/functions/next_api_shows_id  200
 /api/shows/:params/*  /.netlify/functions/next_api_shows_params  200
 /api/static  /.netlify/functions/next_api_static  200

@@ -87,7 +87,8 @@ describe("Routing", () => {
     expect(redirects[3]).toEqual(
       "/_next/data/%BUILD_ID%/static.json  /.netlify/functions/next_static  200!  Cookie=__prerender_bypass,__next_preview_data"
     );
-    expect(redirects[4]).toEqual(
+    // [4] is the next_image redirect
+    expect(redirects[5]).toEqual(
       "/static  /.netlify/functions/next_static  200!  Cookie=__prerender_bypass,__next_preview_data"
     );
   });

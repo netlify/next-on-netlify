@@ -4,6 +4,7 @@ const copyNextAssets = require("./lib/steps/copyNextAssets");
 const setupPages = require("./lib/steps/setupPages");
 const setupImageFunction = require("./lib/steps/setupImageFunction");
 const setupRedirects = require("./lib/steps/setupRedirects");
+const setupHeaders = require("./lib/steps/setupHeaders");
 const {
   NETLIFY_PUBLISH_PATH,
   NETLIFY_FUNCTIONS_PATH,
@@ -30,6 +31,8 @@ const nextOnNetlify = (options = {}) => {
   setupImageFunction(functionsPath);
 
   setupRedirects(publishPath);
+
+  setupHeaders(publishPath);
 };
 
 module.exports = nextOnNetlify;

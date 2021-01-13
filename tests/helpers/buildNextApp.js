@@ -46,6 +46,10 @@ class NextAppBuilder {
     return this.withFile(packageJsonFile, "package.json");
   }
 
+  withCustomFunctions(functionsDir) {
+    return this.withFile(functionsDir);
+  }
+
   // Copy a file from the fixtures folder to the app's staging folder
   withFile(fixture, target = null) {
     // If no target file name is given, use the same name as the fixture
@@ -61,8 +65,7 @@ class NextAppBuilder {
     return this;
   }
 
-  // Build the application with next build
-  async build() {
+  async buildNextApp() {
     // Generate a cache hash ID from the current contents of the staging folder.
     const { hash: cacheHash } = await hashElement(this.__stagingPath, {
       encoding: "hex",
@@ -83,33 +86,21 @@ class NextAppBuilder {
     // run next-on-netlify
     copySync(this.__cachePath, this.__appPath);
 
-    // Run next-on-netlify
+    process.chdir(this.__appPath);
+  }
+
+  async build() {
+    await this.buildNextApp();
+
+    // Run next-on-netlify as postbuild script
     const { stdout } = await npmRun("next-on-netlify", this.__appPath);
     return stdout;
   }
 
   async runWithRequire(options) {
-    // Generate a cach hash ID from the current contents of the staging folder.
-    const { hash: cacheHash } = await hashElement(this.__stagingPath, {
-      encoding: "hex",
-    });
-    this.__cacheHash = cacheHash;
+    await this.buildNextApp();
 
-    // If we have no cached build for this NextJS app, let's run next build and
-    // cache the result
-    if (!existsSync(this.__cachePath)) {
-      // Build the nextJS app
-      await npmRun("next-build", this.__stagingPath);
-
-      // Cache the build
-      copySync(this.__stagingPath, this.__cachePath);
-    }
-
-    // Copy the built NextJS app from the cache to the app folder, where we will
-    // run next-on-netlify
-    copySync(this.__cachePath, this.__appPath);
-
-    process.chdir(this.__appPath);
+    // Run next-on-netlify as an imported module
     const nextOnNetlify = require("../..");
     nextOnNetlify({
       functionsDir: join(this.__appPath, options.functionsDir),
@@ -117,9 +108,6 @@ class NextAppBuilder {
     });
     return "Built successfully!";
   }
-
-  // TO-DO: when I try to split out the shared logic between build & runWithRequire into its own
-  // function on NextBuilder, everything breaks; not sure why
 
   /*****************************************************************************
    * Private functions

@@ -25,6 +25,7 @@ beforeAll(
       .withPages("pages")
       .withNextConfig("next.config.js")
       .withPackageJson("package.json")
+      .withCustomFunctions("my-functions")
       .runWithRequire({ functionsDir: FUNCTIONS_DIR, publishDir: PUBLISH_DIR });
   },
   // time out after 180 seconds
@@ -36,6 +37,10 @@ describe("next-on-netlify", () => {
 
   test("builds successfully", () => {
     expect(runOutput).toMatch("Built successfully!");
+  });
+
+  test("copies custom Netlify Function to configured functions directory", () => {
+    expect(existsSync(join(functionsDir, "someTestFunction.js"))).toBe(true);
   });
 
   test("creates a Netlify Function for each SSR page", () => {
@@ -125,8 +130,9 @@ describe("clean up of NoN files", () => {
       "next_shows_id",
       "next_shows_params",
     ];
-    const fileListFunctions = fileList.split("---")[0].trim().split("\n");
+    const fileListFunctions = fileList.split("---")[0].split("\n");
     expect(isSameList(nextFunctions, fileListFunctions)).toBe(true);
+    expect(fileListFunctions.includes("someTestFunction.js")).toBe(false);
     const publishFiles = [
       "404.html",
       "_next",
@@ -135,7 +141,7 @@ describe("clean up of NoN files", () => {
       "static",
       "static.html",
     ];
-    const fileListPublish = fileList.split("---")[1].trim().split("\n");
+    const fileListPublish = fileList.split("---")[1].split("\n");
     expect(isSameList(publishFiles, fileListPublish)).toBe(true);
   });
 });

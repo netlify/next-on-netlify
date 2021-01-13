@@ -261,7 +261,7 @@ For more on this, see: [Issue #7](https://github.com/netlify/next-on-netlify/iss
 
 Our existing solution for next/image is not very performant. We have performance improvements on our roadmap, dependent on internal work.
 
-In the meantime, we recommend using a cloud provider like Cloudinary ([see the Next.js docs](https://nextjs.org/docs/basic-features/image-optimization#loader)).
+To get better performance now, we recommend using a cloud provider like Cloudinary ([see the Next.js docs](https://nextjs.org/docs/basic-features/image-optimization#loader)).
 
 ## Credits
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.8.0 (2020-01-14)
+
+- Fix: fallback blocking would cause builds to crash ([#139](https://github.com/netlify/next-on-netlify/pull/139))
+- next/image initial support ([#138](https://github.com/netlify/next-on-netlify/pull/138))
+- generate headers file to override static chunks cache control ([#141](https://github.com/netlify/next-on-netlify/pull/141))
+- track NoN files for configured dirs to clean before each run ([#134](https://github.com/netlify/next-on-netlify/pull/134))
+
 ## 2.7.2 (2021-01-06)
 
 - Hotfix: index gsp pages caused builds to fail in i18n ([#75](https://github.com/netlify/next-on-netlify/pull/131))

@@ -50,6 +50,13 @@ class NextAppBuilder {
     return this.withFile(functionsDir);
   }
 
+  withFileTracking() {
+    return this.withFile(
+      ".nonfiletracking",
+      join("node_modules", ".cache", "next-on-netlify", ".nonfiletracking")
+    );
+  }
+
   // Copy a file from the fixtures folder to the app's staging folder
   withFile(fixture, target = null) {
     // If no target file name is given, use the same name as the fixture

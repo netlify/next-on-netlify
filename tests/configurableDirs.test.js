@@ -26,6 +26,7 @@ beforeAll(
       .withNextConfig("next.config.js")
       .withPackageJson("package.json")
       .withCustomFunctions("my-functions")
+      .withFileTracking()
       .runWithRequire({ functionsDir: FUNCTIONS_DIR, publishDir: PUBLISH_DIR });
   },
   // time out after 180 seconds

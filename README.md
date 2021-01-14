@@ -50,7 +50,7 @@ The plugin can be found on [npm here](https://www.npmjs.com/package/@netlify/plu
   - [Using Netlify Identity](#using-netlify-identity)
 - [Caveats](#caveats)
   - [Fallbacks for Pages with `getStaticPaths`](#fallbacks-for-pages-with-getstaticpaths)
-  - [next/image](#next/image)
+  - [next/image](#nextimage)
 - [Credits](#credits)
 - [Showcase](#showcase)
 

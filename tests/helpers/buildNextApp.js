@@ -46,6 +46,10 @@ class NextAppBuilder {
     return this.withFile(packageJsonFile, "package.json");
   }
 
+  withCustomFunctions(functionsDir) {
+    return this.withFile(functionsDir);
+  }
+
   // Copy a file from the fixtures folder to the app's staging folder
   withFile(fixture, target = null) {
     // If no target file name is given, use the same name as the fixture
@@ -61,9 +65,8 @@ class NextAppBuilder {
     return this;
   }
 
-  // Build the application with next build
-  async build() {
-    // Generate a cach hash ID from the current contents of the staging folder.
+  async buildNextApp() {
+    // Generate a cache hash ID from the current contents of the staging folder.
     const { hash: cacheHash } = await hashElement(this.__stagingPath, {
       encoding: "hex",
     });
@@ -83,9 +86,27 @@ class NextAppBuilder {
     // run next-on-netlify
     copySync(this.__cachePath, this.__appPath);
 
-    // Run next-on-netlify
+    process.chdir(this.__appPath);
+  }
+
+  async build() {
+    await this.buildNextApp();
+
+    // Run next-on-netlify as postbuild script
     const { stdout } = await npmRun("next-on-netlify", this.__appPath);
     return stdout;
+  }
+
+  async runWithRequire(options) {
+    await this.buildNextApp();
+
+    // Run next-on-netlify as an imported module
+    const nextOnNetlify = require("../..");
+    nextOnNetlify({
+      functionsDir: join(this.__appPath, options.functionsDir),
+      publishDir: join(this.__appPath, options.publishDir),
+    });
+    return "Built successfully!";
   }
 
   /*****************************************************************************

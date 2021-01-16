@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.8.2 (2020-01-16)
+
+- Fix: failing windows test for file tracking ([#142](https://github.com/netlify/next-on-netlify/pull/142))
+
 ## 2.8.1 (2020-01-14)
 
 - Fix: file tracking bug where publishDir was being used for functons cleaning too ([#ba41f](https://github.com/netlify/next-on-netlify/commit/ba4f141808b40c0a6c5eecdd48562e35403951f7))

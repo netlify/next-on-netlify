@@ -1,3 +1,4 @@
+const { removeSync } = require("fs-extra");
 const waitOn = require("wait-on");
 const execa = require("execa");
 const { join } = require("path");
@@ -6,6 +7,9 @@ const getBaseUrl = require("./getBaseUrl");
 // Deploy the project locally, using netlify dev
 const deployLocally = ({ project }, config) => {
   process.stdout.write(`Deploying project: ${project}...`);
+
+  // _headers breaks netlify dev
+  removeSync(join(config.buildsFolder, project, "out_publish", "_headers"));
 
   // Start server. Must start in detached mode, so that we can kill it later.
   // Otherwise, we seem unable to kill it.

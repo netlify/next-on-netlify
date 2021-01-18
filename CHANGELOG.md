@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.8.3 (2020-01-18)
+
+- Revert next/image support until jimp module issue is resolved ([#149](https://github.com/netlify/next-on-netlify/pull/149))
+- Revert route/redirect sorting logic to static then dynamic ([#145](https://github.com/netlify/next-on-netlify/pull/145))
+- Fix: incorrect headers syntax & broken local cypress ([#144](https://github.com/netlify/next-on-netlify/pull/144))
+
 ## 2.8.2 (2020-01-16)
 
 - Fix: failing windows test for file tracking ([#142](https://github.com/netlify/next-on-netlify/pull/142))

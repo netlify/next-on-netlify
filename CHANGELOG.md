@@ -1,24 +1,24 @@
 # Changelog
 
-## 2.8.4 (2020-01-18)
+## 2.8.4 (2021-01-18)
 
 - Fix: check existence of dirs before reading them in file tracking logic ([#150](https://github.com/netlify/next-on-netlify/pull/150))
 
-## 2.8.3 (2020-01-18)
+## 2.8.3 (2021-01-18)
 
 - Revert next/image support until jimp module issue is resolved ([#149](https://github.com/netlify/next-on-netlify/pull/149))
 - Revert route/redirect sorting logic to static then dynamic ([#145](https://github.com/netlify/next-on-netlify/pull/145))
 - Fix: incorrect headers syntax & broken local cypress ([#144](https://github.com/netlify/next-on-netlify/pull/144))
 
-## 2.8.2 (2020-01-16)
+## 2.8.2 (2021-01-16)
 
 - Fix: failing windows test for file tracking ([#142](https://github.com/netlify/next-on-netlify/pull/142))
 
-## 2.8.1 (2020-01-14)
+## 2.8.1 (2021-01-14)
 
 - Fix: file tracking bug where publishDir was being used for functons cleaning too ([#ba41f](https://github.com/netlify/next-on-netlify/commit/ba4f141808b40c0a6c5eecdd48562e35403951f7))
 
-## 2.8.0 (2020-01-14)
+## 2.8.0 (2021-01-14)
 
 - Fix: fallback blocking would cause builds to crash ([#139](https://github.com/netlify/next-on-netlify/pull/139))
 - next/image initial support ([#138](https://github.com/netlify/next-on-netlify/pull/138))

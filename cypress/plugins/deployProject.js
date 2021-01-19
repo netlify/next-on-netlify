@@ -8,9 +8,6 @@ const getBaseUrl = require("./getBaseUrl");
 const deployLocally = ({ project }, config) => {
   process.stdout.write(`Deploying project: ${project}...`);
 
-  // _headers breaks netlify dev
-  removeSync(join(config.buildsFolder, project, "out_publish", "_headers"));
-
   // Start server. Must start in detached mode, so that we can kill it later.
   // Otherwise, we seem unable to kill it.
   // See: https://medium.com/@almenon214/killing-processes-with-node-772ffdd19aad

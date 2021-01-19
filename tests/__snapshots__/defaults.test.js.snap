@@ -2,7 +2,7 @@
 
 exports[`Headers creates Netlify headers 1`] = `
 "# Next-on-Netlify Headers
-/*/_next/static/chunks/*
+/_next/static/chunks/*
   cache-control: public
   cache-control: max-age=31536000
   cache-control: immutable"

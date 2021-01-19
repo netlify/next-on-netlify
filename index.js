@@ -1,3 +1,4 @@
+const { normalize } = require("path");
 const prepareFolders = require("./lib/steps/prepareFolders");
 const copyPublicFiles = require("./lib/steps/copyPublicFiles");
 const copyNextAssets = require("./lib/steps/copyNextAssets");
@@ -18,8 +19,10 @@ const {
  */
 
 const nextOnNetlify = (options = {}) => {
-  const functionsPath = options.functionsDir || NETLIFY_FUNCTIONS_PATH;
-  const publishPath = options.publishDir || NETLIFY_PUBLISH_PATH;
+  const functionsPath = normalize(
+    options.functionsDir || NETLIFY_FUNCTIONS_PATH
+  );
+  const publishPath = normalize(options.publishDir || NETLIFY_PUBLISH_PATH);
 
   const trackNextOnNetlifyFiles = prepareFolders({
     functionsPath,

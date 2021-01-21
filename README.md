@@ -41,7 +41,8 @@ The plugin can be found on [npm here](https://www.npmjs.com/package/@netlify/plu
 - [Setup](#setup)
   - [1. Set Next.js target to serverless](#1-set-nextjs-target-to-serverless)
   - [2. Add postbuild hook](#2-add-postbuild-hook)
-  - [3. Configure Netlify](#3-configure-netlify)
+  - [3. Configure for Netlify](#3-configure-for-netlify)
+    - [(Optional) Configure private git submodules](#optional-configure-private-git-submodules)
 - [Demo](#demo)
 - [Optional Extras](#optional-extras)
   - [Preview Locally](#preview-locally)
@@ -63,7 +64,7 @@ npm install --save next-on-netlify
 
 ## Setup
 
-#### 1. Set Next.js target to serverless
+### 1. Set Next.js target to serverless
 
 We must build our Next.js app as a serverless app. You can read more about serverless Next.js [here](https://nextjs.org/docs/api-reference/next.config.js/build-target#serverless-target).
 
@@ -90,7 +91,7 @@ module.exports = {
 };
 ```
 
-#### 2. Add postbuild hook
+### 2. Add postbuild hook
 
 The next-on-netlify package adds the `next-on-netlify` command. When we run this command, some magic happens to prepare our Next.js app for hosting on Netlify\*.
 
@@ -110,7 +111,7 @@ We want the next-on-netlify command to run after we build our Next.js applicatio
 
 \*If you're curious about the "magic", check out the well-documented [`next-on-netlify.js` file](https://github.com/netlify/next-on-netlify/blob/master/next-on-netlify.js).
 
-#### 3. Configure Netlify
+### 3. Configure for Netlify
 
 We're almost done! We just have to tell Netlify how to build our Next.js app, where the functions folder is located, and which folder to upload to its CDN. We do that with a `netlify.toml` file and the following instructions:
 
@@ -121,7 +122,27 @@ We're almost done! We just have to tell Netlify how to build our Next.js app, wh
   publish   = "out_publish"
 ```
 
-Note: `out_functions` and `out_publish` are hard-coded into next-on-netlify. These are not configurable at the moment.
+Note: `out_functions` and `out_publish` are hard-coded into next-on-netlify.
+These are not configurable at the moment.
+
+#### (Optional) Configure private git submodules
+If your project contains private submodules, in order to deploy it, you will
+need to:
+
+1. [Generate a Deploy
+   Key](https://docs.netlify.com/configure-builds/repo-permissions-linking/#deploy-keys)
+   in Netlify and [add it to the relevant
+   submodules](https://docs.github.com/en/developers/overview/managing-deploy-keys#setup-2)
+   so that they can be cloned during the deploy process.
+
+2. Ensure the submodule remotes are set to SSH format (i.e.
+   `git@github.com:owner/project.git`, not `https://...`). Inside the submodule
+   directory, the git remote can be updated with: 
+
+   ```bash
+   # git remote set-url [remote] [url]
+   git remote set-url origin git@github.com:owner/project.git
+   ```
 
 We're done. Let's deploy 🚀🚀🚀
 
@@ -132,7 +153,7 @@ We're done. Let's deploy 🚀🚀🚀
 
 ## Optional Extras
 
-#### Preview Locally
+### Preview Locally
 
 I recommend you still use `next dev` to build and preview your application locally.
 
@@ -184,7 +205,7 @@ Preview Mode is not yet available locally, running `netlify dev`, for static pag
 
 For now, Preview Mode *is* supported in production for all Next.js page types.
 
-#### Custom Netlify Redirects
+### Custom Netlify Redirects
 
 You can define custom redirects in a `_redirects` and/or in your `netlify.toml` file.
 The precedence of these rules are:
@@ -196,12 +217,12 @@ Currently, there is no support for redirects set in your `netlify.toml` file.
 
 [Read more about Netlify redirects here](https://docs.netlify.com/routing/redirects/).
 
-#### Custom Netlify Functions
+### Custom Netlify Functions
 
 `next-on-netlify` creates one Netlify Function for each of your
 SSR pages and API endpoints. It is currently not possible to create custom Netlify Functions. This feature is on our list to do.
 
-#### Using Netlify Identity
+### Using Netlify Identity
 
 You can use [Netlify Identity](https://docs.netlify.com/visitor-access/identity/) with `next-on-netlify`. For all pages with server-side rendering (getInitialProps*, getServerSideProps, and API routes), you can access the [clientContext object](https://docs.netlify.com/functions/functions-and-identity/#access-identity-info-via-clientcontext) via the `req` parameter.
 

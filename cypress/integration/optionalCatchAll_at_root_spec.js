@@ -92,6 +92,42 @@ describe("pre-rendered page: /static.js", () => {
   });
 });
 
+describe("SSR'd page: /[bar]/ssr.js", () => {
+  it("loads TV show", () => {
+    cy.visit("/1337/ssr");
+
+    cy.get("h1").should("contain", "Show #1337");
+    cy.get("p").should("contain", "Whodunnit?");
+  });
+
+  it("loads TV show when SSR-ing", () => {
+    cy.ssr("/1337/ssr");
+
+    cy.get("h1").should("contain", "Show #1337");
+    cy.get("p").should("contain", "Whodunnit?");
+  });
+
+  it("loads page props from data .json file when navigating to it", () => {
+    cy.visit("/home");
+    cy.window().then((w) => (w.noReload = true));
+
+    // Navigate to page and test that no reload is performed
+    // See: https://glebbahmutov.com/blog/detect-page-reload/
+    cy.contains("1337/ssr").click();
+
+    cy.get("h1").should("contain", "Show #1337");
+    cy.get("p").should("contain", "Whodunnit?");
+
+    cy.contains("Go back home").click();
+    cy.contains("1338/ssr").click();
+
+    cy.get("h1").should("contain", "Show #1338");
+    cy.get("p").should("contain", "The Whole Truth");
+
+    cy.window().should("have.property", "noReload", true);
+  });
+});
+
 describe("pre-rendered pages: /subfolder/[id].js", () => {
   it("serves /subfolder/static", () => {
     cy.visit("/subfolder/static");

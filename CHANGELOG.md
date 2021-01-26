@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.8.5 (2021-01-26)
+
+- Put back next/image support ([#158](https://github.com/netlify/next-on-netlify/pull/158))
+- Fix: strip file extension when checking if route is dynamic ([#155](https://github.com/netlify/next-on-netlify/pull/155))
+- Fix: prevent copy of .public to .public ([#146](https://github.com/netlify/next-on-netlify/pull/146))
+- Fix: add check if pages-manifest exists before reading ([#147](https://github.com/netlify/next-on-netlify/pull/147))
+- Fix: throw error if .next/static cannot be found ([#148](https://github.com/netlify/next-on-netlify/pull/148))
+- Fix: remove unnecessary * from headers rule ([#152](https://github.com/netlify/next-on-netlify/pull/152))
+
 ## 2.8.4 (2021-01-18)
 
 - Fix: check existence of dirs before reading them in file tracking logic ([#150](https://github.com/netlify/next-on-netlify/pull/150))

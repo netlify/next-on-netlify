@@ -2,8 +2,8 @@
 cypress/builds/
 tests/builds/
 
-# README
-README.md
+# Markdown
+*.md
 
 # Logs
 logs

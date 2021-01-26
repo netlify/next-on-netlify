@@ -35,8 +35,7 @@ const nextOnNetlify = (options = {}) => {
 
   setupPages({ functionsPath, publishPath });
 
-  // TO-DO: put back when jimp module issue is resolved ;(
-  // setupImageFunction(functionsPath);
+  setupImageFunction(functionsPath);
 
   setupRedirects(publishPath);
 

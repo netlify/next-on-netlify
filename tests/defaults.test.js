@@ -135,10 +135,9 @@ describe("API Pages", () => {
 describe("next/image", () => {
   const functionsDir = join(PROJECT_PATH, "out_functions");
 
-  // TO-DO: put back when jump module issue is resolved ;(
-  // test("sets up next_image as a function in every project by default", () => {
-  //   expect(existsSync(join(functionsDir, "next_image.js"))).toBe(true);
-  // });
+  test("sets up next_image as a function in every project by default", () => {
+    expect(existsSync(join(functionsDir, "next_image.js"))).toBe(true);
+  });
 });
 
 describe("SSG Pages with getStaticProps", () => {

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.8.6 (2021-01-27)
+
+- Fix: image url in imageFunction ([#159](https://github.com/netlify/next-on-netlify/pull/159))
+
 ## 2.8.5 (2021-01-26)
 
 - Put back next/image support ([#158](https://github.com/netlify/next-on-netlify/pull/158))

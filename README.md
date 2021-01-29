@@ -68,7 +68,7 @@ npm install --save next-on-netlify
 
 We must build our Next.js app as a serverless app. You can read more about serverless Next.js [here](https://nextjs.org/docs/api-reference/next.config.js/build-target#serverless-target).
 
-It's super simple. Just create a `next.config.js` file and write the following:
+It's super simple. Just create a `next.config.js` file in the root of your project and write the following:
 
 ```js
 // next.config.js
@@ -95,7 +95,8 @@ module.exports = {
 
 The next-on-netlify package adds the `next-on-netlify` command. When we run this command, some magic happens to prepare our Next.js app for hosting on Netlify\*.
 
-We want the next-on-netlify command to run after we build our Next.js application. So let's add a postbuild hook to our package.json file:
+We want the next-on-netlify command to run after we build our Next.js application. So let's add a postbuild hook to our package.json file. You should add `"postbuild": "next-on-netlify"` to the existing scripts, like so:
+
 
 ```
 {
@@ -113,7 +114,7 @@ We want the next-on-netlify command to run after we build our Next.js applicatio
 
 ### 3. Configure for Netlify
 
-We're almost done! We just have to tell Netlify how to build our Next.js app, where the functions folder is located, and which folder to upload to its CDN. We do that with a `netlify.toml` file and the following instructions:
+We're almost done! We just have to tell Netlify how to build our Next.js app, where the functions folder is located, and which folder to upload to its CDN. We do that with a `netlify.toml` file in the root of your project and the following instructions:
 
 ```toml
 [build]
@@ -145,6 +146,8 @@ need to:
    ```
 
 We're done. Let's deploy 🚀🚀🚀
+
+If you're not familiar with Netlify, follow the deployment instructions here: https://www.netlify.com/blog/2020/11/30/how-to-deploy-next.js-sites-to-netlify/
 
 ## Demo
 

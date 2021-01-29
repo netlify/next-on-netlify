@@ -114,7 +114,7 @@ We want the next-on-netlify command to run after we build our Next.js applicatio
 
 ### 3. Configure for Netlify
 
-We're almost done! We just have to tell Netlify how to build our Next.js app, where the functions folder is located, and which folder to upload to its CDN. We do that with a `netlify.toml` file in the root of your folder and the following instructions:
+We're almost done! We just have to tell Netlify how to build our Next.js app, where the functions folder is located, and which folder to upload to its CDN. We do that with a `netlify.toml` file in the root of your project and the following instructions:
 
 ```toml
 [build]

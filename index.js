@@ -44,7 +44,6 @@ const build = (functionsPath, publishPath) => {
 const watch = (functionsPath, publishPath) => {
   logTitle(`👀 Watching source code for changes`);
 
-  const watcher = chokidar.watch(SRC_FILES);
   const runBuild = debounceFn(
     () => {
       try {
@@ -58,9 +57,8 @@ const watch = (functionsPath, publishPath) => {
       wait: 3000,
     }
   );
-  watcher.on("add", runBuild);
-  watcher.on("change", runBuild);
-  watcher.on("unlink", runBuild);
+
+  chokidar.watch(SRC_FILES).on("all", runBuild);
 };
 
 /** options param:

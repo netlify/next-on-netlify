@@ -2,7 +2,6 @@
 const { program } = require("commander");
 
 const nextOnNetlify = require("./index");
-const { logTitle } = require("./lib/helpers/logger");
 
 program.option(
   "--max-log-lines [number]",
@@ -22,7 +21,6 @@ program
   .description("runs next-on-netlify")
   .action(() => {
     nextOnNetlify();
-    logTitle("✅ Success! All done!");
   });
 
 program.parse(process.argv);

@@ -37,6 +37,8 @@ const build = (functionsPath, publishPath) => {
   setupHeaders(publishPath);
 
   trackNextOnNetlifyFiles();
+
+  logTitle("✅ Success! All done!");
 };
 
 const watch = (functionsPath, publishPath) => {

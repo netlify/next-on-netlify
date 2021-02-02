@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.8.7 (2021-02-02)
+
+- Fix: next 10.0.6 changed prerender-manifest for i18n ([#163](https://github.com/netlify/next-on-netlify/pull/163))
+- Chore: support node 15
+
 ## 2.8.6 (2021-01-27)
 
 - Fix: image url in imageFunction ([#159](https://github.com/netlify/next-on-netlify/pull/159))

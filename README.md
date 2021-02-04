@@ -199,7 +199,7 @@ Now you're all set.
 
 From now on, whenever you want to preview your application locally, just run:
 
-1. `npm run build`: This will run `next build` to build your Next.js app and `next-on-netlify` to prepare your Next.js app for compatibility with Netlify
+1. `npx next-on-netlify watch`: This will run `next build` to build your Next.js app and `next-on-netlify` to prepare your Next.js app for compatibility with Netlify. Any source code changes will trigger another build.
 1. `netlify dev`: This will emulate Netlify on your computer and let you preview your app on `http://localhost:8888`.
 
 *Note:*

@@ -1,17 +1,26 @@
 #!/usr/bin/env node
 const { program } = require("commander");
 
-program
-  .option(
-    "--max-log-lines [number]",
-    "lines of build output to show for each section",
-    50
-  )
-  .parse(process.argv);
-
 const nextOnNetlify = require("./index");
-const { logTitle } = require("./lib/helpers/logger");
 
-nextOnNetlify();
+program.option(
+  "--max-log-lines [number]",
+  "lines of build output to show for each section",
+  50
+);
 
-logTitle("✅ Success! All done!");
+program
+  .command("watch")
+  .description("re-runs next-on-netlify on changes")
+  .action(() => {
+    nextOnNetlify({ watch: true });
+  });
+
+program
+  .command("build", { isDefault: true })
+  .description("runs next-on-netlify")
+  .action(() => {
+    nextOnNetlify();
+  });
+
+program.parse(process.argv);

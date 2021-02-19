@@ -23,6 +23,7 @@ exports[`Routing creates Netlify redirects 1`] = `
 /_next/data/%BUILD_ID%/es/getStaticProps/static.json  /.netlify/functions/next_getStaticProps_static  200!  Cookie=__prerender_bypass,__next_preview_data
 /_next/data/%BUILD_ID%/es/getStaticProps/with-revalidate.json  /.netlify/functions/next_getStaticProps_withrevalidate  200
 /_next/data/%BUILD_ID%/getServerSideProps/static.json  /.netlify/functions/next_getServerSideProps_static  200
+/api/hello-background  /.netlify/functions/next_api_hello-background  200
 /api/static  /.netlify/functions/next_api_static  200
 /en  /.netlify/functions/next_index  200
 /en/getServerSideProps/static  /.netlify/functions/next_getServerSideProps_static  200

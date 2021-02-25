@@ -48,6 +48,7 @@ The plugin can be found on [npm here](https://www.npmjs.com/package/@netlify/plu
   - [Preview Locally](#preview-locally)
   - [Custom Netlify Redirects](#custom-netlify-redirects)
   - [Custom Netlify Functions](#custom-netlify-functions)
+  - [Background Functions](#background-functions)
   - [Using Netlify Identity](#using-netlify-identity)
 - [Caveats](#caveats)
   - [Fallbacks for Pages with `getStaticPaths`](#fallbacks-for-pages-with-getstaticpaths)
@@ -223,7 +224,12 @@ Currently, there is no support for redirects set in your `netlify.toml` file.
 ### Custom Netlify Functions
 
 `next-on-netlify` creates one Netlify Function for each of your
-SSR pages and API endpoints. It is currently not possible to create custom Netlify Functions. This feature is on our list to do.
+SSR pages and API endpoints. Currently, you can only create custom Netlify functions using [@netlify/plugin-nextjs](https://github.com/netlify/netlify-plugin-nextjs#custom-netlify-functions).
+
+### Background Functions
+
+If your Next.js API page/route ends in `-background`, it will be treated as a [Netlify background function](https://docs.netlify.com/functions/background-functions/).
+Note: background functions are only available on certain plans.
 
 ### Using Netlify Identity
 

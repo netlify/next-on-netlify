@@ -129,6 +129,15 @@ describe("API Pages", () => {
         join(functionsDir, "next_api_shows_params", "next_api_shows_params.js")
       )
     ).toBe(true);
+    expect(
+      existsSync(
+        join(
+          functionsDir,
+          "next_api_hello-background",
+          "next_api_hello-background.js"
+        )
+      )
+    ).toBe(true);
   });
 });
 

@@ -24,6 +24,7 @@ exports[`Routing creates Netlify redirects 1`] = `
 /_next/data/%BUILD_ID%/getStaticProps/withFallbackBlocking/4.json  /.netlify/functions/next_getStaticProps_withFallbackBlocking_id  200!  Cookie=__prerender_bypass,__next_preview_data
 /_next/data/%BUILD_ID%/getStaticProps/withRevalidate/1.json  /.netlify/functions/next_getStaticProps_withRevalidate_id  200
 /_next/data/%BUILD_ID%/getStaticProps/withRevalidate/2.json  /.netlify/functions/next_getStaticProps_withRevalidate_id  200
+/api/hello-background  /.netlify/functions/next_api_hello-background  200
 /api/static  /.netlify/functions/next_api_static  200
 /getServerSideProps/static  /.netlify/functions/next_getServerSideProps_static  200
 /getStaticProps/1  /.netlify/functions/next_getStaticProps_id  200!  Cookie=__prerender_bypass,__next_preview_data

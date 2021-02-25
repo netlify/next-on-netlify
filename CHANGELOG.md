@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.9.0 (2021-02-24)
+
+- add support for background functions in api pages only ([#171](https://github.com/netlify/next-on-netlify/pull/171))
+- remove next as peer dependency ([#167](https://github.com/netlify/next-on-netlify/pull/167))
+- add watch mode ([#162](https://github.com/netlify/next-on-netlify/pull/162))
+
 ## 2.8.7 (2021-02-02)
 
 - Fix: next 10.0.6 changed prerender-manifest for i18n ([#163](https://github.com/netlify/next-on-netlify/pull/163))

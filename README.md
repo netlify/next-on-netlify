@@ -326,7 +326,7 @@ The following sites are built with `next-on-netlify`:
 
 [gemini.com](https://gemini.com/)
 
-![bigbinary.com](https://raw.githubusercontent.com/netlify/next-on-netlify/master/assets/showcase-bigbinary.png)
+![bigbinary.com](https://raw.githubusercontent.com/netlify/next-on-netlify/main/assets/showcase-bigbinary.png)
 
 [bigbinary.com](https://bigbinary.com/)
 

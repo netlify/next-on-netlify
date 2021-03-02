@@ -16,7 +16,7 @@ const FUNCTIONS_DIR = "my-functions";
 const PUBLISH_DIR = "my-publish";
 
 // Capture the output to verify successful build
-let buildOutput;
+let runOutput;
 
 beforeAll(
   async () => {

@@ -1,6 +1,6 @@
 ## Migrating to Essential Next.js Plugin
 
-This guide is to assist `next-on-netlify` users in their migration to Netlify's [Essential Next.js build plugin](https://github.com/netlify/netlify-plugin-nextjs).
+This guide is to assist `next-on-netlify` users in their migration to Netlify's [Essential Next.js Build Plugin](https://github.com/netlify/netlify-plugin-nextjs).
 
 Please visit [this issue](https://github.com/netlify/next-on-netlify/issues/176) to ask questions about migrating and/or the deprecation of `next-on-netlify`.
 

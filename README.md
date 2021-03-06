@@ -21,7 +21,7 @@
 
 We are deprecating `next-on-netlify` in favor of Netlify's [Essential Next.js build plugin](https://github.com/netlify/netlify-plugin-nextjs). Please visit [this issue](https://github.com/netlify/next-on-netlify/issues/176) to learn more about the deprecation of `next-on-netlify` and ask any questions. You can also visit our simple [Migration doc](https://github.com/netlify/netlify-plugin-nextjs/blob/main/MIGRATING.md) for assistance migrating to the plugin.
 
-- Build plugin [@netlify/plugin-nextjs](https://github.com/netlify/netlify-plugin-nextjs)
+- Build Plugin [@netlify/plugin-nextjs](https://github.com/netlify/netlify-plugin-nextjs)
 - [Plugin npm package](https://www.npmjs.com/package/@netlify/plugin-nextjs)
 
 

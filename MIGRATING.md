@@ -10,7 +10,7 @@ Please visit [this issue](https://github.com/netlify/next-on-netlify/issues/176)
 2. Remove the `"postbuild": "next-on-netlify"` script from your `package.json`.
 3. Get the Essential Next.js plugin.
     - For new Next.js sites on Netlify, the plugin will be automatically installed. You can [opt out of the plugin](https://docs.netlify.com/configure-builds/build-plugins/#remove-a-plugin) by visiting the **Plugins** tab for your site in the Netlify UI.
-    2. For existing sites on Netlify, follow the manual installation instructions in the [plugin README](https://github.com/netlify/netlify-plugin-nextjs#installation-and-configuration), which explains UI-based and file-based installation.
+    - For existing sites on Netlify, follow the manual installation instructions in the [plugin README](https://github.com/netlify/netlify-plugin-nextjs#installation-and-configuration), which explains UI-based and file-based installation.
 
 ### Brand New Users
 

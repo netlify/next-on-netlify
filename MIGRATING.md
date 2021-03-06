@@ -14,4 +14,4 @@ Please visit [this issue](https://github.com/netlify/next-on-netlify/issues/176)
 
 ### Brand New Users
 
-1. Deploy a new Next.js site to Netlify! Your site will automatically build with the plugin. You can opt of the plugin by visiting the Plugins tab for your site in the Netlify UI.
+Deploy a new Next.js site to Netlify! Your site will automatically build with the plugin. You can [opt out of the plugin](https://docs.netlify.com/configure-builds/build-plugins/#remove-a-plugin) by visiting the **Plugins** tab for your site in the Netlify UI.

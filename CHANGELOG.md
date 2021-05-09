@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.0 (2021-05-09)
+
+- NoN is still deprecated but @sls-next dependency was causing issues
+
 ## 2.9.0 (2021-02-24)
 
 - add support for background functions in api pages only ([#171](https://github.com/netlify/next-on-netlify/pull/171))

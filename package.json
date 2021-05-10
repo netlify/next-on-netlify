@@ -36,7 +36,6 @@
   },
   "devDependencies": {
     "cypress": "^5.1.0",
-    "execa": "^4.1.0",
     "folder-hash": "^3.3.3",
     "husky": "^4.3.0",
     "jest": "^26.4.2",
@@ -51,6 +50,7 @@
     "chokidar": "^3.5.1",
     "commander": "^6.0.0",
     "debounce-fn": "^4.0.0",
+    "execa": "^4.1.0",
     "fs-extra": "^9.0.1",
     "jimp": "^0.16.1"
   },

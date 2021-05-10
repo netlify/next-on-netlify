@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.1 (2021-05-10)
+
+- move execa to prod dependency
+
 ## 3.0.0 (2021-05-09)
 
 - NoN is still deprecated but @sls-next dependency was causing issues
